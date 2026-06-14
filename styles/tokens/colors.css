@@ -1,0 +1,130 @@
+/* ============================================================
+   bnbong — Color tokens
+   A warm, golden, editorial palette built around the brand
+   signal color #E1B978 (wheat gold), paired with warm paper
+   neutrals and ink. Includes a dark theme scope.
+   ============================================================ */
+
+:root {
+  /* --- Brand / gold ramp (warm wheat → toasted) --- */
+  --gold-50:  #FBF4E6;
+  --gold-100: #F6E8CC;
+  --gold-200: #EFD7A6;
+  --gold-300: #E8C88A;
+  --gold-400: #E1B978;  /* ← brand signal color */
+  --gold-500: #D2A256;
+  --gold-600: #BC8A3C;
+  --gold-700: #9A6E2C;
+  --gold-800: #74521F;
+  --gold-900: #4F3814;
+
+  /* --- Warm neutral ramp (paper → ink) --- */
+  --warm-0:   #FFFFFF;
+  --warm-50:  #FDFBF6;  /* page paper */
+  --warm-100: #F8F4EC;
+  --warm-150: #F2EBDE;
+  --warm-200: #E9E0CE;
+  --warm-300: #D9CEB7;
+  --warm-400: #B9AC91;
+  --warm-500: #948A74;
+  --warm-600: #6E6657;
+  --warm-700: #4E483D;
+  --warm-800: #332F28;
+  --warm-900: #211E19;
+  --warm-950: #16140F;
+
+  /* --- Semantic status (kept in the warm family) --- */
+  --green-500:  #5E8C57;
+  --green-50:   #EDF3EB;
+  --amber-500:  #D49A33;
+  --amber-50:   #FBF1DA;
+  --red-500:    #C2553B;
+  --red-50:     #F8E7E1;
+  --blue-500:   #527699;
+  --blue-50:    #E8EEF3;
+
+  /* ============================================================
+     Semantic aliases — reference these in components
+     ============================================================ */
+
+  /* Brand */
+  --color-brand:          var(--gold-400);
+  --color-brand-strong:   var(--gold-600);
+  --color-brand-soft:     var(--gold-100);
+  --color-brand-tint:     var(--gold-50);
+  --color-brand-ink:      var(--gold-800);  /* gold text on light bg */
+
+  /* Surfaces */
+  --surface-page:         var(--warm-50);
+  --surface-raised:       var(--warm-0);
+  --surface-sunken:       var(--warm-100);
+  --surface-card:         var(--warm-0);
+  --surface-inverse:      var(--warm-900);
+  --surface-code:         var(--warm-900);   /* code block bg */
+
+  /* Text */
+  --text-strong:          var(--warm-900);
+  --text-body:            var(--warm-800);
+  --text-muted:           var(--warm-600);
+  --text-subtle:          var(--warm-500);
+  --text-on-brand:        var(--warm-950);   /* ink on gold */
+  --text-on-inverse:      var(--warm-100);
+  --text-link:            var(--gold-700);
+
+  /* Borders / lines */
+  --border-subtle:        var(--warm-200);
+  --border-default:       var(--warm-300);
+  --border-strong:        var(--warm-400);
+  --border-brand:         var(--gold-400);
+  --border-focus:         var(--gold-600);
+
+  /* Status semantic */
+  --color-success:        var(--green-500);
+  --color-success-soft:   var(--green-50);
+  --color-warning:        var(--amber-500);
+  --color-warning-soft:   var(--amber-50);
+  --color-danger:         var(--red-500);
+  --color-danger-soft:    var(--red-50);
+  --color-info:           var(--blue-500);
+  --color-info-soft:      var(--blue-50);
+
+  /* Selection */
+  --color-selection-bg:   var(--gold-200);
+  --color-selection-fg:   var(--warm-900);
+}
+
+/* ============================================================
+   Dark theme — warm charcoal, gold stays the signal
+   Apply with <html data-theme="dark"> or [data-theme="dark"]
+   ============================================================ */
+[data-theme="dark"] {
+  --surface-page:         var(--warm-950);
+  --surface-raised:       var(--warm-900);
+  --surface-sunken:       #1C1A15;
+  --surface-card:         var(--warm-900);
+  --surface-inverse:      var(--warm-50);
+  --surface-code:         #100E0A;
+
+  --text-strong:          var(--warm-50);
+  --text-body:            var(--warm-150);
+  --text-muted:           var(--warm-400);
+  --text-subtle:          var(--warm-500);
+  --text-on-inverse:      var(--warm-900);
+  --text-link:            var(--gold-300);
+
+  --color-brand-soft:     #3A2E18;
+  --color-brand-tint:     #2A2113;
+  --color-brand-ink:      var(--gold-300);
+
+  --border-subtle:        #2C281F;
+  --border-default:       #3A352B;
+  --border-strong:        #4E483D;
+
+  --color-success-soft:   #1E2A1C;
+  --color-warning-soft:   #2E2510;
+  --color-danger-soft:    #2E1812;
+  --color-info-soft:      #16212C;
+
+  --color-selection-bg:   var(--gold-800);
+  --color-selection-fg:   var(--gold-50);
+}

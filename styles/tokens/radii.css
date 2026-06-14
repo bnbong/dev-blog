@@ -1,0 +1,40 @@
+/* ============================================================
+   bnbong — Radii, shadows, borders & motion tokens
+   Shadows are warm-tinted (brown, not blue-black) and soft.
+   ============================================================ */
+
+:root {
+  /* --- Corner radii --- */
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-2xl:  28px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* --- Border widths --- */
+  --border-width:       1px;
+  --border-width-thick: 2px;
+
+  /* --- Warm-tinted shadows --- */
+  --shadow-xs:  0 1px 2px rgba(74, 56, 24, 0.06);
+  --shadow-sm:  0 1px 3px rgba(74, 56, 24, 0.08), 0 1px 2px rgba(74, 56, 24, 0.05);
+  --shadow-md:  0 4px 12px rgba(74, 56, 24, 0.09), 0 1px 3px rgba(74, 56, 24, 0.06);
+  --shadow-lg:  0 12px 28px rgba(74, 56, 24, 0.12), 0 4px 10px rgba(74, 56, 24, 0.06);
+  --shadow-xl:  0 24px 56px rgba(74, 56, 24, 0.16), 0 8px 18px rgba(74, 56, 24, 0.08);
+  --shadow-brand: 0 6px 20px rgba(188, 138, 60, 0.30);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+  /* Focus ring */
+  --ring-brand: 0 0 0 3px rgba(225, 185, 120, 0.45);
+
+  /* --- Motion --- */
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);  /* @kind other */
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);       /* @kind other */
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);      /* @kind other */
+  --duration-fast:   120ms;  /* @kind other */
+  --duration-normal: 200ms;  /* @kind other */
+  --duration-slow:   340ms;  /* @kind other */
+}

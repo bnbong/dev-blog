@@ -1,0 +1,107 @@
+/* ============================================================
+   bnbong — custom giscus theme (warm paper light)
+   Based on giscus's built-in `light` theme, with the canvas,
+   borders and accent recoloured to the blog's warm-gold palette
+   so the comments box matches the page background (#FDFBF6).
+
+   To enable: deploy the site, then set
+     giscus.themeUrl = "https://<your-domain>/giscus-theme.css"
+   in lib/site.ts (must be an absolute URL — the giscus iframe
+   loads it as a stylesheet, so no CORS headers are required).
+   ============================================================ */
+main {
+  --color-prettylights-syntax-comment: #6e6657;
+  --color-prettylights-syntax-constant: #9a6e2c;
+  --color-prettylights-syntax-entity: #8250df;
+  --color-prettylights-syntax-storage-modifier-import: #332f28;
+  --color-prettylights-syntax-entity-tag: #1a7f37;
+  --color-prettylights-syntax-keyword: #bc8a3c;
+  --color-prettylights-syntax-string: #0a3069;
+  --color-prettylights-syntax-variable: #9a6e2c;
+  --color-prettylights-syntax-brackethighlighter-unmatched: #82071e;
+  --color-prettylights-syntax-invalid-illegal-text: #f6f8fa;
+  --color-prettylights-syntax-invalid-illegal-bg: #82071e;
+  --color-prettylights-syntax-carriage-return-text: #f6f8fa;
+  --color-prettylights-syntax-carriage-return-bg: #cf222e;
+  --color-prettylights-syntax-string-regexp: #1a7f37;
+  --color-prettylights-syntax-markup-list: #3b2300;
+  --color-prettylights-syntax-markup-heading: #0550ae;
+  --color-prettylights-syntax-markup-italic: #332f28;
+  --color-prettylights-syntax-markup-bold: #332f28;
+  --color-prettylights-syntax-markup-deleted-text: #82071e;
+  --color-prettylights-syntax-markup-deleted-bg: #ffebe9;
+  --color-prettylights-syntax-markup-inserted-text: #116329;
+  --color-prettylights-syntax-markup-inserted-bg: #dafbe1;
+  --color-prettylights-syntax-markup-changed-text: #953800;
+  --color-prettylights-syntax-markup-changed-bg: #ffd8b5;
+  --color-prettylights-syntax-markup-ignored-text: #eaeef2;
+  --color-prettylights-syntax-markup-ignored-bg: #0550ae;
+  --color-prettylights-syntax-meta-diff-range: #8250df;
+  --color-prettylights-syntax-sublimelinter-gutter-mark: #d9ceb7;
+
+  --color-btn-text: #332f28;
+  --color-btn-bg: #f8f4ec;
+  --color-btn-border: rgba(74, 56, 24, 0.15);
+  --color-btn-shadow: 0 1px 0 rgba(74, 56, 24, 0.04);
+  --color-btn-inset-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  --color-btn-hover-bg: #f2ebde;
+  --color-btn-hover-border: rgba(74, 56, 24, 0.2);
+  --color-btn-active-bg: #e9e0ce;
+  --color-btn-active-border: rgba(74, 56, 24, 0.2);
+  --color-btn-selected-bg: #e9e0ce;
+
+  --color-btn-primary-text: #211e19;
+  --color-btn-primary-bg: #e1b978;
+  --color-btn-primary-border: rgba(74, 56, 24, 0.15);
+  --color-btn-primary-shadow: 0 1px 0 rgba(74, 56, 24, 0.1);
+  --color-btn-primary-inset-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  --color-btn-primary-hover-bg: #d2a256;
+  --color-btn-primary-hover-border: rgba(74, 56, 24, 0.2);
+  --color-btn-primary-selected-bg: #bc8a3c;
+  --color-btn-primary-disabled-text: rgba(255, 255, 255, 0.8);
+  --color-btn-primary-disabled-bg: #efd7a6;
+  --color-btn-primary-disabled-border: rgba(74, 56, 24, 0.1);
+
+  --color-action-list-item-default-hover-bg: rgba(233, 224, 206, 0.5);
+
+  --color-segmented-control-bg: #f2ebde;
+  --color-segmented-control-button-bg: #fdfbf6;
+  --color-segmented-control-button-selected-border: #b9ac91;
+
+  --color-fg-default: #332f28;
+  --color-fg-muted: #6e6657;
+  --color-fg-subtle: #948a74;
+  --color-canvas-default: #fdfbf6;
+  --color-canvas-overlay: #ffffff;
+  --color-canvas-inset: #f2ebde;
+  --color-canvas-subtle: #f8f4ec;
+  --color-border-default: #e9e0ce;
+  --color-border-muted: #f2ebde;
+  --color-neutral-muted: rgba(185, 172, 145, 0.2);
+  --color-accent-fg: #9a6e2c;
+  --color-accent-emphasis: #bc8a3c;
+  --color-accent-muted: rgba(225, 185, 120, 0.4);
+  --color-accent-subtle: #fbf4e6;
+  --color-success-fg: #5e8c57;
+  --color-success-emphasis: #5e8c57;
+  --color-attention-fg: #d49a33;
+  --color-attention-muted: rgba(212, 154, 51, 0.4);
+  --color-attention-subtle: #fbf1da;
+  --color-danger-fg: #c2553b;
+  --color-danger-muted: rgba(194, 85, 59, 0.4);
+  --color-danger-subtle: #f8e7e1;
+  --color-primer-shadow-inset: inset 0 1px 0 rgba(74, 56, 24, 0.04);
+  --color-scale-gray-1: #f2ebde;
+  --color-scale-gray-2: #e9e0ce;
+
+  --color-social-reaction-bg-hover: #f2ebde;
+  --color-social-reaction-bg-reacted-hover: #efd7a6;
+}
+
+main .pagination-loader-container {
+  background-image: none;
+}
+
+main .gsc-loading-image {
+  background-image: none;
+}

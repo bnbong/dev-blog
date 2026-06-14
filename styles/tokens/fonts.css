@@ -1,0 +1,44 @@
+/* ============================================================
+   bnbong — Webfonts
+   - Space Grotesk : display / headings / UI accents (Latin)
+   - Pretendard    : body + UI; full Hangul (Korean) coverage
+                     — self-hosted from assets/fonts/ (OFL 1.1)
+   - JetBrains Mono : code, inline mono, metadata
+
+   Space Grotesk + JetBrains Mono load from Google Fonts.
+   Pretendard is vendored locally so the system is self-contained
+   and has no runtime dependency on a third-party CDN.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+/* Pretendard — Kil Hyung-jin, SIL Open Font License 1.1
+   https://github.com/orioncactus/pretendard */
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 400;
+  font-display: swap;
+  src: local("Pretendard Regular"),
+       url("/fonts/Pretendard-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 500;
+  font-display: swap;
+  src: local("Pretendard Medium"),
+       url("/fonts/Pretendard-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-display: swap;
+  src: local("Pretendard SemiBold"),
+       url("/fonts/Pretendard-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Pretendard";
+  font-weight: 700;
+  font-display: swap;
+  src: local("Pretendard Bold"),
+       url("/fonts/Pretendard-Bold.woff2") format("woff2");
+}

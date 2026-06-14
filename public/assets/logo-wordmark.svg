@@ -1,0 +1,13 @@
+<svg width="248" height="64" viewBox="0 0 248 64" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="bnbong">
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="#E1B978"></rect>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#wm_grad)" fill-opacity="0.28"></rect>
+  <path d="M20 22 L31 32 L20 42" stroke="#211E19" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+  <rect x="34" y="37.5" width="13" height="5" rx="2.5" fill="#211E19"></rect>
+  <text x="78" y="42" font-family="&#39;Space Grotesk&#39;, sans-serif" font-size="30" font-weight="700" letter-spacing="-0.02em" fill="#211E19">bnbong</text>
+  <defs>
+    <linearGradient id="wm_grad" x1="2" y1="2" x2="62" y2="62" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F6E8CC"></stop>
+      <stop offset="1" stop-color="#BC8A3C"></stop>
+    </linearGradient>
+  </defs>
+</svg>
