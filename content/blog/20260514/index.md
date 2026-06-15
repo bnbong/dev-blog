@@ -243,9 +243,7 @@ direction = (direction + 1) % 4          # 시계방향 회전
 
 ### 대표 문제: [완주하지 못한 선수](https://school.programmers.co.kr/learn/courses/30/lessons/42576) (프로그래머스, Level 1)
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42576
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42576>
 
 마라톤에 참여한 선수 목록 `participant`와 완주한 선수 목록 `completion`이 주어질 때, 완주하지 못한 선수의 이름을 반환하는 문제다.
 
@@ -265,14 +263,10 @@ def solution(participant, completion):
 
 - 프로그래머스 [전화번호 목록](https://school.programmers.co.kr/learn/courses/30/lessons/42577) (Level 2) — 해시 셋을 이용한 접두어 판별
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42577
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42577>
 - LeetCode [Two Sum](https://leetcode.com/problems/two-sum/) (#1) — 해시 맵으로 보수(complement) 탐색
 
-```preview
-https://leetcode.com/problems/two-sum/
-```
+<https://leetcode.com/problems/two-sum/>
 
 <br>
 
@@ -290,9 +284,7 @@ https://leetcode.com/problems/two-sum/
 
 ### 대표 문제: [소수 찾기](https://school.programmers.co.kr/learn/courses/30/lessons/42839) (프로그래머스, Level 2)
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42839
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42839>
 
 각 자리 숫자가 적힌 종이 조각 `numbers`가 주어질 때, 종이 조각으로 만들 수 있는 소수의 개수를 반환하는 문제다.
 
@@ -331,15 +323,11 @@ def solution(numbers):
 
 - 프로그래머스 [모의고사](https://school.programmers.co.kr/learn/courses/30/lessons/42840) (Level 1) — 패턴 반복 완전 탐색
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42840
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42840>
 
 - LeetCode [Subsets](https://leetcode.com/problems/subsets/) (#78) — 백트래킹으로 부분집합 생성
 
-```preview
-https://leetcode.com/problems/subsets/
-```
+<https://leetcode.com/problems/subsets/>
 
 <br>
 
@@ -357,9 +345,7 @@ https://leetcode.com/problems/subsets/
 
 ### 대표 문제: [큰 수 만들기](https://school.programmers.co.kr/learn/courses/30/lessons/42883) (프로그래머스, Level 2)
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42883
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42883>
 
 숫자로 이루어진 문자열 `number`에서 `k`개의 숫자를 제거하여 만들 수 있는 가장 큰 수를 반환하는 문제다.
 
@@ -388,9 +374,7 @@ def solution(number, k):
 
 - 프로그래머스 [체육복](https://school.programmers.co.kr/learn/courses/30/lessons/42862) (Level 1) — 정렬 후 인접 탐색 그리디
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42862
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42862>
 
 <br>
 
@@ -408,9 +392,7 @@ Python의 `sort()`와 `sorted()`는 Timsort 알고리즘을 사용하며, 시간
 
 ### 대표 문제: [가장 큰 수](https://school.programmers.co.kr/learn/courses/30/lessons/42746) (프로그래머스, Level 2)
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42746
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42746>
 
 정수 배열 `numbers`가 주어질 때, 숫자를 이어 붙여 만들 수 있는 가장 큰 수를 반환하는 문제다.
 
@@ -438,9 +420,7 @@ def solution(numbers):
 
 - 프로그래머스 [H-Index](https://school.programmers.co.kr/learn/courses/30/lessons/42747) (Level 2) — 정렬 후 조건 탐색
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42747
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42747>
 
 <br>
 
@@ -458,9 +438,7 @@ https://school.programmers.co.kr/learn/courses/30/lessons/42747
 
 ### 대표 문제: [입국심사](https://school.programmers.co.kr/learn/courses/30/lessons/43238) (프로그래머스, Level 3)
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/43238
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/43238>
 
 n명의 사람이 입국심사를 받을 때, 각 심사관의 심사 시간 배열 `times`가 주어진다. 모든 사람이 심사를 받는 데 걸리는 최소 시간을 반환한다.
 
@@ -505,9 +483,7 @@ DFS는 모든 경로를 탐색하거나 경우의 수를 세야 하는 문제에
 
 ### 대표 문제 1: [타겟 넘버](https://school.programmers.co.kr/learn/courses/30/lessons/43165) (프로그래머스, Level 2) — DFS
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/43165
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/43165>
 
 정수 배열 `numbers`의 각 원소에 +나 -를 붙여 합이 `target`이 되는 경우의 수를 구한다.
 
@@ -538,9 +514,7 @@ def solution(numbers, target):
 
 ### 대표 문제 2: [게임 맵 최단거리](https://school.programmers.co.kr/learn/courses/30/lessons/1844) (프로그래머스, Level 2) — BFS
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/1844
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/1844>
 
 n×m 크기의 게임 맵에서 (0,0)부터 (n-1, m-1)까지의 최단 거리를 구한다. 1은 이동 가능, 0은 벽이다.
 
@@ -578,9 +552,7 @@ BFS이므로 목적지에 처음 도달한 시점의 거리가 최단 거리다.
 
 - 프로그래머스 [네트워크](https://school.programmers.co.kr/learn/courses/30/lessons/43162) (Level 3) — DFS로 연결 요소 개수 세기
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/43162
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/43162>
 
 <br>
 
@@ -603,9 +575,7 @@ DP 접근법은 크게 두 가지로 나뉜다:
 
 ### 대표 문제: [정수 삼각형](https://school.programmers.co.kr/learn/courses/30/lessons/43105) (프로그래머스, Level 3)
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/43105
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/43105>
 
 삼각형의 꼭대기에서 바닥까지 이동하면서 거쳐간 숫자의 합의 최댓값을 구한다.
 
@@ -638,15 +608,11 @@ Bottom-up 방식의 풀이다.
 
 - LeetCode [Climbing Stairs](https://leetcode.com/problems/climbing-stairs/) (#70) — 피보나치 형태의 기본 DP
 
-```preview
-https://leetcode.com/problems/climbing-stairs/
-```
+<https://leetcode.com/problems/climbing-stairs/>
 
 - 프로그래머스 [N으로 표현](https://school.programmers.co.kr/learn/courses/30/lessons/42895) (Level 3) — 집합 기반 DP
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/42895
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/42895>
 
 <br>
 
@@ -663,9 +629,7 @@ https://school.programmers.co.kr/learn/courses/30/lessons/42895
 
 ### 대표 문제: [배달](https://school.programmers.co.kr/learn/courses/30/lessons/12978) (프로그래머스, Level 2)
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/12978
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/12978>
 
 
 N개의 마을과 양방향 도로가 주어질 때, 1번 마을에서 K 시간 이내로 배달할 수 있는 마을의 수를 구한다.
@@ -722,9 +686,7 @@ def solution(N, road, K):
 
 ### 대표 문제: [Two Sum II](https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/) (LeetCode #167)
 
-```preview
-https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
-```
+<https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/>
 
 정렬된 정수 배열 `numbers`에서 합이 `target`인 두 수의 인덱스(1-based)를 반환하는 문제다.
 
@@ -765,9 +727,7 @@ def twoSum(numbers, target):
 
 ### 대표 문제: [키패드 누르기](https://school.programmers.co.kr/learn/courses/30/lessons/67256) (프로그래머스, Level 1)
 
-```preview
-https://school.programmers.co.kr/learn/courses/30/lessons/67256
-```
+<https://school.programmers.co.kr/learn/courses/30/lessons/67256>
 
 전화 키패드에서 눌러야 할 번호 배열이 주어질 때, 각 번호를 왼손/오른손 중 어느 손으로 누르는지 결정한다.
 
@@ -855,3 +815,4 @@ def solution(numbers, hand):
 나동빈의 "이것이 취업을 위한 코딩 테스트다"를 비롯한 여러 알고리즘 학습 자료에서도 N 기반 시간 복잡도 추론을 첫 번째 전략으로 소개하고 있다.
 
 문제를 보자마자 N의 범위를 확인하고 허용 가능한 알고리즘을 좁혀가는 습관은, 한 번 체화하면 문제 접근 속도를 확실히 끌어올려 준다.
+

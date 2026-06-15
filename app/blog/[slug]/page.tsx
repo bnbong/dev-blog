@@ -8,19 +8,19 @@ import { PostSidebar } from "@/components/PostSidebar";
 import { Giscus } from "@/components/Giscus";
 import { Container } from "@/components/Container";
 
-export function generateStaticParams() {
-  return getAllPosts().map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getAllPosts()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   return { title: post ? `${post.title} — bnbong` : "Post — bnbong", description: post?.excerpt };
 }
 
 export default async function PostDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPost(slug);
+  const post = await getPost(slug);
   if (!post) notFound();
 
   const hasUpdate = post.updated && post.updated !== post.date;

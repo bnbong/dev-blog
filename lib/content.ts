@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { renderMarkdown, plainTextLength } from "./markdown";
+import { renderMarkdown, plainTextLength, findLinkCardUrls } from "./markdown";
+import { getLinkPreviews } from "./link-preview";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
@@ -153,8 +154,12 @@ function extractDates(data: Record<string, unknown>): { created: string; updated
   return { created: fmtDate(d), updated: data.updated ? fmtDate(data.updated) : undefined };
 }
 
-export function getAllPosts(): Post[] {
-  const posts = readDir(BLOG_DIR).map(({ slug, raw }) => {
+export async function getAllPosts(): Promise<Post[]> {
+  const entries = readDir(BLOG_DIR);
+  const previews = await getLinkPreviews(entries.flatMap((e) => findLinkCardUrls(e.raw)));
+  const resolveLink = getLinkResolver();
+
+  const posts = entries.map(({ slug, raw }) => {
     const { data, content } = matter(raw);
     const { created, updated } = extractDates(data);
     const category =
@@ -170,7 +175,7 @@ export function getAllPosts(): Post[] {
       tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
       intro: data.intro ? String(data.intro) : undefined,
       isNewExplicit: typeof data.isNew === "boolean" ? (data.isNew as boolean) : undefined,
-      html: renderMarkdown(content, { assetBase: `/blog/${slug}`, resolveLink: getLinkResolver() }),
+      html: renderMarkdown(content, { assetBase: `/blog/${slug}`, resolveLink, linkPreviews: previews }),
     };
   });
 
@@ -185,8 +190,8 @@ export function getAllPosts(): Post[] {
   }));
 }
 
-export function getPost(slug: string): Post | undefined {
-  return getAllPosts().find((p) => p.slug === slug);
+export async function getPost(slug: string): Promise<Post | undefined> {
+  return (await getAllPosts()).find((p) => p.slug === slug);
 }
 
 const STACK_STOPLIST = new Set([
@@ -205,8 +210,12 @@ function firstGithubUrl(body: string): string {
   return m ? m[0].replace(/[.,)]+$/, "") : "";
 }
 
-export function getAllProjects(): Project[] {
-  const projects = readDir(PROJECTS_DIR).map(({ slug, raw }) => {
+export async function getAllProjects(): Promise<Project[]> {
+  const entries = readDir(PROJECTS_DIR);
+  const previews = await getLinkPreviews(entries.flatMap((e) => findLinkCardUrls(e.raw)));
+  const resolveLink = getLinkResolver();
+
+  const projects = entries.map(({ slug, raw }) => {
     const { data, content } = matter(raw);
     const period = data.period ? String(data.period) : "";
     const url = String(data.url ?? data.repo ?? firstGithubUrl(content) ?? "");
@@ -232,7 +241,7 @@ export function getAllProjects(): Project[] {
       featured: Boolean(data.featured),
       period: period || undefined,
       role: data.role ? String(data.role) : undefined,
-      html: renderMarkdown(content, { assetBase: `/projects/${slug}`, resolveLink: getLinkResolver() }),
+      html: renderMarkdown(content, { assetBase: `/projects/${slug}`, resolveLink, linkPreviews: previews }),
     } satisfies Project;
   });
 
@@ -242,6 +251,6 @@ export function getAllProjects(): Project[] {
   );
 }
 
-export function getProject(slug: string): Project | undefined {
-  return getAllProjects().find((p) => p.slug === slug);
+export async function getProject(slug: string): Promise<Project | undefined> {
+  return (await getAllProjects()).find((p) => p.slug === slug);
 }

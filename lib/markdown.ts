@@ -1,7 +1,29 @@
 import { marked } from "marked";
+import { markedHighlight } from "marked-highlight";
+import hljs from "highlight.js";
 import sanitizeHtml from "sanitize-html";
+import { renderLinkCard, type LinkPreview } from "./link-preview";
 
 marked.setOptions({ gfm: true, breaks: false });
+
+// Build-time syntax highlighting (highlight.js → `<span class="hljs-…">` tokens,
+// coloured by the .hljs CSS theme). Synchronous, so renderMarkdown stays sync;
+// no client-side JS ships.
+marked.use(
+  markedHighlight({
+    emptyLangClass: "hljs",
+    langPrefix: "hljs language-",
+    highlight(code, lang) {
+      try {
+        if (lang && hljs.getLanguage(lang)) return hljs.highlight(code, { language: lang }).value;
+        if (!lang) return hljs.highlightAuto(code).value;
+      } catch {
+        /* fall through to escaped plain text */
+      }
+      return code.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    },
+  }),
+);
 
 const ADMONITION_TITLES: Record<string, string> = {
   note: "Note",
@@ -17,12 +39,30 @@ const ADMONITION_TITLES: Record<string, string> = {
   example: "Example",
   quote: "Quote",
 };
+const ADMONITION_TYPES = new Set(Object.keys(ADMONITION_TITLES));
+
+/** A line that is exactly an autolink `<https://…>` becomes a social card. */
+const LINK_CARD_LINE = /^[ \t]*<(https?:\/\/[^>\s]+)>[ \t]*$/;
+/** Opening of a pymdownx-style block: `/// type` or `/// type | args`. */
+const BLOCK_OPEN = /^\/\/\/\s+([\w-]+)\s*(?:\|\s*(.*?))?\s*$/;
 
 export interface RenderOptions {
   /** Public URL prefix for co-located images, e.g. "/blog/<slug>". */
   assetBase?: string;
   /** Resolve a legacy `*.md` link to a real route; return input unchanged to keep it. */
   resolveLink?: (href: string) => string;
+  /** OG previews for `<url>` autolink social cards (keyed by URL). */
+  linkPreviews?: Map<string, LinkPreview | null>;
+}
+
+/** Collect URLs that appear as standalone `<https://…>` autolinks (→ social cards). */
+export function findLinkCardUrls(md: string): string[] {
+  const urls: string[] = [];
+  for (const line of md.replace(/\r\n?/g, "\n").split("\n")) {
+    const m = line.match(LINK_CARD_LINE);
+    if (m) urls.push(m[1]);
+  }
+  return urls;
 }
 
 function escapeHtml(s: string): string {
@@ -110,15 +150,34 @@ const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
   },
 };
 
+/** Render a `/// type | args … ///` block (pymdownx Blocks subset). */
+function renderBlock(type: string, args: string, body: string, opts: RenderOptions): string {
+  const inner = renderMarkdown(body, opts);
+  if (type === "caption" || type === "figure-caption") {
+    return `<div class="md-caption">${inner}</div>`;
+  }
+  if (type === "details" || type === "collapse") {
+    const summary = escapeHtml(args || "Details");
+    return `<details class="md-details"><summary>${summary}</summary>${inner}</details>`;
+  }
+  if (ADMONITION_TYPES.has(type)) {
+    const title = escapeHtml(args || ADMONITION_TITLES[type]);
+    return `<div class="admonition ${escapeHtml(type)}"><p class="admonition-title">${title}</p>${inner}</div>`;
+  }
+  // Unknown block type: keep the content, drop the wrapper semantics.
+  return `<div class="md-block">${inner}</div>`;
+}
+
 /**
  * Convert an MkDocs Markdown document into sanitized HTML.
  * Handles the subset of pymdownx/material syntax used in the legacy blog:
- * admonitions, collapsible admonitions, `<!-- more -->`, icon shortcodes,
- * attr-lists, co-located image paths and legacy cross-links. Output is run
- * through an allowlist sanitizer before it is injected into the page.
+ * admonitions (`!!!`/`???`), Blocks (`/// caption`, `/// note`, `/// details`),
+ * `<url>` social-card autolinks, `<!-- more -->`, icon shortcodes, attr-lists,
+ * co-located image paths and legacy cross-links. Output is run through an
+ * allowlist sanitizer before it is injected into the page.
  */
 export function renderMarkdown(input: string, opts: RenderOptions = {}): string {
-  const src = input.replace(/<!--\s*more\s*-->/g, "");
+  const src = input.replace(/\r\n?/g, "\n").replace(/<!--\s*more\s*-->/g, "");
   const lines = src.split("\n");
   const out: string[] = [];
   let inFence = false;
@@ -161,6 +220,35 @@ export function renderMarkdown(input: string, opts: RenderOptions = {}): string 
       if (title) out.push(`<p class="admonition-title">${escapeHtml(title)}</p>`);
       out.push(inner);
       out.push(`</div>`);
+      out.push("");
+      continue;
+    }
+
+    // Standalone autolink `<https://…>` → social card.
+    const cardMatch = line.match(LINK_CARD_LINE);
+    if (cardMatch) {
+      const url = cardMatch[1];
+      const preview = opts.linkPreviews?.get(url) ?? null;
+      out.push("");
+      out.push(renderLinkCard(url, preview));
+      out.push("");
+      i++;
+      continue;
+    }
+
+    // pymdownx-style block: `/// type | args` … `///`
+    const block = line.match(BLOCK_OPEN);
+    if (block) {
+      const type = block[1].toLowerCase();
+      const args = (block[2] ?? "").trim();
+      i++;
+      const body: string[] = [];
+      while (i < lines.length && lines[i].trim() !== "///") {
+        body.push(lines[i]);
+        i++;
+      }
+      if (i < lines.length) i++; // consume closing ///
+      out.push(renderBlock(type, args, body.join("\n").trim(), opts));
       out.push("");
       continue;
     }

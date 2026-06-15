@@ -115,9 +115,7 @@ AWS(Amazon Web Services)는 클라우드 개발이라는 것을 단 한번이라
 
 사진에서 유일하게 과금이 나가고 있는 VPC endpoint라는 서비스가 무엇인지 외부 참고 자료를 찾아보았다.
 
-```preview
-https://aws-hyoh.tistory.com/73
-```
+<https://aws-hyoh.tistory.com/73>
 
 VPC는 일종의 큰 범주의 서브넷 네트워크를 내 계정이 소유하게 배치하는 것이다. 외부에서 내 VPC 내부에 있는 인스턴스와 통신을 하기 위해선 public ip를 할당받은 인스턴스가 있어야 하는데, VPC endpoint는 public ip를 할당할 필요 없이 AWS사가 보유하고 운영하고 있는 백본 네트워크로 트래픽을 흘려서 통신할 수 있게 해준다.
 

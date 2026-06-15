@@ -7,13 +7,13 @@ import { Tag } from "@/components/Tag";
 import { RepoCard } from "@/components/RepoCard";
 import { Container } from "@/components/Container";
 
-export function generateStaticParams() {
-  return getAllProjects().map((p) => ({ slug: p.slug }));
+export async function generateStaticParams() {
+  return (await getAllProjects()).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   return { title: project ? `${project.name} — bnbong` : "Project — bnbong", description: project?.description };
 }
 
@@ -22,7 +22,7 @@ const STATUS_LABEL = { active: "Active", wip: "WIP", archived: "Archived" } as c
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = getProject(slug);
+  const project = await getProject(slug);
   if (!project) notFound();
 
   return (

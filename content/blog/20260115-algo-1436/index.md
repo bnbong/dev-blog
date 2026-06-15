@@ -16,9 +16,7 @@ comments: true
 
 ## 문제 개요
 
-```preview
-https://www.acmicpc.net/problem/1436
-```
+<https://www.acmicpc.net/problem/1436>
 
 ### 분류
 

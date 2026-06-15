@@ -25,6 +25,7 @@ export function Giscus() {
     script.setAttribute("data-category", giscus.category);
     script.setAttribute("data-category-id", giscus.categoryId);
     script.setAttribute("data-mapping", giscus.mapping);
+    script.setAttribute("data-strict", giscus.strict);
     script.setAttribute("data-reactions-enabled", giscus.reactionsEnabled);
     script.setAttribute("data-emit-metadata", "0");
     script.setAttribute("data-input-position", giscus.inputPosition);

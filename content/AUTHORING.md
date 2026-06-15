@@ -70,6 +70,51 @@ blogflow brief && blogflow draft && blogflow review && blogflow finalize && blog
 
 발행 경로는 포스트별 폴더 규칙(`content/blog/<slug>/index.md`)을 그대로 쓰면 되고, `.blogflow/config.yaml`의 `blog_dir: content/blog` 아래라면 유효.
 
+## 본문 렌더링 문법 (MkDocs 호환)
+
+MKDocs-materials 시절 문법 그대로 적용(리더가 빌드 시 HTML로 변환).
+
+### Admonition (콜아웃)
+
+```markdown
+!!! tip "제목"
+    들여쓴 본문 (4칸 들여쓰기)
+```
+
+- `???` 로 시작하면 접히는(collapsible) 형태로도 인식.
+- 타입: `note` `tip` `info` `warning` `danger` `success` `question` `example` `quote` `abstract` `failure` `bug`
+
+### Blocks (`/// … ///`)
+
+```markdown
+![아키텍처](diagram.png)
+/// caption
+그림 아래 캡션
+///
+```
+
+- `/// caption … ///` → 이미지/표 아래 **중앙 정렬 캡션**.
+- `/// note | "제목" … ///` 등 admonition 타입도 동일하게 렌더링(제목은 `|` 뒤 인자).
+- `/// details | 요약 … ///` → 접히는 `<details>`.
+
+### 링크 소셜 카드 (`<url>`)
+
+줄 하나에 URL을 `<`, `>` 로 감싸면 OG 메타데이터를 가져와 **소셜 카드**로 렌더링.
+
+```markdown
+<https://github.com/bnbong/dev-blog>
+```
+
+- **그 줄 전체가** `<url>` 일 때만 카드가 됨. 문장 속 `<url>` 이나 `[텍스트](url)` 는 일반 링크로 유지.
+- 제목&설명&대표 이미지는 빌드 시 해당 페이지에서 가져오고, 실패하면 도메인+파비콘만 있는 간단 카드로 표시.
+- 결과는 `.cache/link-previews.json` 에 캐시(재빌드 빠름). 새로 가져오려면 `.cache` 삭제.
+
+### 기타
+
+- `<!-- more -->`(프리뷰 구분자), `:material-…:`/`:fontawesome-…:` 아이콘 단축코드, `{ .class }` attr-list 는 자동 제거.
+- 레거시 `*.md` 상호 링크(예: `qr-phishing-detector.md`)는 실제 라우트(`/projects/qr-phishing-detector/`)로 자동 변환.
+- 모든 HTML은 allowlist sanitizer를 거쳐 주입(스크립트 및 위험 URL 차단).
+
 ## 참고
 
 - 수동으로 한 번 동기화하려면 `npm run sync:assets`.

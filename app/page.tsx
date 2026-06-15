@@ -54,12 +54,12 @@ function Timeline({ items }: { items: { org: string; role?: string; period: stri
   );
 }
 
-export default function AboutPage() {
-  const latestPosts = getAllPosts()
+export default async function AboutPage() {
+  const latestPosts = (await getAllPosts())
     .slice(0, 3)
     .map((p) => ({ slug: p.slug, title: p.title, excerpt: p.excerpt, date: p.date, readingTime: p.readingTime, tags: p.tags, isNew: p.isNew }));
 
-  const allProjects = getAllProjects();
+  const allProjects = await getAllProjects();
   const featured = featuredProjectSlugs
     .map((slug) => allProjects.find((p) => p.slug === slug))
     .filter((p): p is NonNullable<typeof p> => Boolean(p))

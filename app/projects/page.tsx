@@ -6,8 +6,8 @@ import { Container } from "@/components/Container";
 
 export const metadata = { title: "Projects — bnbong" };
 
-export default function ProjectsPage() {
-  const projects = getAllProjects().map((p) => ({
+export default async function ProjectsPage() {
+  const projects = (await getAllProjects()).map((p) => ({
     slug: p.slug,
     name: p.name,
     description: p.description,

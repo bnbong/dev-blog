@@ -8,6 +8,9 @@ next-env.d.ts
 # generated image mirror — source of truth is content/<area>/<slug>/
 /public/blog
 /public/projects
+
+# build-time link-preview (OG metadata) cache
+/.cache
 .DS_Store
 npm-debug.log*
 yarn-error.log*

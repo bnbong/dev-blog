@@ -11,9 +11,9 @@ export const metadata: Metadata = {
   icons: { icon: "/assets/logo-mark.svg" },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const postCount = getAllPosts().length;
-  const projectCount = getAllProjects().length;
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const postCount = (await getAllPosts()).length;
+  const projectCount = (await getAllProjects()).length;
 
   return (
     <html lang="ko">

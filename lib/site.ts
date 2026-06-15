@@ -159,19 +159,23 @@ export const analytics = {
 };
 
 /**
- * giscus (GitHub Discussions comments) — migrated verbatim from the legacy
- * overrides/partials/comments.html. Comments stay attached to the
- * bnbong/bnbong.github.io Discussions so existing threads are preserved.
+ * giscus (GitHub Discussions comments) — attached to the bnbong/dev-blog repo.
+ *
+ * `repoId` and `categoryId` are GitHub node IDs unique to this repo + category,
+ * so they must be generated from https://giscus.app and pasted below. Until
+ * they are filled in, the comments section renders a styled placeholder
+ * instead of breaking. Setup steps are in README.md ("giscus 댓글 연결").
  */
 export const giscus = {
   enabled: true,
-  repo: "bnbong/bnbong.github.io",
-  repoId: "MDEwOlJlcG9zaXRvcnkyMDg1MzMyNTU=",
-  category: "Blog",
-  categoryId: "DIC_kwDODG33B84CkxR1",
-  mapping: "title" as const,
+  repo: "bnbong/dev-blog",
+  repoId: "R_kgDOS6Y17Q",
+  category: "Announcements",
+  categoryId: "DIC_kwDOS6Y17c4C_I46",
+  mapping: "pathname" as const,
+  strict: "0" as const,
   reactionsEnabled: "1" as const,
-  inputPosition: "top" as const,
+  inputPosition: "bottom" as const,
   // The blog has no dark-mode toggle — it's always light (warm paper #FDFBF6).
   // `preferred_color_scheme` would follow the visitor's OS and flip to dark,
   // mismatching the page. Use a fixed light theme instead.
