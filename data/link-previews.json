@@ -48,6 +48,13 @@
     "image": "https://bnbong.github.io/assets/images/social/projects/index.png",
     "siteName": "bnbong.github.io"
   },
+  "https://codemaru.bnbong.com": {
+    "url": "https://codemaru.bnbong.com",
+    "title": "codemaru — developer summary cards",
+    "description": "Render your public developer activity and algorithm-training stats as an embeddable GitHub README card.",
+    "image": "",
+    "siteName": "codemaru.bnbong.com"
+  },
   "https://cspell.org/": {
     "url": "https://cspell.org/",
     "title": "CSpell",
@@ -151,6 +158,20 @@
     "title": "[Storage] Fixed cspell typos in storage-blob by bnbong · Pull Request #31635 · Azure/azure-sdk-for-python",
     "description": "Description\nPart of #22674\nfixing incorrectly written words at source codes:\n\ntransfered -> transferred\nsnapthots -> snapshots\nspeficied -> specified\nconifgure -> configure\n\nAll SDK Con...",
     "image": "https://opengraph.githubassets.com/2a55018957b6e35a9053adcc81babb927934c964b60cc6101d654b9cc3367d18/Azure/azure-sdk-for-python/pull/31635",
+    "siteName": "GitHub"
+  },
+  "https://github.com/BaekjoonHub/BaekjoonHub/issues/333": {
+    "url": "https://github.com/BaekjoonHub/BaekjoonHub/issues/333",
+    "title": "SWEA push 끊김 · Issue #333 · BaekjoonHub/BaekjoonHub",
+    "description": "버그를 설명해주세요 SW Expert Academy(SWEA)에서 정답(Pass) 제출 이후 BaekjoonHub가 GitHub에 자동 push를 수행하지 않습니다. 프로그래머스에서는 정상적으로 동작하지만, SWEA에서는 동작하지 않습니다. 재현 방법을 기술해주세요 OS: macOS Browser: Chrome Extension Version: 1.4...",
+    "image": "https://opengraph.githubassets.com/6291920683996daaacbae971418d08c5617ff4a2c8f8518a808ee35580ad5f31/BaekjoonHub/BaekjoonHub/issues/333",
+    "siteName": "GitHub"
+  },
+  "https://github.com/BaekjoonHub/BaekjoonHub/pull/334": {
+    "url": "https://github.com/BaekjoonHub/BaekjoonHub/pull/334",
+    "title": "fix: SWEA 자동 업로드 실패 수정 (#333) by bnbong · Pull Request #334 · BaekjoonHub/BaekjoonHub",
+    "description": "Summary\nFixes #333\nSWEA(SW Expert Academy)에서 Pass 제출 후 GitHub 자동 업로드가 실패하던 문제를 수정했습니다.\n주요 원인은 SWEA 결과 페이지 DOM 변경으로 인해 parseData()가 제출 정보를 제대로 파싱하지 못하는 상황에서도 업로드 로딩 UI가 먼저 표시되고, 이후 10초 타임아웃으로 빨간 체크가...",
+    "image": "https://opengraph.githubassets.com/1b42e1fd834d9e1d9063e2a00b847d354bad9902da7ef1638e21bbfbcf904203/BaekjoonHub/BaekjoonHub/pull/334",
     "siteName": "GitHub"
   },
   "https://github.com/DenverCoder1/readme-typing-svg": {
@@ -291,6 +312,13 @@
     "title": "bnbong.github.io/mkdocs.yml at master · bnbong/bnbong.github.io",
     "description": "<Blog> bnbong's Personal tech blog site. Contribute to bnbong/bnbong.github.io development by creating an account on GitHub.",
     "image": "https://opengraph.githubassets.com/c63ea3bd87d89f51167b5f4a87d51db31c41e085f2d20a232258330e834795d4/bnbong/bnbong.github.io",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/codemaru": {
+    "url": "https://github.com/bnbong/codemaru",
+    "title": "GitHub - bnbong/codemaru: GitHub profile README 용 프로그래밍 역량 요약 카드 생성 도구",
+    "description": "GitHub profile README 용 프로그래밍 역량 요약 카드 생성 도구. Contribute to bnbong/codemaru development by creating an account on GitHub.",
+    "image": "https://repository-images.githubusercontent.com/1254948729/6d2f2091-c257-4259-86c5-0bcc97ecbe9b",
     "siteName": "GitHub"
   },
   "https://github.com/bnbong/rickTcal_DayLife": {

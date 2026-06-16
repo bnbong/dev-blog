@@ -44,6 +44,8 @@ const ADMONITION_TYPES = new Set(Object.keys(ADMONITION_TITLES));
 
 /** Opening of a pymdownx-style block: `/// type` or `/// type | args`. */
 const BLOCK_OPEN = /^\/\/\/\s+([\w-]+)\s*(?:\|\s*(.*?))?\s*$/;
+/** `**bold**` (content not whitespace-bounded; single `*` allowed inside). */
+const STRONG = /\*\*(?=\S)((?:[^*]|\*(?!\*))*?)(?<=\S)\*\*/g;
 
 export interface RenderOptions {
   /** Public URL prefix for co-located images, e.g. "/blog/<slug>". */
@@ -72,7 +74,15 @@ function resolveSrc(src: string, base: string): string {
 
 function cleanInline(line: string, opts: RenderOptions): string {
   const { assetBase = "", resolveLink } = opts;
-  let out = line
+
+  // Protect inline code spans so none of the transforms below touch their text.
+  const codeSpans: string[] = [];
+  let out = line.replace(/`[^`\n]*`/g, (m) => {
+    codeSpans.push(m);
+    return `\u0000${codeSpans.length - 1}\u0000`;
+  });
+
+  out = out
     // Markdown images → <img> so they render inside MkDocs `md_in_html`
     // containers (<figure markdown>) that marked passes through verbatim.
     .replace(
@@ -105,6 +115,13 @@ function cleanInline(line: string, opts: RenderOptions): string {
       (_m, pre, href, post) => `${pre}${resolveLink(href)}${post}`,
     );
   }
+
+  // Bold: convert **...** to <strong> ourselves - marked (strict CommonMark) cannot
+  // close ** between punctuation and a CJK letter (e.g. `...6)**ipnida`).
+  out = out.replace(STRONG, (_m, inner) => `<strong>${inner}</strong>`);
+
+  // restore protected inline code spans
+  out = out.replace(/\u0000(\d+)\u0000/g, (_m, i) => codeSpans[Number(i)]);
 
   return out.trimEnd();
 }

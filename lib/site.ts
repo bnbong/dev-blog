@@ -127,8 +127,29 @@ export const openSource = {
         "문서화 및 사용자 피드백 반영 사이클 운영",
       ],
     },
+    {
+      name: "codemaru",
+      slug: "codemaru",
+      upstream: "https://github.com/bnbong/codemaru",
+      desc: "GitHub 프로필 README에 개발 역량을 5개 축으로 요약하는 SVG 카드 생성기. GitHub·solved.ac·LeetCode 데이터를 모아 점수화하고 8단계 티어로 표현합니다.",
+      contributions: [
+        "5개 축 스코어링 + 신뢰도 가중치 설계",
+        "FastAPI 카드 생성 서버 · 웹 제너레이터",
+        "GitHub Action 연동 자동 갱신",
+      ],
+    },
   ],
   contributions: [
+    {
+      name: "BaekjoonHub",
+      slug: "baekjoonhub",
+      upstream: "https://github.com/BaekjoonHub/BaekjoonHub",
+      desc: "백준·프로그래머스·SWEA 풀이를 GitHub에 자동 커밋해 주는 브라우저 확장. SWEA 자동 업로드가 끊기던 버그를 수정했습니다.",
+      contributions: [
+        "SWEA DOM 변경 대응: selector fallback · null-safe 파싱 (#334)",
+        "머지 후 .textContent/.innerText 오해로 인한 회귀를 직접 겪고 회고 — 텍스트 추출 의미 차이와 테스트 격리의 중요성",
+      ],
+    },
     {
       name: "Azure SDK for Python",
       slug: "azure-sdk-python",
