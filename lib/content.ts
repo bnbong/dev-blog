@@ -154,6 +154,41 @@ function extractDates(data: Record<string, unknown>): { created: string; updated
   return { created: fmtDate(d), updated: data.updated ? fmtDate(data.updated) : undefined };
 }
 
+/** Post fields without the rendered body — for lists and the RSS feed. */
+export type PostSummary = Omit<Post, "html">;
+
+/** Frontmatter → post metadata (no Markdown rendering, no link-preview fetch). */
+function parsePostMeta(slug: string, data: Record<string, unknown>, content: string) {
+  const { created, updated } = extractDates(data);
+  const category =
+    (data.category as string) ?? (Array.isArray(data.categories) ? String(data.categories[0]) : "Writing");
+  return {
+    slug,
+    title: String(data.title ?? slug),
+    excerpt: String(data.excerpt ?? data.description ?? ""),
+    category,
+    date: created,
+    updated: updated && updated !== created ? updated : undefined,
+    readingTime: data.readingTime ? String(data.readingTime) : estimateReadingTime(content),
+    tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
+    intro: data.intro ? String(data.intro) : undefined,
+    isNewExplicit: typeof data.isNew === "boolean" ? (data.isNew as boolean) : undefined,
+  };
+}
+
+/** Sort newest-first by created date and flag posts within 60 days of the newest as "New". */
+function sortAndFlagNew<T extends { date: string; isNewExplicit?: boolean }>(
+  list: T[],
+): Array<Omit<T, "isNewExplicit"> & { isNew: boolean }> {
+  const sorted = [...list].sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
+  const newest = sorted.length ? new Date(sortKey(sorted[0].date)).getTime() : 0;
+  const SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000;
+  return sorted.map(({ isNewExplicit, ...rest }) => ({
+    ...rest,
+    isNew: isNewExplicit ?? newest - new Date(sortKey(rest.date)).getTime() <= SIXTY_DAYS,
+  })) as Array<Omit<T, "isNewExplicit"> & { isNew: boolean }>;
+}
+
 export async function getAllPosts(): Promise<Post[]> {
   const entries = readDir(BLOG_DIR);
   const previews = await getLinkPreviews(entries.flatMap((e) => findLinkCardUrls(e.raw)));
@@ -161,33 +196,22 @@ export async function getAllPosts(): Promise<Post[]> {
 
   const posts = entries.map(({ slug, raw }) => {
     const { data, content } = matter(raw);
-    const { created, updated } = extractDates(data);
-    const category =
-      (data.category as string) ?? (Array.isArray(data.categories) ? String(data.categories[0]) : "Writing");
     return {
-      slug,
-      title: String(data.title ?? slug),
-      excerpt: String(data.excerpt ?? data.description ?? ""),
-      category,
-      date: created,
-      updated: updated && updated !== created ? updated : undefined,
-      readingTime: data.readingTime ? String(data.readingTime) : estimateReadingTime(content),
-      tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-      intro: data.intro ? String(data.intro) : undefined,
-      isNewExplicit: typeof data.isNew === "boolean" ? (data.isNew as boolean) : undefined,
+      ...parsePostMeta(slug, data, content),
       html: renderMarkdown(content, { assetBase: `/blog/${slug}`, resolveLink, linkPreviews: previews }),
     };
   });
 
-  posts.sort((a, b) => sortKey(b.date).localeCompare(sortKey(a.date)));
+  return sortAndFlagNew(posts) as Post[];
+}
 
-  // Mark posts within 60 days of the newest as "New" (unless frontmatter overrides).
-  const newest = posts.length ? new Date(sortKey(posts[0].date)).getTime() : 0;
-  const SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000;
-  return posts.map(({ isNewExplicit, ...p }) => ({
-    ...p,
-    isNew: isNewExplicit ?? (newest - new Date(sortKey(p.date)).getTime() <= SIXTY_DAYS),
-  }));
+/** Lightweight metadata-only list (no Markdown render, no network) for the RSS feed. */
+export function getPostSummaries(): PostSummary[] {
+  const items = readDir(BLOG_DIR).map(({ slug, raw }) => {
+    const { data, content } = matter(raw);
+    return parsePostMeta(slug, data, content);
+  });
+  return sortAndFlagNew(items) as PostSummary[];
 }
 
 export async function getPost(slug: string): Promise<Post | undefined> {

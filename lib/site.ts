@@ -3,6 +3,13 @@
  * Migrated from the legacy MkDocs site (bnbong.github.io).
  */
 
+/**
+ * Absolute base URL of the DEPLOYED site (no trailing slash). Used to build
+ * absolute links in the RSS feed (/feed.xml). Override per-deploy with the
+ * NEXT_PUBLIC_SITE_URL env var; falls back to the production domain.
+ */
+export const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || "https://bnbong.com").replace(/\/$/, "");
+
 export const profile = {
   name: "이준혁",
   nameEn: "JunHyeok Lee",
