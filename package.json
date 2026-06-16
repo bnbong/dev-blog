@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync:assets": "node tools/content-assets.mjs"
+    "sync:assets": "node tools/content-assets.mjs",
+    "prefetch:links": "node tools/prefetch-link-previews.mjs",
+    "check:links": "node tools/check-link-previews.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
@@ -25,6 +27,7 @@
     "@types/react-dom": "^19.0.0",
     "@types/sanitize-html": "^2.13.0",
     "eslint": "^8.57.1",
+    "html-entities": "^2.5.2",
     "eslint-config-next": "15.5.19",
     "typescript": "^5.5.0"
   }

@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { renderMarkdown, plainTextLength, findLinkCardUrls } from "./markdown";
+import { renderMarkdown, plainTextLength } from "./markdown";
 import { getLinkPreviews } from "./link-preview";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -191,7 +191,7 @@ function sortAndFlagNew<T extends { date: string; isNewExplicit?: boolean }>(
 
 export async function getAllPosts(): Promise<Post[]> {
   const entries = readDir(BLOG_DIR);
-  const previews = await getLinkPreviews(entries.flatMap((e) => findLinkCardUrls(e.raw)));
+  const previews = getLinkPreviews();
   const resolveLink = getLinkResolver();
 
   const posts = entries.map(({ slug, raw }) => {
@@ -236,7 +236,7 @@ function firstGithubUrl(body: string): string {
 
 export async function getAllProjects(): Promise<Project[]> {
   const entries = readDir(PROJECTS_DIR);
-  const previews = await getLinkPreviews(entries.flatMap((e) => findLinkCardUrls(e.raw)));
+  const previews = getLinkPreviews();
   const resolveLink = getLinkResolver();
 
   const projects = entries.map(({ slug, raw }) => {

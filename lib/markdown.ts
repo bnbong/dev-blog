@@ -3,6 +3,7 @@ import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
 import sanitizeHtml from "sanitize-html";
 import { renderLinkCard, type LinkPreview } from "./link-preview";
+import { LINK_CARD_LINE } from "./link-cards.mjs";
 
 marked.setOptions({ gfm: true, breaks: false });
 
@@ -41,8 +42,6 @@ const ADMONITION_TITLES: Record<string, string> = {
 };
 const ADMONITION_TYPES = new Set(Object.keys(ADMONITION_TITLES));
 
-/** A line that is exactly an autolink `<https://…>` becomes a social card. */
-const LINK_CARD_LINE = /^[ \t]*<(https?:\/\/[^>\s]+)>[ \t]*$/;
 /** Opening of a pymdownx-style block: `/// type` or `/// type | args`. */
 const BLOCK_OPEN = /^\/\/\/\s+([\w-]+)\s*(?:\|\s*(.*?))?\s*$/;
 
@@ -53,16 +52,6 @@ export interface RenderOptions {
   resolveLink?: (href: string) => string;
   /** OG previews for `<url>` autolink social cards (keyed by URL). */
   linkPreviews?: Map<string, LinkPreview | null>;
-}
-
-/** Collect URLs that appear as standalone `<https://…>` autolinks (→ social cards). */
-export function findLinkCardUrls(md: string): string[] {
-  const urls: string[] = [];
-  for (const line of md.replace(/\r\n?/g, "\n").split("\n")) {
-    const m = line.match(LINK_CARD_LINE);
-    if (m) urls.push(m[1]);
-  }
-  return urls;
 }
 
 function escapeHtml(s: string): string {

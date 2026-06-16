@@ -106,8 +106,8 @@ MKDocs-materials 시절 문법 그대로 적용(리더가 빌드 시 HTML로 변
 ```
 
 - **그 줄 전체가** `<url>` 일 때만 카드가 됨. 문장 속 `<url>` 이나 `[텍스트](url)` 는 일반 링크로 유지.
-- 제목&설명&대표 이미지는 빌드 시 해당 페이지에서 가져오고, 실패하면 도메인+파비콘만 있는 간단 카드로 표시.
-- 결과는 `.cache/link-previews.json` 에 캐시(재빌드 빠름). 새로 가져오려면 `.cache` 삭제.
+- OG 메타데이터는 **`npm run prefetch:links`** 로 미리 받아 **`data/link-previews.json`(커밋됨)** 에 저장. CI 타임아웃 방지 목적.
+- 새 `<url>` 을 추가했으면 `npm run prefetch:links` 실행 후 `data/link-previews.json` 을 커밋할 것. 전체 갱신은 `npm run prefetch:links -- --force`.
 
 ### 기타
 

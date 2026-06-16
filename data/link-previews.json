@@ -1,0 +1,683 @@
+{
+  "https://aws-hyoh.tistory.com/73": {
+    "url": "https://aws-hyoh.tistory.com/73",
+    "title": "Virtual Private Cloud(VPC) 쉽게 이해하기 #5",
+    "description": "이번 문서에서 다룰 주제는 VPC Endpoint입니다. VPC 내 Resource들이 VPC 외부의 서비스(S3, Dynamo DB, Cloudwatch) 등에 접근할 때 Internet Gateway, NAT Gateway 등의 외부 인터넷 전송 서비스를 타지 않고 아마존의 백본 네트워크를 통해 접근할 수 있도록 지원하는 서비스입니다. VPC Endpoint는 왜 필요한가? 앞서 말씀드린 것처럼 AWS VPC는 사설 네트워크로 이루어진 사용자 정의 네트워크입니다. VPC 내 EC2, RDS, ELB 등을 탑재하고 ENI(Elastic Network Interface)에 사설 IP 혹은 공인 IP를 부여하여 사용하지요. S3, Cloudwatch, Cloudfront, Dynamo DB, API Gat..",
+    "image": "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdna%2FcRPeKO%2FbtqEPlEWtLS%2FAAAAAAAAAAAAAAAAAAAAAFmr8wHcIkzE0WsNhV2FQP-SJbseBIgX9C9FXFsWxRiF%2Fimg.png%3Fcredential%3DyqXZFxpELC7KVnFOS48ylbz2pIh7yKj8%26expires%3D1782831599%26allow_ip%3D%26allow_referer%3D%26signature%3DmY69MKLwJYPJzoqGm7ZE%252BevmiUQ%253D",
+    "siteName": "네트워크 엔지니어 환영의 기술블로그"
+  },
+  "https://azure.github.io/azure-sdk-korean/contribution_cspell": {
+    "url": "https://azure.github.io/azure-sdk-korean/contribution_cspell",
+    "title": "주요 컨트리뷰션 - CSpell | Azure SDKs",
+    "description": "",
+    "image": "",
+    "siteName": "azure.github.io"
+  },
+  "https://azure.microsoft.com/ko-kr/products/storage/blobs": {
+    "url": "https://azure.microsoft.com/ko-kr/products/storage/blobs",
+    "title": "Azure Blob Storage | Microsoft Azure",
+    "description": "Azure Blob Storage는 클라우드에서 확장성 있는 비용 효율적 개체 스토리지를 제공합니다. 가장 까다로운 워크로드의 비정형 데이터를 저장하고 그에 액세스하세요.",
+    "image": "",
+    "siteName": "azure.microsoft.com"
+  },
+  "https://bnbong.github.io/FastAPI-fastkit/#create-a-project-with-interactive-mode-new": {
+    "url": "https://bnbong.github.io/FastAPI-fastkit/#create-a-project-with-interactive-mode-new",
+    "title": "FastAPI-fastkit",
+    "description": "Fast, easy-to-use starter kit for new users of Python and FastAPI",
+    "image": "",
+    "siteName": "bnbong.github.io"
+  },
+  "https://bnbong.github.io/FastAPI-fastkit/#usage": {
+    "url": "https://bnbong.github.io/FastAPI-fastkit/#usage",
+    "title": "FastAPI-fastkit",
+    "description": "Fast, easy-to-use starter kit for new users of Python and FastAPI",
+    "image": "",
+    "siteName": "bnbong.github.io"
+  },
+  "https://bnbong.github.io/blog/2024/01/12/github-readmemd%EB%A1%9C-%EB%82%B4-%ED%94%84%EB%A1%9C%ED%95%84-%EB%A7%9B%EC%9E%88%EA%B2%8C-%EA%BE%B8%EB%AF%B8%EA%B8%B0/": {
+    "url": "https://bnbong.github.io/blog/2024/01/12/github-readmemd%EB%A1%9C-%EB%82%B4-%ED%94%84%EB%A1%9C%ED%95%84-%EB%A7%9B%EC%9E%88%EA%B2%8C-%EA%BE%B8%EB%AF%B8%EA%B8%B0/",
+    "title": "[Github] README.md로 내 프로필 맛있게 꾸미기 - bnbong's tech blog",
+    "description": "README.md를 꾸며 내 프로필을 작성하는 방법에 대해 서술합니다.",
+    "image": "https://bnbong.github.io/assets/images/social/blog/posts/20240112-readme-profile/20240112.png",
+    "siteName": "bnbong.github.io"
+  },
+  "https://bnbong.github.io/projects/": {
+    "url": "https://bnbong.github.io/projects/",
+    "title": "Projects - bnbong's tech blog",
+    "description": "bnbong이 진행한 프로젝트 — featured 우선 · 카테고리 기반 archive",
+    "image": "https://bnbong.github.io/assets/images/social/projects/index.png",
+    "siteName": "bnbong.github.io"
+  },
+  "https://cspell.org/": {
+    "url": "https://cspell.org/",
+    "title": "CSpell",
+    "description": "A spell checker for code!",
+    "image": "",
+    "siteName": "cspell.org"
+  },
+  "https://cspell.org/docs/Configuration": {
+    "url": "https://cspell.org/docs/Configuration",
+    "title": "Configuration | CSpell",
+    "description": "Customizing CSpell",
+    "image": "",
+    "siteName": "cspell.org"
+  },
+  "https://disqus.com/": {
+    "url": "https://disqus.com/",
+    "title": "#1 in audience engagement and community growth | Disqus",
+    "description": "More publishers trust us to engage, grow, and understand their audiences than any other. Build your on-site community with Disqus.",
+    "image": "https://c.disquscdn.com/next/current/marketing/assets/img/brand/favicon-192x192.png",
+    "siteName": "Disqus"
+  },
+  "https://docs.github.com/ko/actions": {
+    "url": "https://docs.github.com/ko/actions",
+    "title": "GitHub Actions 문서 - GitHub 문서",
+    "description": "를 사용하여 리포지 GitHub Actions토리에서 바로 소프트웨어 개발 워크플로를 자동화, 사용자 지정 및 실행합니다. CI/CD를 포함하여 원하는 작업을 수행하기 위한 작업을 검색, 생성 및 공유하고 완전히 사용자 정의된 워크플로에서 작업을 결합할 수 있습니다.",
+    "image": "https://docs.github.com/assets/cb-345/images/social-cards/actions.png",
+    "siteName": "GitHub Docs"
+  },
+  "https://docs.pydantic.dev/latest/api/config/#pydantic.config.ConfigDict": {
+    "url": "https://docs.pydantic.dev/latest/api/config/#pydantic.config.ConfigDict",
+    "title": "Configuration",
+    "description": "",
+    "image": "https://pydantic.dev/docs/og/validation/latest/api/pydantic/config.png",
+    "siteName": "Pydantic Docs"
+  },
+  "https://docs.pydantic.dev/latest/migration/": {
+    "url": "https://docs.pydantic.dev/latest/migration/",
+    "title": "Migration Guide",
+    "description": "Migrating from Pydantic V1.",
+    "image": "https://pydantic.dev/docs/og/validation/latest/get-started/migration.png",
+    "siteName": "Pydantic Docs"
+  },
+  "https://drf-yasg.readthedocs.io/en/stable/custom_spec.html#custom-spec-swagger-auto-schema": {
+    "url": "https://drf-yasg.readthedocs.io/en/stable/custom_spec.html#custom-spec-swagger-auto-schema",
+    "title": "Custom schema generation — drf-yasg 1.21.7 documentation",
+    "description": "",
+    "image": "",
+    "siteName": "drf-yasg.readthedocs.io"
+  },
+  "https://drf-yasg.readthedocs.io/en/stable/readme.html": {
+    "url": "https://drf-yasg.readthedocs.io/en/stable/readme.html",
+    "title": "drf-yasg - Yet another Swagger generator — drf-yasg 1.21.7 documentation",
+    "description": "",
+    "image": "",
+    "siteName": "drf-yasg.readthedocs.io"
+  },
+  "https://drf-yasg.readthedocs.io/en/stable/readme.html#third-party-integrations": {
+    "url": "https://drf-yasg.readthedocs.io/en/stable/readme.html#third-party-integrations",
+    "title": "drf-yasg - Yet another Swagger generator — drf-yasg 1.21.7 documentation",
+    "description": "",
+    "image": "",
+    "siteName": "drf-yasg.readthedocs.io"
+  },
+  "https://drf-yasg.readthedocs.io/en/stable/rendering.html": {
+    "url": "https://drf-yasg.readthedocs.io/en/stable/rendering.html",
+    "title": "Serving the schema — drf-yasg 1.21.7 documentation",
+    "description": "",
+    "image": "",
+    "siteName": "drf-yasg.readthedocs.io"
+  },
+  "https://drf-yasg.readthedocs.io/en/stable/settings.html": {
+    "url": "https://drf-yasg.readthedocs.io/en/stable/settings.html",
+    "title": "Settings — drf-yasg 1.21.7 documentation",
+    "description": "",
+    "image": "",
+    "siteName": "drf-yasg.readthedocs.io"
+  },
+  "https://en.wikipedia.org/wiki/MkDocs": {
+    "url": "https://en.wikipedia.org/wiki/MkDocs",
+    "title": "MkDocs - Wikipedia",
+    "description": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/d/dd/MkDocs_Logo.png",
+    "siteName": "en.wikipedia.org"
+  },
+  "https://giscus.app/ko": {
+    "url": "https://giscus.app/ko",
+    "title": "giscus",
+    "description": "A comments widget built on GitHub Discussions.",
+    "image": "https://opengraph.githubassets.com/4f866d5b634e7cd5422af77f8dbfb6d48dd288b7c5c18326544c1973210320ed/giscus/giscus",
+    "siteName": "giscus.app"
+  },
+  "https://gist.github.com/wonhyeongseo/fe09e0e625fb8b6d86a1adb90f211469": {
+    "url": "https://gist.github.com/wonhyeongseo/fe09e0e625fb8b6d86a1adb90f211469",
+    "title": "GitHub Resume Template",
+    "description": "GitHub Resume Template. GitHub Gist: instantly share code, notes, and snippets.",
+    "image": "https://github.githubassets.com/assets/gist-og-image-54fd7dc0713e.png",
+    "siteName": "Gist"
+  },
+  "https://github.com/Azure/azure-sdk-for-python/pull/31635": {
+    "url": "https://github.com/Azure/azure-sdk-for-python/pull/31635",
+    "title": "[Storage] Fixed cspell typos in storage-blob by bnbong · Pull Request #31635 · Azure/azure-sdk-for-python",
+    "description": "Description\nPart of #22674\nfixing incorrectly written words at source codes:\n\ntransfered -> transferred\nsnapthots -> snapshots\nspeficied -> specified\nconifgure -> configure\n\nAll SDK Con...",
+    "image": "https://opengraph.githubassets.com/2a55018957b6e35a9053adcc81babb927934c964b60cc6101d654b9cc3367d18/Azure/azure-sdk-for-python/pull/31635",
+    "siteName": "GitHub"
+  },
+  "https://github.com/DenverCoder1/readme-typing-svg": {
+    "url": "https://github.com/DenverCoder1/readme-typing-svg",
+    "title": "GitHub - DenverCoder1/readme-typing-svg: ⚡ Dynamically generated, customizable SVG that gives the appearance of typing and deleting text for use on your profile page, repositories, or website.",
+    "description": "⚡ Dynamically generated, customizable SVG that gives the appearance of typing and deleting text for use on your profile page, repositories, or website. - DenverCoder1/readme-typing-svg",
+    "image": "https://opengraph.githubassets.com/2676a148dde698d59045f0ffd9dfc7ccc6548ca6b4f99449226bff16ef6a72ae/DenverCoder1/readme-typing-svg",
+    "siteName": "GitHub"
+  },
+  "https://github.com/Naereen/badges": {
+    "url": "https://github.com/Naereen/badges",
+    "title": "GitHub - Naereen/badges: :pencil: Markdown code for lots of small badges :pushpin: (shields.io, forthebadge.com etc) :sunglasses:. Contributions are welcome! Please add yours!",
+    "description": ":pencil: Markdown code for lots of small badges :ribbon: :pushpin: (shields.io, forthebadge.com etc) :sunglasses:. Contributions are welcome! Please add yours! - Naereen/badges",
+    "image": "https://opengraph.githubassets.com/55de64b5f9bd234a33c294e8ca73437346cda1126aae107291df224339b15ba1/Naereen/badges",
+    "siteName": "GitHub"
+  },
+  "https://github.com/alexandresanlim/Badges4-README.md-Profile": {
+    "url": "https://github.com/alexandresanlim/Badges4-README.md-Profile",
+    "title": "GitHub - alexandresanlim/Badges4-README.md-Profile: :octocat: Improve your README.md profile with these amazing badges.",
+    "description": ":octocat: Improve your README.md profile with these amazing badges. - alexandresanlim/Badges4-README.md-Profile",
+    "image": "https://opengraph.githubassets.com/1874117f1570ab59e4863b057ca6326ab9c1d15db8a1c3e47e8295e4cb4aa54c/alexandresanlim/Badges4-README.md-Profile",
+    "siteName": "GitHub"
+  },
+  "https://github.com/anuraghazra/github-readme-stats": {
+    "url": "https://github.com/anuraghazra/github-readme-stats",
+    "title": "GitHub - anuraghazra/github-readme-stats: :zap: Dynamically generated stats for your github readmes",
+    "description": ":zap: Dynamically generated stats for your github readmes - anuraghazra/github-readme-stats",
+    "image": "https://opengraph.githubassets.com/14c31c1ccf2eb275e88529b37a42a2a538607b288e8ae00d3c3cf7d48e966dbf/anuraghazra/github-readme-stats",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong": {
+    "url": "https://github.com/bnbong",
+    "title": "bnbong - Overview",
+    "description": "Hanyang Univ. ERICA student\r\nMajor in Computer Science - bnbong",
+    "image": "https://avatars.githubusercontent.com/u/55042923?v=4?s=400",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/Awesome_ChattingApp": {
+    "url": "https://github.com/bnbong/Awesome_ChattingApp",
+    "title": "GitHub - bnbong/Awesome_ChattingApp: <팀 프로젝트> lecture Open Source sw, TEAM 두둥등장 Chatting APP Project",
+    "description": "<팀 프로젝트> lecture Open Source sw, TEAM 두둥등장 Chatting APP Project - bnbong/Awesome_ChattingApp",
+    "image": "https://opengraph.githubassets.com/e257e348045f2e9bfc55d5da0513580e8ae0ef81b2a5de5b0d9b1033bc18fbc6/bnbong/Awesome_ChattingApp",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/FEMU": {
+    "url": "https://github.com/bnbong/FEMU",
+    "title": "GitHub - bnbong/FEMU: FEMU: Accurate, Scalable and Extensible NVMe SSD Emulator (FAST'18)",
+    "description": "FEMU: Accurate, Scalable and Extensible NVMe SSD Emulator (FAST'18) - bnbong/FEMU",
+    "image": "https://opengraph.githubassets.com/73fc56761bd54fdbc08b2639861ef8b9535f4778a0204626cffd60aa025dec7c/bnbong/FEMU",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/Fall-In": {
+    "url": "https://github.com/bnbong/Fall-In",
+    "title": "GitHub - bnbong/Fall-In: <game> 헤쳐 모여! - 대한민국 공군 배경 '젝스님트' 패러디 게임",
+    "description": "<game> 헤쳐 모여! - 대한민국 공군 배경 '젝스님트' 패러디 게임. Contribute to bnbong/Fall-In development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/6b03280f56effc6d8d83be8dbb758f6c0a262b561cb81c407d7849ab0b574d30/bnbong/Fall-In",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/FastAPI-fastkit": {
+    "url": "https://github.com/bnbong/FastAPI-fastkit",
+    "title": "GitHub - bnbong/FastAPI-fastkit: <Open Source> Fast, easy-to-use starter kit for new users of Python and FastAPI",
+    "description": "<Open Source> Fast, easy-to-use starter kit for new users of Python and FastAPI - bnbong/FastAPI-fastkit",
+    "image": "https://repository-images.githubusercontent.com/869300336/03c10be4-9491-4b28-b920-e75f2c522c35",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/FastAPI-fastkit/blob/main/src/fastapi_fastkit/backend/transducer.py": {
+    "url": "https://github.com/bnbong/FastAPI-fastkit/blob/main/src/fastapi_fastkit/backend/transducer.py",
+    "title": "FastAPI-fastkit/src/fastapi_fastkit/backend/transducer.py at main · bnbong/FastAPI-fastkit",
+    "description": "<Open Source> Fast, easy-to-use starter kit for new users of Python and FastAPI - bnbong/FastAPI-fastkit",
+    "image": "https://repository-images.githubusercontent.com/869300336/03c10be4-9491-4b28-b920-e75f2c522c35",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/FastAPI-fastkit/discussions/8": {
+    "url": "https://github.com/bnbong/FastAPI-fastkit/discussions/8",
+    "title": "Development Milestones (version 1.0.3 ~) · bnbong/FastAPI-fastkit · Discussion #8",
+    "description": "🚀 FastAPI-fastkit Development Roadmap - Post v1.0.3 Hello FastAPI-fastkit community! 👋 We're excited to share our development roadmap for the upcoming releases after v1.0.3. Your feedback and contr...",
+    "image": "https://opengraph.githubassets.com/677fdcb4fbea05e43aeed808426d9ca2f5a4c79be2e21327de7bce96c9777494/bnbong/FastAPI-fastkit/discussions/8",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/JaramUniv_Sugang-API": {
+    "url": "https://github.com/bnbong/JaramUniv_Sugang-API",
+    "title": "GitHub - bnbong/JaramUniv_Sugang-API: <자람 허브 프로젝트> 스터디 최종 과제 - 수강 신청 API",
+    "description": "<자람 허브 프로젝트> 스터디 최종 과제 - 수강 신청 API. Contribute to bnbong/JaramUniv_Sugang-API development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/3d049c31800d665635470683788423b61061bebd26a129059ed7db74847ce326/bnbong/JaramUniv_Sugang-API",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/KakaoTalk-channel-WeatherToday": {
+    "url": "https://github.com/bnbong/KakaoTalk-channel-WeatherToday",
+    "title": "GitHub - bnbong/KakaoTalk-channel-WeatherToday: <개인 프로젝트> A weather forecasting KakaoTalk channel which informs local weather.",
+    "description": "<개인 프로젝트> A weather forecasting KakaoTalk channel which informs local weather. - bnbong/KakaoTalk-channel-WeatherToday",
+    "image": "https://opengraph.githubassets.com/4158e0f53d848273da1323d5e0a25cfb7ea2dc8c943512120f47e7225038b3f5/bnbong/KakaoTalk-channel-WeatherToday",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/Project-Pinned": {
+    "url": "https://github.com/bnbong/Project-Pinned",
+    "title": "GitHub - bnbong/Project-Pinned: <공모전 출품용> 지역 랜드마크와 관련된 내 추억을 공유하는 지도 기반 웹 SNS 서비스",
+    "description": "<공모전 출품용> 지역 랜드마크와 관련된 내 추억을 공유하는 지도 기반 웹 SNS 서비스. Contribute to bnbong/Project-Pinned development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/fe88757059b9c9c60674facf7608c2224c32bdbb6378e7d653b1cd1213b38c11/bnbong/Project-Pinned",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/Project-Pinned/wiki": {
+    "url": "https://github.com/bnbong/Project-Pinned/wiki",
+    "title": "Home",
+    "description": "<공모전 출품용> 지역 랜드마크와 관련된 내 추억을 공유하는 지도 기반 웹 SNS 서비스. Contribute to bnbong/Project-Pinned development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/fe88757059b9c9c60674facf7608c2224c32bdbb6378e7d653b1cd1213b38c11/bnbong/Project-Pinned",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/TooKindFriendChat": {
+    "url": "https://github.com/bnbong/TooKindFriendChat",
+    "title": "GitHub - bnbong/TooKindFriendChat: <자람 워크샵 프로젝트> 나에게 모든걸 맞춰주는 환상적인 친구와 채팅하는 앱",
+    "description": "<자람 워크샵 프로젝트> 나에게 모든걸 맞춰주는 환상적인 친구와 채팅하는 앱. Contribute to bnbong/TooKindFriendChat development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/b8f03162dfe3dc25c8dfc74ecbcd6376318e92b033caf3963738308ef959e0e8/bnbong/TooKindFriendChat",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/azure-sdk-for-python": {
+    "url": "https://github.com/bnbong/azure-sdk-for-python",
+    "title": "GitHub - bnbong/azure-sdk-for-python: This repository is for active development of the Azure SDK for Python. For consumers of the SDK we recommend visiting our public developer docs at https://docs.microsoft.com/python/azure/ or our versioned developer docs at https://azure.github.io/azure-sdk-for-python.",
+    "description": "This repository is for active development of the Azure SDK for Python. For consumers of the SDK we recommend visiting our public developer docs at https://docs.microsoft.com/python/azure/ or our ve...",
+    "image": "https://opengraph.githubassets.com/1f4863d263e3e8c3d29bfb8befdf718fbcc065ee2da72067586e3b6331f79813/bnbong/azure-sdk-for-python",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/azure-sdk-korean": {
+    "url": "https://github.com/bnbong/azure-sdk-korean",
+    "title": "GitHub - bnbong/azure-sdk-korean: Korean explanation and related materials to navigate Azure SDK parent and child repositories",
+    "description": "Korean explanation and related materials to navigate Azure SDK parent and child repositories - bnbong/azure-sdk-korean",
+    "image": "https://opengraph.githubassets.com/c0063edfe55b14976f8f8e721f9be94e00ffb99aa4a0efef77a15e3a81da771c/bnbong/azure-sdk-korean",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/bnbong.github.io": {
+    "url": "https://github.com/bnbong/bnbong.github.io",
+    "title": "GitHub - bnbong/bnbong.github.io: <Blog> bnbong's Personal tech blog site",
+    "description": "<Blog> bnbong's Personal tech blog site. Contribute to bnbong/bnbong.github.io development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/c63ea3bd87d89f51167b5f4a87d51db31c41e085f2d20a232258330e834795d4/bnbong/bnbong.github.io",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/bnbong.github.io/blob/master/mkdocs.yml": {
+    "url": "https://github.com/bnbong/bnbong.github.io/blob/master/mkdocs.yml",
+    "title": "bnbong.github.io/mkdocs.yml at master · bnbong/bnbong.github.io",
+    "description": "<Blog> bnbong's Personal tech blog site. Contribute to bnbong/bnbong.github.io development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/c63ea3bd87d89f51167b5f4a87d51db31c41e085f2d20a232258330e834795d4/bnbong/bnbong.github.io",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/rickTcal_DayLife": {
+    "url": "https://github.com/bnbong/rickTcal_DayLife",
+    "title": "GitHub - bnbong/rickTcal_DayLife: <자람 워크샵 프로젝트> 릭트컬 데이라이프 - 볼따구 라이프로 스트레스를 줄여주는 데스크톱 앱",
+    "description": "<자람 워크샵 프로젝트> 릭트컬 데이라이프 - 볼따구 라이프로 스트레스를 줄여주는 데스크톱 앱 - bnbong/rickTcal_DayLife",
+    "image": "https://opengraph.githubassets.com/0bdbc6f1cce4499bccf94d198463cad8cdbf1d73a756c6b1555f4bdc3a868886/bnbong/rickTcal_DayLife",
+    "siteName": "GitHub"
+  },
+  "https://github.com/coder/code-server": {
+    "url": "https://github.com/coder/code-server",
+    "title": "GitHub - coder/code-server: VS Code in the browser",
+    "description": "VS Code in the browser. Contribute to coder/code-server development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/9bf924fca94753a97c9dffd6895d89beeb1be914c6e85f231ed2e7f5c504c14d/coder/code-server",
+    "siteName": "GitHub"
+  },
+  "https://github.com/fastapi/fastapi/pull/11522#issuecomment-2264639417": {
+    "url": "https://github.com/fastapi/fastapi/pull/11522#issuecomment-2264639417",
+    "title": "✨ Add FastAPI CLI, the new `fastapi` command by tiangolo · Pull Request #11522 · fastapi/fastapi",
+    "description": "✨ Add FastAPI CLI, the new fastapi command",
+    "image": "https://opengraph.githubassets.com/fa1c84097605a4b4daf12000a057e28dec388a61c44ee05ad8f7aa9c5ffdaf3d/fastapi/fastapi/pull/11522",
+    "siteName": "GitHub"
+  },
+  "https://github.com/fastapi/fastapi/releases/tag/0.111.0": {
+    "url": "https://github.com/fastapi/fastapi/releases/tag/0.111.0",
+    "title": "Release 0.111.0 · fastapi/fastapi",
+    "description": "Features\n\n✨ Add FastAPI CLI, the new fastapi command. PR #11522 by @tiangolo.\n\nNew docs: FastAPI CLI.\n\n\n\nTry it out with:\n$ pip install --upgrade fastapi\n\n$ fastapi dev main.py\n\n\n ╭────────── FastA...",
+    "image": "https://opengraph.githubassets.com/a11c57e8a3279ee86b10d51f0332348108483e7bc4d426f73815f8ebc7fc606a/fastapi/fastapi/releases/tag/0.111.0",
+    "siteName": "GitHub"
+  },
+  "https://github.com/gautamkrishnar/blog-post-workflow": {
+    "url": "https://github.com/gautamkrishnar/blog-post-workflow",
+    "title": "GitHub - gautamkrishnar/blog-post-workflow: Show your latest blog posts from any sources or StackOverflow activity or Youtube Videos on your GitHub profile/project readme automatically using the RSS feed",
+    "description": "Show your latest blog posts from any sources or StackOverflow activity or Youtube Videos on your GitHub profile/project readme automatically using the RSS feed - gautamkrishnar/blog-post-workflow",
+    "image": "https://opengraph.githubassets.com/a347560165f60948dc032bc90ab593698f2c95039ee023eac92d582aec8caa19/gautamkrishnar/blog-post-workflow",
+    "siteName": "GitHub"
+  },
+  "https://github.com/gautamkrishnar/blog-post-workflow/issues/241": {
+    "url": "https://github.com/gautamkrishnar/blog-post-workflow/issues/241",
+    "title": "[New Source]: NAVER · Issue #241 · gautamkrishnar/blog-post-workflow",
+    "description": "Source Name: NAVER Source URL: https://rss.blog.naver.com/blog_id.xml Comments: Hello, thank you so much for providing such wonderful features that I can decorate my Github Profile README even more...",
+    "image": "https://opengraph.githubassets.com/f29689ac12bd26579a25dde423f74bb8a912508588ea180170492c81bb4ab09b/gautamkrishnar/blog-post-workflow/issues/241",
+    "siteName": "GitHub"
+  },
+  "https://github.com/hdodenhof/CircleImageView": {
+    "url": "https://github.com/hdodenhof/CircleImageView",
+    "title": "GitHub - hdodenhof/CircleImageView: A circular ImageView for Android",
+    "description": "A circular ImageView for Android. Contribute to hdodenhof/CircleImageView development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/7d2a40c21510c39b4ea1b659e350c01c7cd018629b523b41704a504114c12b31/hdodenhof/CircleImageView",
+    "siteName": "GitHub"
+  },
+  "https://github.com/hyp3rflow/github-readme-solvedac": {
+    "url": "https://github.com/hyp3rflow/github-readme-solvedac",
+    "title": "GitHub - hyp3rflow/github-readme-solvedac: 백준, solved.ac 통계로 github stats card를 만들어주는 서비스",
+    "description": "백준, solved.ac 통계로 github stats card를 만들어주는 서비스. Contribute to hyp3rflow/github-readme-solvedac development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/e4900b3d0dc13cf8931fe1a47f0c4369897185c68fb30317491b619252ed0957/hyp3rflow/github-readme-solvedac",
+    "siteName": "GitHub"
+  },
+  "https://github.com/kyechan99/capsule-render": {
+    "url": "https://github.com/kyechan99/capsule-render",
+    "title": "GitHub - kyechan99/capsule-render: 🌈 Dynamic Coloful Image Render",
+    "description": "🌈 Dynamic Coloful Image Render. Contribute to kyechan99/capsule-render development by creating an account on GitHub.",
+    "image": "https://repository-images.githubusercontent.com/280360410/988dd580-c8fb-11ea-9071-cf915afe6709",
+    "siteName": "GitHub"
+  },
+  "https://github.com/msng-devs/JGW-Attendance-Python": {
+    "url": "https://github.com/msng-devs/JGW-Attendance-Python",
+    "title": "GitHub - msng-devs/JGW-Attendance-Python",
+    "description": "Contribute to msng-devs/JGW-Attendance-Python development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/c2e3866977a4dc327c74025110ee48892d8aad8d26d82c7f6c7748fe9f9f8f2c/msng-devs/JGW-Attendance-Python",
+    "siteName": "GitHub"
+  },
+  "https://github.com/msng-devs/JGW-Penalty-Python": {
+    "url": "https://github.com/msng-devs/JGW-Penalty-Python",
+    "title": "GitHub - msng-devs/JGW-Penalty-Python",
+    "description": "Contribute to msng-devs/JGW-Penalty-Python development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/282eaa3d2fa36a7a5f781dfb173c18317383b110191add712a6a3730b88d9582/msng-devs/JGW-Penalty-Python",
+    "siteName": "GitHub"
+  },
+  "https://github.com/msng-devs/JGW-hub": {
+    "url": "https://github.com/msng-devs/JGW-hub",
+    "title": "GitHub - msng-devs/JGW-hub",
+    "description": "Contribute to msng-devs/JGW-hub development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/61b7a9d9e6d3fc3c407498211b65d94f1d96814055585197a748284d5f4686dd/msng-devs/JGW-hub",
+    "siteName": "GitHub"
+  },
+  "https://github.com/rzashakeri/beautify-github-profile": {
+    "url": "https://github.com/rzashakeri/beautify-github-profile",
+    "title": "GitHub - rzashakeri/beautify-github-profile: This repository will assist you in creating a more beautiful and appealing github profile, and you will have access to a comprehensive range of tools and tutorials for beautifying your github profile.  🪄 ⭐",
+    "description": "This repository will assist you in creating a more beautiful and appealing github profile, and you will have access to a comprehensive range of tools and tutorials for beautifying your github profi...",
+    "image": "https://repository-images.githubusercontent.com/491911983/15908308-d269-45b0-84e0-22a68d370a91",
+    "siteName": "GitHub"
+  },
+  "https://github.com/squidfunk/mkdocs-material/blob/master/material/templates/blog.html": {
+    "url": "https://github.com/squidfunk/mkdocs-material/blob/master/material/templates/blog.html",
+    "title": "mkdocs-material/material/templates/blog.html at master · squidfunk/mkdocs-material",
+    "description": "Documentation that simply works. Contribute to squidfunk/mkdocs-material development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/6ff09c68430a96a3671a2369580ef2e91f6e7b3791b8a2ba162788cb939b6da8/squidfunk/mkdocs-material",
+    "siteName": "GitHub"
+  },
+  "https://justinchronicles.net/ko/2023/07/07/github-profile-as-resume/": {
+    "url": "https://justinchronicles.net/ko/2023/07/07/github-profile-as-resume/",
+    "title": "GitHub 프로필로 이력서 만들기",
+    "description": "노션으로 이력서 만들지 말고 GitHub 프로필로 이력서 만들자!",
+    "image": "https://justinchronicles.net/2023/07/github-profile-as-resume-00.png",
+    "siteName": "justinchronicles.net"
+  },
+  "https://ko.wikipedia.org/wiki/RSS": {
+    "url": "https://ko.wikipedia.org/wiki/RSS",
+    "title": "RSS - 위키백과, 우리 모두의 백과사전",
+    "description": "",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/1280px-Feed-icon.svg.png",
+    "siteName": "ko.wikipedia.org"
+  },
+  "https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos?view=powershell-7.2": {
+    "url": "https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-macos?view=powershell-7.2",
+    "title": "Install PowerShell 7 on macOS - PowerShell",
+    "description": "How to install PowerShell on macOS",
+    "image": "https://learn.microsoft.com/media/logos/logo-powershell-social.png",
+    "siteName": "learn.microsoft.com"
+  },
+  "https://leetcode.com/problems/climbing-stairs/": {
+    "url": "https://leetcode.com/problems/climbing-stairs/",
+    "title": "Climbing Stairs - LeetCode",
+    "description": "Can you solve this real interview question? Climbing Stairs - You are climbing a staircase. It takes n steps to reach the top.\n\nEach time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?\n\n \n\nExample 1:\n\n\nInput: n = 2\nOutput: 2\nExplanation: There are two ways to climb to the top.\n1. 1 step + 1 step\n2. 2 steps\n\n\nExample 2:\n\n\nInput: n = 3\nOutput: 3\nExplanation: There are three ways to climb to the top.\n1. 1 step + 1 step + 1 step\n2. 1 step + 2 steps\n3. 2 steps + 1 step\n\n\n \n\nConstraints:\n\n * 1 <= n <= 45",
+    "image": "https://leetcode.com/static/images/LeetCode_Sharing.png",
+    "siteName": "LeetCode"
+  },
+  "https://leetcode.com/problems/subsets/": {
+    "url": "https://leetcode.com/problems/subsets/",
+    "title": "Subsets - LeetCode",
+    "description": "Can you solve this real interview question? Subsets - Given an integer array nums of unique elements, return all possible subsets (the power set).\n\nThe solution set must not contain duplicate subsets. Return the solution in any order.\n\n \n\nExample 1:\n\n\nInput: nums = [1,2,3]\nOutput: [[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]\n\n\nExample 2:\n\n\nInput: nums = [0]\nOutput: [[],[0]]\n\n\n \n\nConstraints:\n\n * 1 <= nums.length <= 10\n * -10 <= nums[i] <= 10\n * All the numbers of nums are unique.",
+    "image": "https://leetcode.com/static/images/LeetCode_Sharing.png",
+    "siteName": "LeetCode"
+  },
+  "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/": {
+    "url": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
+    "title": "Two Sum II - Input Array Is Sorted - LeetCode",
+    "description": "Can you solve this real interview question? Two Sum II - Input Array Is Sorted - Given a 1-indexed array of integers numbers that is already sorted in non-decreasing order, find two numbers such that they add up to a specific target number. Let these two numbers be numbers[index1] and numbers[index2] where 1 <= index1 < index2 <= numbers.length.\n\nReturn the indices of the two numbers index1 and index2, each incremented by one, as an integer array [index1, index2] of length 2.\n\nThe tests are generated such that there is exactly one solution. You may not use the same element twice.\n\nYour solution must use only constant extra space.\n\n \n\nExample 1:\n\n\nInput: numbers = [2,7,11,15], target = 9\nOutput: [1,2]\nExplanation: The sum of 2 and 7 is 9. Therefore, index1 = 1, index2 = 2. We return [1, 2].\n\n\nExample 2:\n\n\nInput: numbers = [2,3,4], target = 6\nOutput: [1,3]\nExplanation: The sum of 2 and 4 is 6. Therefore index1 = 1, index2 = 3. We return [1, 3].\n\n\nExample 3:\n\n\nInput: numbers = [-1,0], target = -1\nOutput: [1,2]\nExplanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].\n\n\n \n\nConstraints:\n\n * 2 <= numbers.length <= 3 * 104\n * -1000 <= numbers[i] <= 1000\n * numbers is sorted in non-decreasing order.\n * -1000 <= target <= 1000\n * The tests are generated such that there is exactly one solution.",
+    "image": "https://leetcode.com/static/images/LeetCode_Sharing.png",
+    "siteName": "LeetCode"
+  },
+  "https://leetcode.com/problems/two-sum/": null,
+  "https://platform.openai.com/account/api-keys": null,
+  "https://platform.openai.com/docs/guides/gpt": {
+    "url": "https://platform.openai.com/docs/guides/gpt",
+    "title": "Text generation | OpenAI API",
+    "description": "Learn how to use the OpenAI API to generate text from a prompt. Learn about message types and available text formats like JSON and Structured Outputs.",
+    "image": "https://developers.openai.com/og/api/docs/guides/text.png",
+    "siteName": "platform.openai.com"
+  },
+  "https://readme-typing-svg.demolab.com/demo/": {
+    "url": "https://readme-typing-svg.demolab.com/demo/",
+    "title": "Readme Typing SVG - Demo Site",
+    "description": "",
+    "image": "",
+    "siteName": "readme-typing-svg.demolab.com"
+  },
+  "https://redis.io/": {
+    "url": "https://redis.io/",
+    "title": "Redis - Real-time data for agents & apps",
+    "description": "Developers love Redis. Unlock the full potential of the Redis database with Redis Enterprise and start building blazing fast apps.",
+    "image": "https://redis.io/_next/static/media/open-graph.0ec72f52.png",
+    "siteName": "Redis"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/12978": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/12978",
+    "title": "코딩테스트 연습 - 배달",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/1844": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/1844",
+    "title": "코딩테스트 연습 - 게임 맵 최단거리",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42576": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42576",
+    "title": "코딩테스트 연습 - 완주하지 못한 선수",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42577": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42577",
+    "title": "코딩테스트 연습 - 전화번호 목록",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42746": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42746",
+    "title": "코딩테스트 연습 - 가장 큰 수",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42747": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42747",
+    "title": "코딩테스트 연습 - H-Index",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42839": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42839",
+    "title": "코딩테스트 연습 - 소수 찾기",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42840": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42840",
+    "title": "코딩테스트 연습 - 모의고사",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42862": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42862",
+    "title": "코딩테스트 연습 - 체육복",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42883": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42883",
+    "title": "코딩테스트 연습 - 큰 수 만들기",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/42895": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/42895",
+    "title": "코딩테스트 연습 - N으로 표현",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/43105": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/43105",
+    "title": "코딩테스트 연습 - 정수 삼각형",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/43162": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/43162",
+    "title": "코딩테스트 연습 - 네트워크",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/43165": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/43165",
+    "title": "코딩테스트 연습 - 타겟 넘버",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/43238": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/43238",
+    "title": "코딩테스트 연습 - 입국심사",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://school.programmers.co.kr/learn/courses/30/lessons/67256": {
+    "url": "https://school.programmers.co.kr/learn/courses/30/lessons/67256",
+    "title": "코딩테스트 연습 - 키패드 누르기",
+    "description": "알고리즘 문제 연습 카카오톡 친구해요! 프로그래머스 교육 카카오 채널을 만들었어요. 여기를 눌러, 친구 추가를 해주세요. 신규 교육 과정 소식은 물론 다양한 이벤트 소식을 가장 먼저 알려드립니다.",
+    "image": "https://image.freepik.com/free-vector/landing-page-template-for-a-website_23-2147782747.jpg",
+    "siteName": "프로그래머스 스쿨"
+  },
+  "https://searchadvisor.naver.com/guide/request-feed": {
+    "url": "https://searchadvisor.naver.com/guide/request-feed",
+    "title": "RSS 및 사이트맵 제출",
+    "description": "",
+    "image": "",
+    "siteName": "searchadvisor.naver.com"
+  },
+  "https://shields.io/badges": {
+    "url": "https://shields.io/badges",
+    "title": "Static Badge | Shields.io",
+    "description": "",
+    "image": "",
+    "siteName": "shields.io"
+  },
+  "https://squidfunk.github.io/mkdocs-material/getting-started/": {
+    "url": "https://squidfunk.github.io/mkdocs-material/getting-started/",
+    "title": "Installation - Material for MkDocs",
+    "description": "",
+    "image": "",
+    "siteName": "squidfunk.github.io"
+  },
+  "https://squidfunk.github.io/mkdocs-material/insiders/": {
+    "url": "https://squidfunk.github.io/mkdocs-material/insiders/",
+    "title": "Material for MkDocs",
+    "description": "",
+    "image": "",
+    "siteName": "squidfunk.github.io"
+  },
+  "https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/": {
+    "url": "https://squidfunk.github.io/mkdocs-material/setup/adding-a-comment-system/",
+    "title": "Adding a comment system - Material for MkDocs",
+    "description": "",
+    "image": "",
+    "siteName": "squidfunk.github.io"
+  },
+  "https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-analytics/": {
+    "url": "https://squidfunk.github.io/mkdocs-material/setup/setting-up-site-analytics/",
+    "title": "Setting up site analytics - Material for MkDocs",
+    "description": "",
+    "image": "",
+    "siteName": "squidfunk.github.io"
+  },
+  "https://stackoverflow.com/questions/48402823/embed-openstreetmap-iframe-in-github-markdown/54613247#54613247": {
+    "url": "https://stackoverflow.com/questions/48402823/embed-openstreetmap-iframe-in-github-markdown/54613247#54613247",
+    "title": "embed openstreetmap iframe in github markdown",
+    "description": "From the share tab on the openstreetmap page, I can export a map view as HTML e.g.:\n\n<iframe width=\"425\" height=\"350\" frameborder=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" src=\"https:/...",
+    "image": "https://stackoverflow.com/Content/Sites/stackoverflow/Img/apple-touch-icon@2.png?v=0f0cab681579",
+    "siteName": "Stack Overflow"
+  },
+  "https://swagger.io/": {
+    "url": "https://swagger.io/",
+    "title": "API Documentation & Design Tools for Teams | Swagger",
+    "description": "Simplify API development for users, teams, and enterprises with our open source and professional toolset. Find out how Swagger can help you and get started today.",
+    "image": "",
+    "siteName": "swagger.io"
+  },
+  "https://www.acmicpc.net/problem/1436": {
+    "url": "https://www.acmicpc.net/problem/1436",
+    "title": "BOJ 서비스 종료",
+    "description": "",
+    "image": "",
+    "siteName": "acmicpc.net"
+  },
+  "https://www.campuspick.com/contest/view?id=22177": {
+    "url": "https://www.campuspick.com/contest/view?id=22177",
+    "title": "제11회 문화데이터 활용 경진대회 | 에브리커리어",
+    "description": "제11회 문화데이터 활용 경진대회  문화데이터를 활용한 우수 아이디어, 새로운 비즈니스 모델을 발굴하기 위해 경진대회를 실시하오니 많은 관심과",
+    "image": "https://cf-tabs-image.campuspick.com/activity/168497819729926_thumb.jpg",
+    "siteName": "에브리커리어(캠퍼스픽)"
+  },
+  "https://www.django-rest-framework.org/api-guide/generic-views/": {
+    "url": "https://www.django-rest-framework.org/api-guide/generic-views/",
+    "title": "Generic views - Django REST framework",
+    "description": "Django REST framework - Web APIs for Django",
+    "image": "",
+    "siteName": "django-rest-framework.org"
+  },
+  "https://www.djangoproject.com/": {
+    "url": "https://www.djangoproject.com/",
+    "title": "Django",
+    "description": "The web framework for perfectionists with deadlines.",
+    "image": "https://static.djangoproject.com/img/logos/django-logo-negative.1d528e2cb5fb.png",
+    "siteName": "Django Project"
+  },
+  "https://www.postgresql.org/": {
+    "url": "https://www.postgresql.org/",
+    "title": "PostgreSQL",
+    "description": "The world's most advanced open source database.",
+    "image": "https://www.postgresql.org/media/img/about/press/elephant.png",
+    "siteName": "PostgreSQL"
+  },
+  "https://www.terminalgif.com/": {
+    "url": "https://www.terminalgif.com/",
+    "title": "Terminal Gif Maker",
+    "description": "Terminal Gif Maker is a tool for creating code sample in terminal interface. You can create gif for your projects and you can show that in your README of your project. Many application and project using this in Github, Gitlab and Bitbucket.",
+    "image": "",
+    "siteName": "terminalgif.com"
+  },
+  "https://www.vultr.com/": {
+    "url": "https://www.vultr.com/",
+    "title": "SSD VPS Servers, Cloud Servers and Cloud Hosting",
+    "description": "Vultr Global Cloud Hosting - Brilliantly Fast SSD VPS Cloud Servers. 100% KVM Virtualization",
+    "image": "https://www.vultr.com/_images/og/default.png",
+    "siteName": "Vultr"
+  },
+  "https://www.youtube.com/watch?v=rR4n-0KYeKQ": {
+    "url": "https://www.youtube.com/watch?v=rR4n-0KYeKQ",
+    "title": "youtube.com",
+    "description": "",
+    "image": "",
+    "siteName": "youtube.com"
+  }
+}
