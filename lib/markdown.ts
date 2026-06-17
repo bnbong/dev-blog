@@ -1,6 +1,7 @@
 import { marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
+import katex from "katex";
 import sanitizeHtml from "sanitize-html";
 import { renderLinkCard, type LinkPreview } from "./link-preview";
 import { LINK_CARD_LINE } from "./link-cards.mjs";
@@ -46,6 +47,39 @@ const ADMONITION_TYPES = new Set(Object.keys(ADMONITION_TITLES));
 const BLOCK_OPEN = /^\/\/\/\s+([\w-]+)\s*(?:\|\s*(.*?))?\s*$/;
 /** `**bold**` (content not whitespace-bounded; single `*` allowed inside). */
 const STRONG = /\*\*(?=\S)((?:[^*]|\*(?!\*))*?)(?<=\S)\*\*/g;
+/** Inline LaTeX `$ … $` (edges non-space, no `$`/newline inside — skips `$5`/`$VAR`). */
+const INLINE_MATH = /\$(?=\S)([^$\n]+?)(?<=\S)\$/g;
+/** Single-line display math `$$ … $$`. */
+const DISPLAY_MATH_INLINE = /^\$\$([\s\S]+?)\$\$$/;
+
+/**
+ * Render LaTeX to static HTML+MathML at build time (no client JS). KaTeX output
+ * is trusted (generated from the source, content escaped) so it bypasses the
+ * sanitizer via a placeholder that is substituted back after sanitization.
+ */
+function renderMath(tex: string, displayMode: boolean): string {
+  try {
+    return katex.renderToString(tex, {
+      displayMode,
+      throwOnError: false,
+      strict: "ignore",
+      output: "htmlAndMathml",
+    });
+  } catch {
+    return escapeHtml(`${displayMode ? "$$" : "$"}${tex}${displayMode ? "$$" : "$"}`);
+  }
+}
+
+/** Stash rendered math and return a sanitize-surviving placeholder (PUA delimiters). */
+function stashMath(math: string[], html: string): string {
+  math.push(html);
+  return `${math.length - 1}`;
+}
+
+/** Re-insert stashed KaTeX HTML after the sanitizer has run. */
+function restoreMath(html: string, math: string[]): string {
+  return html.replace(/(\d+)/g, (_m, i) => math[Number(i)] ?? "");
+}
 
 export interface RenderOptions {
   /** Public URL prefix for co-located images, e.g. "/blog/<slug>". */
@@ -72,7 +106,7 @@ function resolveSrc(src: string, base: string): string {
   return `${base}/${trimmed.replace(/^\.\//, "")}`;
 }
 
-function cleanInline(line: string, opts: RenderOptions): string {
+function cleanInline(line: string, opts: RenderOptions, math: string[]): string {
   const { assetBase = "", resolveLink } = opts;
 
   // Protect inline code spans so none of the transforms below touch their text.
@@ -81,6 +115,11 @@ function cleanInline(line: string, opts: RenderOptions): string {
     codeSpans.push(m);
     return `\u0000${codeSpans.length - 1}\u0000`;
   });
+
+  // Inline LaTeX `$ … $` → KaTeX placeholder. Done before the transforms below so
+  // braces inside math (e.g. `$\sqrt{N}$`) aren't eaten by the attr-list strippers.
+  // Code spans are already protected, so `$` inside backticks is left untouched.
+  out = out.replace(INLINE_MATH, (_m, tex) => stashMath(math, renderMath(tex, false)));
 
   out = out
     // Markdown images → <img> so they render inside MkDocs `md_in_html`
@@ -157,8 +196,8 @@ const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
 };
 
 /** Render a `/// type | args … ///` block (pymdownx Blocks subset). */
-function renderBlock(type: string, args: string, body: string, opts: RenderOptions): string {
-  const inner = renderMarkdown(body, opts);
+function renderBlock(type: string, args: string, body: string, opts: RenderOptions, math: string[]): string {
+  const inner = renderDoc(body, opts, math);
   if (type === "caption" || type === "figure-caption") {
     return `<div class="md-caption">${inner}</div>`;
   }
@@ -183,6 +222,13 @@ function renderBlock(type: string, args: string, body: string, opts: RenderOptio
  * allowlist sanitizer before it is injected into the page.
  */
 export function renderMarkdown(input: string, opts: RenderOptions = {}): string {
+  const math: string[] = [];
+  const html = renderDoc(input, opts, math);
+  // KaTeX HTML is trusted (generated, content-escaped) → re-insert after sanitizing.
+  return restoreMath(html, math);
+}
+
+function renderDoc(input: string, opts: RenderOptions, math: string[]): string {
   const src = input.replace(/\r\n?/g, "\n").replace(/<!--\s*more\s*-->/g, "");
   const lines = src.split("\n");
   const out: string[] = [];
@@ -211,6 +257,30 @@ export function renderMarkdown(input: string, opts: RenderOptions = {}): string 
       continue;
     }
 
+    // Display math: `$$ … $$` (single line, or a block spanning lines).
+    if (line.trimStart().startsWith("$$")) {
+      const single = line.trim().match(DISPLAY_MATH_INLINE);
+      if (single) {
+        out.push("");
+        out.push(stashMath(math, renderMath(single[1].trim(), true)));
+        out.push("");
+        i++;
+        continue;
+      }
+      const after = line.trim().slice(2);
+      i++;
+      const body: string[] = after ? [after] : [];
+      while (i < lines.length && !lines[i].includes("$$")) {
+        body.push(lines[i]);
+        i++;
+      }
+      if (i < lines.length) i++; // consume the closing `$$`
+      out.push("");
+      out.push(stashMath(math, renderMath(body.join("\n").trim(), true)));
+      out.push("");
+      continue;
+    }
+
     const adm = line.match(/^(!!!|\?\?\?\+?)\s+([\w-]+)(?:\s+"([^"]*)")?\s*$/);
     if (adm) {
       const type = adm[2].toLowerCase();
@@ -221,7 +291,7 @@ export function renderMarkdown(input: string, opts: RenderOptions = {}): string 
         body.push(lines[i].replace(/^(\s{4}|\t)/, ""));
         i++;
       }
-      const inner = renderMarkdown(body.join("\n").trim(), opts);
+      const inner = renderDoc(body.join("\n").trim(), opts, math);
       out.push(`<div class="admonition ${escapeHtml(type)}">`);
       if (title) out.push(`<p class="admonition-title">${escapeHtml(title)}</p>`);
       out.push(inner);
@@ -254,12 +324,12 @@ export function renderMarkdown(input: string, opts: RenderOptions = {}): string 
         i++;
       }
       if (i < lines.length) i++; // consume closing ///
-      out.push(renderBlock(type, args, body.join("\n").trim(), opts));
+      out.push(renderBlock(type, args, body.join("\n").trim(), opts, math));
       out.push("");
       continue;
     }
 
-    out.push(cleanInline(line, opts));
+    out.push(cleanInline(line, opts, math));
     i++;
   }
 

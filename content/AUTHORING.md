@@ -109,6 +109,24 @@ MKDocs-materials 시절 문법 그대로 적용(리더가 빌드 시 HTML로 변
 - OG 메타데이터는 **`npm run prefetch:links`** 로 미리 받아 **`data/link-previews.json`(커밋됨)** 에 저장. CI 타임아웃 방지 목적.
 - 새 `<url>` 을 추가했으면 `npm run prefetch:links` 실행 후 `data/link-previews.json` 을 커밋할 것. 전체 갱신은 `npm run prefetch:links -- --force`.
 
+### 수식 (LaTeX / KaTeX)
+
+빌드 시 [KaTeX](https://katex.org/)로 정적 HTML 변환(클라이언트 JS 없음).
+
+```markdown
+인라인: $O(N \log N)$, $\sqrt{N}$ 처럼 한 줄 안에서 `$ … $`.
+
+블록(가운데 정렬):
+
+$$
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+$$
+```
+
+- 인라인은 **`$` 바로 안쪽이 공백이 아니어야** 인식(`$O(N)$` ⭕, `$ O(N) $` ❌). 덕분에 `$5`, `$VAR` 같은 일반 텍스트는 수식으로 처리되지 않음.
+- **코드 블록(```` ``` ````)과 인라인 코드(`` `…` ``) 안의 `$` 는 건드리지 않음** — 쉘 변수 `$GITHUB_OUTPUT` 등은 그대로 유지.
+- 잘못된 LaTeX는 빌드를 깨뜨리지 않고 빨간색으로 표시(`throwOnError: false`).
+
 ### 기타
 
 - `<!-- more -->`(프리뷰 구분자), `:material-…:`/`:fontawesome-…:` 아이콘 단축코드, `{ .class }` attr-list 는 자동 제거.
