@@ -10,13 +10,15 @@ export interface PostSidebarProps {
   role: string;
   intro: string;
   initials: string;
+  /** Profile image URL (shared with the About page). Falls back to initials. */
+  avatar?: string;
 }
 
 /**
  * Left profile rail for the blog post detail page.
  * Avatar, nickname and the "프로필 홈" link all navigate back home.
  */
-export function PostSidebar({ name, handle, role, intro, initials }: PostSidebarProps) {
+export function PostSidebar({ name, handle, role, intro, initials, avatar }: PostSidebarProps) {
   return (
     <aside
       style={{
@@ -34,7 +36,7 @@ export function PostSidebar({ name, handle, role, intro, initials }: PostSidebar
         onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.78")}
         onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
       >
-        <Avatar initials={initials} size={72} />
+        <Avatar src={avatar} alt={name} initials={initials} size={72} />
         <div>
           <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.125rem", color: "var(--text-strong)", lineHeight: 1.2 }}>
             {name}

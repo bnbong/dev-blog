@@ -56,6 +56,7 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
           role={profile.role}
           intro={post.intro ?? profile.intro}
           initials={profile.initials}
+          avatar={profile.avatar}
         />
 
         <div style={{ flex: "99 1 30rem", minWidth: 0 }}>
