@@ -258,11 +258,11 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 }
 
 /* ------------------------------------------------------------
-   /// caption ///  →  centered figure caption (tucks under image)
+   /// caption ///  →  figure caption (left-aligned, tucks under image)
    ------------------------------------------------------------ */
 .prose .md-caption {
   margin-top: calc(-1 * var(--space-3));
-  text-align: center;
+  text-align: left;
   font-size: var(--text-sm);
   color: var(--text-subtle);
 }
