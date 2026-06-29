@@ -1,5 +1,6 @@
 import { marked } from "marked";
 import { markedHighlight } from "marked-highlight";
+import markedFootnote from "marked-footnote";
 import hljs from "highlight.js";
 import katex from "katex";
 import sanitizeHtml from "sanitize-html";
@@ -7,6 +8,10 @@ import { renderLinkCard, type LinkPreview } from "./link-preview";
 import { LINK_CARD_LINE } from "./link-cards.mjs";
 
 marked.setOptions({ gfm: true, breaks: false });
+
+// `[^id]` references + `[^id]: …` definitions → a numbered footnotes section
+// with back-references (rendered at build time, no client JS).
+marked.use(markedFootnote());
 
 // Build-time syntax highlighting (highlight.js → `<span class="hljs-…">` tokens,
 // coloured by the .hljs CSS theme). Synchronous, so renderMarkdown stays sync;
@@ -171,10 +176,10 @@ const SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
     "code", "pre", "hr", "br", "div", "span", "strong", "em", "b", "i", "s", "del",
     "ins", "sup", "sub", "mark", "kbd", "abbr",
     "table", "thead", "tbody", "tfoot", "tr", "th", "td",
-    "img", "figure", "figcaption", "details", "summary",
+    "img", "figure", "figcaption", "details", "summary", "section",
   ],
   allowedAttributes: {
-    a: ["href", "title", "target", "rel"],
+    a: ["href", "title", "target", "rel", "aria-label", "data-footnote-ref", "data-footnote-backref"],
     img: ["src", "alt", "title", "loading", "width", "height"],
     th: ["align", "colspan", "rowspan"],
     td: ["align", "colspan", "rowspan"],
@@ -250,6 +255,22 @@ function renderDoc(input: string, opts: RenderOptions, math: string[]): string {
       continue;
     }
     if (fenceMatch) {
+      // ```mermaid → emit a <pre class="mermaid"> the client renderer picks up.
+      const lang = line.slice(fenceMatch[0].length).trim().split(/\s+/)[0].toLowerCase();
+      if (lang === "mermaid") {
+        const marker = fenceMatch[2];
+        i++;
+        const body: string[] = [];
+        while (i < lines.length && !lines[i].match(new RegExp(`^\\s*${marker[0]}{${marker.length},}\\s*$`))) {
+          body.push(lines[i]);
+          i++;
+        }
+        if (i < lines.length) i++; // consume the closing fence
+        out.push("");
+        out.push(`<pre class="mermaid">${escapeHtml(body.join("\n"))}</pre>`);
+        out.push("");
+        continue;
+      }
       inFence = true;
       fenceMarker = fenceMatch[2];
       out.push(line);
@@ -334,6 +355,79 @@ function renderDoc(input: string, opts: RenderOptions, math: string[]): string {
   }
 
   return sanitizeHtml(marked.parse(out.join("\n")) as string, SANITIZE_OPTIONS);
+}
+
+export interface TocEntry {
+  depth: number;
+  text: string;
+  id: string;
+}
+
+/** Strip inline markdown/LaTeX from a heading so the TOC shows clean text. */
+function cleanHeadingText(raw: string): string {
+  return raw
+    .replace(/`([^`]*)`/g, "$1")
+    .replace(/\$([^$]+)\$/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+    .replace(/<[^>]+>/g, "")
+    .replace(/[#*_~`]/g, "")
+    .trim();
+}
+
+/** GitHub-style anchor slug (keeps Unicode letters, so Korean headings work). */
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+/**
+ * Extract the heading outline from raw Markdown (skipping fenced code), with a
+ * stable, de-duplicated anchor slug per heading. Returns every level so the
+ * order lines up 1:1 with the rendered HTML headings for id injection.
+ */
+export function tableOfContents(input: string): TocEntry[] {
+  const lines = input.replace(/\r\n?/g, "\n").split("\n");
+  const headings: TocEntry[] = [];
+  const seen = new Map<string, number>();
+  let inFence = false;
+  let fenceMarker = "";
+
+  for (const line of lines) {
+    const fence = line.match(/^(\s*)(```+|~~~+)/);
+    if (inFence) {
+      if (fence && fence[2][0] === fenceMarker[0]) inFence = false;
+      continue;
+    }
+    if (fence) {
+      inFence = true;
+      fenceMarker = fence[2];
+      continue;
+    }
+    const h = line.match(/^ {0,3}(#{1,6})\s+(.+?)\s*#*\s*$/);
+    if (!h) continue;
+    const text = cleanHeadingText(h[2]);
+    if (!text) continue;
+    const base = slugify(text) || "section";
+    const n = seen.get(base) ?? 0;
+    seen.set(base, n + 1);
+    headings.push({ depth: h[1].length, text, id: n ? `${base}-${n}` : base });
+  }
+  return headings;
+}
+
+/** Add `id` attributes to rendered HTML headings, in document order. */
+export function injectHeadingIds(html: string, headings: TocEntry[]): string {
+  let k = 0;
+  return html.replace(/<(h[1-6])\b([^>]*)>/gi, (m, tag, attrs) => {
+    const entry = headings[k++];
+    if (!entry || /\bid=/i.test(attrs)) return m;
+    return `<${tag}${attrs} id="${entry.id}">`;
+  });
 }
 
 /** Plain-text length for reading-time estimates (strips markdown noise). */

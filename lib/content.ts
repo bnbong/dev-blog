@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { renderMarkdown, plainTextLength } from "./markdown";
+import { renderMarkdown, plainTextLength, tableOfContents, injectHeadingIds, type TocEntry } from "./markdown";
 import { getLinkPreviews } from "./link-preview";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -21,6 +21,7 @@ export interface Post {
   intro?: string;
   isNew?: boolean;
   html: string;
+  toc: TocEntry[];
 }
 
 export interface Project {
@@ -155,7 +156,7 @@ function extractDates(data: Record<string, unknown>): { created: string; updated
 }
 
 /** Post fields without the rendered body — for lists and the RSS feed. */
-export type PostSummary = Omit<Post, "html">;
+export type PostSummary = Omit<Post, "html" | "toc">;
 
 /** Frontmatter → post metadata (no Markdown rendering, no link-preview fetch). */
 function parsePostMeta(slug: string, data: Record<string, unknown>, content: string) {
@@ -196,9 +197,16 @@ export async function getAllPosts(): Promise<Post[]> {
 
   const posts = entries.map(({ slug, raw }) => {
     const { data, content } = matter(raw);
+    const headings = tableOfContents(content);
+    const html = injectHeadingIds(
+      renderMarkdown(content, { assetBase: `/blog/${slug}`, resolveLink, linkPreviews: previews }),
+      headings,
+    );
     return {
       ...parsePostMeta(slug, data, content),
-      html: renderMarkdown(content, { assetBase: `/blog/${slug}`, resolveLink, linkPreviews: previews }),
+      html,
+      // Only h2/h3 in the sidebar TOC (h1 duplicates the post title).
+      toc: headings.filter((h) => h.depth >= 2 && h.depth <= 3),
     };
   });
 

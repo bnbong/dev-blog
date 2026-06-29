@@ -11,8 +11,10 @@ html {
 }
 
 /* Never allow horizontal scroll — kills the "content shifted left, gap on the
-   right" symptom on mobile if any single element overflows. */
-html, body { overflow-x: hidden; max-width: 100%; }
+   right" symptom on mobile if any single element overflows.
+   `clip` (not `hidden`) so it doesn't create a scroll container, which would
+   break `position: sticky` descendants like the post sidebar / TOC. */
+html, body { overflow-x: clip; max-width: 100%; }
 
 /* ------------------------------------------------------------
    Responsive containers (inline styles can't hold media queries,
@@ -33,6 +35,24 @@ html, body { overflow-x: hidden; max-width: 100%; }
     scrollbar-width: none;
   }
   .site-header__nav::-webkit-scrollbar { display: none; }
+}
+
+/* Post detail: collapse the two-column (sidebar + body) layout before it gets
+   cramped. Drop the flex layout entirely and fall back to normal block flow —
+   the same thing the projects page does — so the body is a plain full-width
+   block whose content wraps (and code blocks scroll) instead of overflowing.
+   `!important` is required because the layout is set via inline styles.
+   The sticky profile rail becomes a static header; the long TOC is hidden. */
+@media (max-width: 860px) {
+  .post-layout { display: block !important; }
+  .post-sidebar {
+    position: static !important;
+    top: auto !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin-bottom: 1.75rem;
+  }
+  .post-toc { display: none !important; }
 }
 
 body {
@@ -89,7 +109,8 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 .prose h1, .prose h2, .prose h3, .prose h4 {
   margin-top: var(--space-8);
   margin-bottom: var(--space-3);
-  scroll-margin-top: var(--space-8);
+  /* Clear the 4.5rem sticky site header when jumping to a TOC anchor. */
+  scroll-margin-top: 5.5rem;
 }
 .prose h1 { font-size: var(--text-3xl); }
 .prose h2 {
@@ -282,6 +303,37 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   color: var(--text-strong);
 }
 .prose .md-details[open] > summary { margin-bottom: var(--space-3); }
+
+/* ------------------------------------------------------------
+   ```mermaid  →  diagram (rendered to SVG on the client)
+   ------------------------------------------------------------ */
+.prose pre.mermaid {
+  margin: var(--space-5) 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  text-align: center;
+  line-height: normal;
+}
+/* Hide the raw diagram source until mermaid swaps in the SVG. */
+.prose pre.mermaid:not([data-processed]) { visibility: hidden; }
+.prose pre.mermaid svg { max-width: 100%; height: auto; }
+
+/* ------------------------------------------------------------
+   [^id] footnotes
+   ------------------------------------------------------------ */
+.prose sup[id^="footnote-ref"] { line-height: 0; }
+.prose .footnotes {
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: var(--border-width) solid var(--border-subtle);
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+.prose .footnotes ol { padding-left: var(--space-5); }
+.prose .footnotes li { margin: var(--space-2) 0; }
+.prose .footnotes li:target { background: var(--surface-sunken); border-radius: var(--radius-sm); }
+.prose a[data-footnote-backref] { text-decoration: none; }
 
 /* ------------------------------------------------------------
    <https://…>  →  social / link-preview card

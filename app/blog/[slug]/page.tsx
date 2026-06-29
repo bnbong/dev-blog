@@ -7,6 +7,7 @@ import { Tag } from "@/components/Tag";
 import { PostSidebar } from "@/components/PostSidebar";
 import { Giscus } from "@/components/Giscus";
 import { Container } from "@/components/Container";
+import { Mermaid } from "@/components/Mermaid";
 
 export async function generateStaticParams() {
   return (await getAllPosts()).map((p) => ({ slug: p.slug }));
@@ -49,7 +50,7 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
         Back to blog
       </Link>
 
-      <div style={{ display: "flex", gap: "3.5rem", alignItems: "flex-start", flexWrap: "wrap" }}>
+      <div className="post-layout" style={{ display: "flex", gap: "3.5rem", alignItems: "flex-start", flexWrap: "wrap" }}>
         <PostSidebar
           name={profile.name}
           handle={profile.handle}
@@ -57,6 +58,7 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
           intro={post.intro ?? profile.intro}
           initials={profile.initials}
           avatar={profile.avatar}
+          toc={post.toc}
         />
 
         <div style={{ flex: "99 1 30rem", minWidth: 0 }}>
@@ -112,6 +114,7 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
           </header>
 
           <div className="prose" style={{ maxWidth: "none" }} dangerouslySetInnerHTML={{ __html: post.html }} />
+          {post.html.includes('class="mermaid"') && <Mermaid />}
 
           <Giscus />
         </div>

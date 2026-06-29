@@ -6,6 +6,7 @@ import { Badge } from "@/components/Badge";
 import { Tag } from "@/components/Tag";
 import { RepoCard } from "@/components/RepoCard";
 import { Container } from "@/components/Container";
+import { Mermaid } from "@/components/Mermaid";
 
 export async function generateStaticParams() {
   return (await getAllProjects()).map((p) => ({ slug: p.slug }));
@@ -79,6 +80,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
       </div>
 
       <div className="prose" style={{ maxWidth: "none" }} dangerouslySetInnerHTML={{ __html: project.html }} />
+      {project.html.includes('class="mermaid"') && <Mermaid />}
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center", marginTop: "2.5rem", paddingTop: "1.5rem", borderTop: "1px solid var(--border-subtle)" }}>
         {project.stack.map((s) => (

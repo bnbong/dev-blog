@@ -127,6 +127,34 @@ $$
 - **코드 블록(```` ``` ````)과 인라인 코드(`` `…` ``) 안의 `$` 는 건드리지 않음** — 쉘 변수 `$GITHUB_OUTPUT` 등은 그대로 유지.
 - 잘못된 LaTeX는 빌드를 깨뜨리지 않고 빨간색으로 표시(`throwOnError: false`).
 
+### 다이어그램 (Mermaid)
+
+언어를 `mermaid` 로 지정한 코드 펜스로 작성. 다이어그램이 있는 페이지에서만 라이브러리를 lazy 로드해 **클라이언트에서 SVG로 렌더링**.
+
+````markdown
+```mermaid
+graph TD
+  A[시작] --> B{조건}
+  B -->|예| C[처리]
+  B -->|아니오| D[종료]
+```
+````
+
+- 문법은 [Mermaid 공식 문서](https://mermaid.js.org/) 참고(flowchart, sequence, class, state, ER, gantt 등).
+- `securityLevel: "strict"` 로 동작 — 다이어그램 내 클릭 핸들러/HTML 삽입은 비활성.
+- 렌더 전에는 원본 소스가 숨겨졌다가 SVG로 교체됨(깜빡임 방지).
+
+### 각주 (Footnotes)
+
+`[^id]` 로 참조하고, 아무 곳에서나 `[^id]: 내용` 으로 정의. 빌드 시 문서 하단에 번호가 매겨진 각주 목록 + 본문으로 돌아가는 백링크가 생성됨.
+
+```markdown
+본문 문장입니다.[^1] 이름 있는 각주도 됩니다.[^ref]
+
+[^1]: 첫 번째 각주 내용.
+[^ref]: 식별자는 숫자가 아니어도 됨.
+```
+
 ### 기타
 
 - `<!-- more -->`(프리뷰 구분자), `:material-…:`/`:fontawesome-…:` 아이콘 단축코드, `{ .class }` attr-list 는 자동 제거.

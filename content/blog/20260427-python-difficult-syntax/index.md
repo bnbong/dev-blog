@@ -17,7 +17,11 @@ tags:
 comments: true
 ---
 
-> 이 포스팅은 **생소한 프로그래밍 언어 문법 시리즈** 의 첫 번째 편(Python)입니다. 이후 Java, C 편이 이어질 예정입니다.
+??? note "Series: 생소한 프로그래밍 언어 문법"
+
+    [0. Python편](https://bnbong.com/blog/20260427-python-difficult-syntax/)
+    
+    [1. Java편](20260627.md)
 
 ## 들어가며: Python 문법의 '간결함' 뒤에 숨은 함정들
 
