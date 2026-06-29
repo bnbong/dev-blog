@@ -10,6 +10,7 @@ tags:
   - personal
 period: "2023"
 role: 개인 프로젝트, 기획 / 구현 / 릴리스 / 문서화
+status: archived
 ---
 
 # rickTcal_DayLife

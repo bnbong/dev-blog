@@ -13,6 +13,7 @@ tags:
 featured: true
 period: 2026.01.30 - 진행중
 role: 1인 개발, 기획 / 룰 설계 / 구현 / 테스트 / 배포 / 아트 통합
+status: wip
 ---
 
 # 헤쳐 모여! (Fall In!)

@@ -19,6 +19,7 @@ tags:
 featured: true
 period: 2023.09 - 2024.06
 role: 팀, 창업팀 초기 멤버 / BE / DevOps / 문서화
+status: archived
 ---
 
 # K-Buddy

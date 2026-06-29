@@ -16,6 +16,7 @@ languageColor: "#3572A5"
 stars: 4
 period: 2026 - 진행중
 role: 개인 OSS 운영, 스코어링 설계 / FastAPI 서버 / SVG 렌더 / GitHub Action
+status: active
 ---
 
 # codemaru

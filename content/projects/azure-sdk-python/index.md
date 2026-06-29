@@ -11,6 +11,7 @@ tags:
   - backend
 period: "2023"
 role: 오픈소스 기여
+status: archived
 ---
 
 # Azure SDK Python

@@ -12,6 +12,7 @@ tags:
   - devops
 period: 2024 - 진행중
 role: 오픈소스 가이드 기여 / 버그 리포트
+status: archived
 ---
 
 # Blog Post Workflow

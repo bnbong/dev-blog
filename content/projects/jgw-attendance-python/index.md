@@ -12,6 +12,7 @@ tags:
   - backend
 period: "2023"
 role: 팀, 학회 / 백엔드 / 문서화 / 테스트 / 배포 자동화
+status: archived
 ---
 
 # JaramGroupware Attendance API

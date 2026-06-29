@@ -277,9 +277,14 @@ export async function getAllProjects(): Promise<Project[]> {
     } satisfies Project;
   });
 
-  // Featured first, then most recent year, then name.
+  // Status first (WIP → Active → Archived), then featured, recent year, name.
+  const statusRank: Record<ProjectStatus, number> = { wip: 0, active: 1, archived: 2 };
   return projects.sort(
-    (a, b) => Number(b.featured) - Number(a.featured) || b.year - a.year || a.name.localeCompare(b.name),
+    (a, b) =>
+      statusRank[a.status] - statusRank[b.status] ||
+      Number(b.featured) - Number(a.featured) ||
+      b.year - a.year ||
+      a.name.localeCompare(b.name),
   );
 }
 

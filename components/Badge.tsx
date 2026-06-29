@@ -41,11 +41,12 @@ export function Badge({ children, tone = "neutral", dot = false, style, ...rest 
         background: t.bg,
         color: t.fg,
         borderRadius: "var(--radius-sm)",
+        whiteSpace: "nowrap",
         ...style,
       }}
       {...rest}
     >
-      {dot && <span style={{ width: 6, height: 6, borderRadius: "50%", background: "currentColor", opacity: 0.9 }} />}
+      {dot && <span style={{ flexShrink: 0, width: 6, height: 6, borderRadius: "50%", background: "currentColor", opacity: 0.9 }} />}
       {children}
     </span>
   );

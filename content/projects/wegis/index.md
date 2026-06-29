@@ -20,6 +20,7 @@ tags:
 featured: true
 period: 2025.09 - 2025.10
 role: 개인 프로젝트, 모델 서빙 / 확장 프로그램 / 인프라 재설계 / 운영 구조 개선
+status: active
 ---
 
 # Wegis

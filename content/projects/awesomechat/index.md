@@ -12,6 +12,7 @@ tags:
   - backend
 period: "2022"
 role: 팀 프로젝트, 설계 / 문서화 / 이슈 관리 / 테스트
+status: archived
 ---
 
 # Awesome Chatting App

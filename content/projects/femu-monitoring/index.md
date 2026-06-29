@@ -14,6 +14,7 @@ tags:
 featured: true
 period: 2024.09 - 2024.12
 role: 개인 수업 과제 / 계측 모듈 설계 / FTL 수정 / 실험 정리
+status: archived
 ---
 
 # FEMU Monitoring

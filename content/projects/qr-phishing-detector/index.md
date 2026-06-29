@@ -13,6 +13,7 @@ tags:
   - coursework
 period: "2024"
 role: 팀 캡스톤 프로젝트 / 서버 구현 / 추론 파이프라인 정리
+status: archived
 ---
 
 # Phishing QR detector

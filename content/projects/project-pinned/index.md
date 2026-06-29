@@ -15,6 +15,7 @@ tags:
   - backend
 period: "2023"
 role: 팀장, 설계 / 백엔드 / 아키텍처 / 스프린트 운영
+status: archived
 ---
 
 # Project Pinned

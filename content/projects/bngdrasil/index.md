@@ -18,6 +18,7 @@ tags:
   - devops
 period: 2022 - 진행중
 role: 개인 프로젝트, 플랫폼 아키텍처 / IaC / API Gateway / Auth / 운영 콘솔 설계
+status: active
 ---
 
 # BNGdrasil

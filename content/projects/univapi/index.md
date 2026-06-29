@@ -14,6 +14,7 @@ tags:
   - backend
 period: "2023"
 role: 개인 프로젝트, 학회 과제 / API 설계 / 백엔드 구현 / 문서화
+status: archived
 ---
 
 # 수강신청 API

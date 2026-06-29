@@ -12,6 +12,7 @@ tags:
   - backend
 period: "2023"
 role: 개인 프로젝트, 백엔드 / 데이터 수집 / 챗봇 연동 / 배포
+status: archived
 ---
 
 # KakaoTalk-channel-WeatherToday

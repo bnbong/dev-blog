@@ -15,6 +15,7 @@ tags:
 featured: true
 period: 2024.08 - 진행중
 role: 개인 OSS 운영, CLI 설계 / 템플릿 시스템 / 문서 / 릴리스 관리
+status: active
 ---
 
 # FastAPI FastKit

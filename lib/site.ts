@@ -43,8 +43,15 @@ export const skillGroups: { label: string; items: string[] }[] = [
 
 export const education = [
   {
+    org: "SSAFY (삼성 청년 SW아카데미)",
+    period: "2026.07.07 시작",
+    notes: [
+      "16기 대전캠퍼스"
+    ],
+  },
+  {
     org: "한양대학교 ERICA 컴퓨터학부",
-    period: "2019.03 – 2026.08 졸업예정",
+    period: "2019.03 – 2026.08 졸업",
     notes: [
       "학점 3.76 / 4.5 · 클라우드SW 중급 마이크로전공 이수",
       "졸업 프로젝트: \"CNN + BERT Multimodal Qshing Detection\"",

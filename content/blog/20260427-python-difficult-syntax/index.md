@@ -65,7 +65,7 @@ print(append_to(3))
 
 `[1]`, `[2]`, `[3]`이 각각 출력될 것 같지만, 실제로는 리스트가 계속 누적됩니다.
 
-Python에서 함수의 기본 인자값은 함수가 **정의(define)** 될 때 **단 한 번만** 평가됩니다. 따라서 `target=[]`의 빈 리스트 객체는 함수 호출마다 새로 생성되는 것이 아니라, 모든 호출이 **같은 리스트 객체를 공유** 합니다.
+Python에서 함수의 기본 인자값은 함수가 **정의(define)** 될 때 **단 한 번만** 평가됩니다.[^mutable-default] 따라서 `target=[]`의 빈 리스트 객체는 함수 호출마다 새로 생성되는 것이 아니라, 모든 호출이 **같은 리스트 객체를 공유** 합니다.
 
 올바른 패턴은 `None`을 센티널(sentinel)로 사용하는 것입니다:
 
@@ -83,7 +83,7 @@ def append_to(element, target=None):
 
 ## for/while/try 문의 else 절은 언제 실행되는가
 
-Python에서 `else`는 `if` 문에만 붙는 것이 아닙니다. `for`, `while`, `try` 문에도 `else` 절을 붙일 수 있습니다.
+Python에서 `else`는 `if` 문에만 붙는 것이 아닙니다. `for`, `while`, `try` 문에도 `else` 절을 붙일 수 있습니다.[^compound]
 
 **Q. 다음 코드의 출력은?**
 
@@ -167,7 +167,7 @@ finally:
 
 ## 왈러스 연산자(:=)와 대입 표현식
 
-Python 3.8에서 PEP 572를 통해 도입된 왈러스 연산자(`:=`)는 **표현식(expression)** 안에서 변수에 값을 대입할 수 있게 해줍니다.
+Python 3.8에서 PEP 572를 통해 도입된 왈러스 연산자(`:=`)는 **표현식(expression)** 안에서 변수에 값을 대입할 수 있게 해줍니다.[^pep572]
 
 **Q. 다음 코드의 출력은?**
 
@@ -213,7 +213,7 @@ if (m := re.match(r"\d+", text)):
 
 ## 언패킹 연산자 * 와 ** 의 다양한 쓰임
 
-`*`와 `**`는 곱셈이나 거듭제곱 연산자이기도 하지만, 언패킹(unpacking) 문맥에서는 완전히 다른 역할을 합니다.
+`*`와 `**`는 곱셈이나 거듭제곱 연산자이기도 하지만, 언패킹(unpacking) 문맥에서는 완전히 다른 역할을 합니다.[^expressions]
 
 **Q. 다음 코드의 출력은?**
 
@@ -333,7 +333,7 @@ total = sum(x ** 2 for x in range(10_000_000))
 
 ## 구조적 패턴 매칭(match-case) 기초와 주의점
 
-Python 3.10에서 PEP 634를 통해 도입된 `match-case` 문은 값의 구조를 기반으로 분기하는 문법입니다.
+Python 3.10에서 PEP 634를 통해 도입된 `match-case` 문은 값의 구조를 기반으로 분기하는 문법입니다.[^pep634]
 
 기본 사용법은 다른 언어의 `switch-case`와 유사합니다:
 
@@ -406,7 +406,7 @@ match status:
 
 ### 구조 분해
 
-`match-case`의 진짜 강점은 구조 분해(destructuring)에 있습니다:
+`match-case`의 진짜 강점은 구조 분해(destructuring)에 있습니다:[^pep636]
 
 ```python
 point = (3, 4)
@@ -686,7 +686,7 @@ tuple
 
 ---
 
-## 정리 및 참고 자료
+## 정리
 
 Python은 간결한 문법을 지향하지만, 그 간결함 속에 직관적이지 않은 동작이 적지 않습니다. 이번에 다룬 내용을 표로 정리해봤습니다.
 
@@ -711,11 +711,9 @@ Python 고수의 길은 멀고도 험하다...
 
 다음 편에서는 **Java의 헷갈리는 문법들** 을 다룰 예정입니다.
 
-### 참고 자료
-
-- [Python Language Reference — Compound statements](https://docs.python.org/3/reference/compound_stmts.html)
-- [Python Language Reference — Expressions](https://docs.python.org/3/reference/expressions.html)
-- [PEP 572 — Assignment Expressions](https://peps.python.org/pep-0572/)
-- [PEP 634 — Structural Pattern Matching: Specification](https://peps.python.org/pep-0634/)
-- [PEP 636 — Structural Pattern Matching: Tutorial](https://peps.python.org/pep-0636/)
-- [Python FAQ — Why are default values shared between objects?](https://docs.python.org/3/faq/programming.html#why-are-default-values-shared-between-objects)
+[^mutable-default]: Python FAQ, *Why are default values shared between objects?* <https://docs.python.org/3/faq/programming.html#why-are-default-values-shared-between-objects>
+[^compound]: Python Language Reference, *Compound statements* — `for`/`while`/`try`의 `else` 절 동작. <https://docs.python.org/3/reference/compound_stmts.html>
+[^pep572]: PEP 572, *Assignment Expressions* — 왈러스 연산자(`:=`). <https://peps.python.org/pep-0572/>
+[^expressions]: Python Language Reference, *Expressions* — 언패킹(displays)·체이닝 비교 등 표현식 문법. <https://docs.python.org/3/reference/expressions.html>
+[^pep634]: PEP 634, *Structural Pattern Matching: Specification* — `match-case` 명세. <https://peps.python.org/pep-0634/>
+[^pep636]: PEP 636, *Structural Pattern Matching: Tutorial* — 구조 분해 패턴 튜토리얼. <https://peps.python.org/pep-0636/>

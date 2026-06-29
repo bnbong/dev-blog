@@ -10,6 +10,7 @@ tags:
   - oss
 period: "2023"
 role: 문서 번역 기여
+status: archived
 ---
 
 # Azure SDK Python Korean

@@ -12,6 +12,7 @@ tags:
   - personal
 period: "2022"
 role: 개인 프로젝트, 기획 / Android 구현 / API 연동
+status: archived
 ---
 
 # TooKindFriendChat

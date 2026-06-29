@@ -13,6 +13,7 @@ tags:
   - backend
 period: 2020.09 - 2021.04
 role: 팀 GiftMusic / 백엔드 / 초기 서비스 아이디어 제안
+status: archived
 ---
 
 # Mugip

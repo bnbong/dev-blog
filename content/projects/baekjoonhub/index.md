@@ -10,6 +10,7 @@ tags:
 url: https://github.com/BaekjoonHub/BaekjoonHub
 period: 2026.05
 role: 외부 기여, 이슈 진단 보조(#333) / 버그 수정 PR(#334)
+status: archived
 ---
 
 # BaekjoonHub

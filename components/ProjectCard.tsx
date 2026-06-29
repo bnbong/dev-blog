@@ -66,14 +66,18 @@ export function ProjectCard({ project = { name: "" }, href, onClick, style, ...r
       }}
       {...rest}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)" }}>
-        <span style={{ display: "inline-flex", color: "var(--color-brand-strong)" }} aria-hidden>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)" }}>
+        <span style={{ display: "inline-flex", flexShrink: 0, color: "var(--color-brand-strong)" }} aria-hidden>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           </svg>
         </span>
         <h3
           style={{
+            minWidth: 0,
+            // Break long unbreakable names (underscore/camelCase) so they wrap
+            // instead of sliding under the status badge.
+            overflowWrap: "anywhere",
             fontSize: "var(--text-lg)",
             fontWeight: 700,
             color: "var(--text-strong)",
@@ -84,7 +88,7 @@ export function ProjectCard({ project = { name: "" }, href, onClick, style, ...r
           {name}
         </h3>
         {statusLabel && (
-          <Badge tone={statusTone} dot style={{ marginLeft: "auto" }}>
+          <Badge tone={statusTone} dot style={{ flexShrink: 0, marginLeft: "auto" }}>
             {statusLabel}
           </Badge>
         )}
