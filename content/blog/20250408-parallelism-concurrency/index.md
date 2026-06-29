@@ -88,7 +88,7 @@ comments: true
 
 ### Rob Pike의 명언
 
-Go 언어를 만든 Rob Pike는 동시성과 병렬성의 차이를 다음과 같이 정의했습니다:
+Go 언어를 만든 Rob Pike는 동시성과 병렬성의 차이를 다음과 같이 정의했습니다:[^robpike]
 
 > "Concurrency is about **dealing with** lots of things at once.
 > Parallelism is about **doing** lots of things at once."
@@ -258,7 +258,7 @@ if __name__ == "__main__":
 
 ### 4.4 동기(Synchronous)와 비동기(Asynchronous)
 
-비동기 프로그래밍은 I/O 대기 시간을 효율적으로 활용하여 동시성을 구현하는 유용한 방법 중 하나입니다.
+비동기 프로그래밍은 I/O 대기 시간을 효율적으로 활용하여 동시성을 구현하는 유용한 방법 중 하나입니다.[^asyncio]
 
 #### 동기(Synchronous)
 
@@ -437,14 +437,14 @@ if __name__ == "__main__":
 
 ## 6. Python의 GIL(Global Interpreter Lock)
 
-Python에서 병렬성과 동시성을 다룰 때 반드시 알아야 할 개념이 **GIL(Global Interpreter Lock)**입니다.
+Python에서 병렬성과 동시성을 다룰 때 반드시 알아야 할 개념이 **GIL(Global Interpreter Lock)**입니다.[^gil-glossary]
 
 ### GIL이란?
 
 - Python 인터프리터가 한 번에 하나의 스레드만 Python 바이트코드를 실행하도록 보장하는 뮤텍스(mutex)
 - 메모리 관리를 단순화하기 위해 도입되었습니다
 - **멀티스레딩으로 CPU 집약적 작업을 병렬화할 수 없습니다**
-- 다만, I/O 작업(네트워크 요청, 파일 읽기/쓰기 등) 중에는 GIL이 해제되므로 멀티스레딩이 여전히 응답성을 높이는 데 유용합니다
+- 다만, I/O 작업(네트워크 요청, 파일 읽기/쓰기 등) 중에는 GIL이 해제되므로 멀티스레딩이 여전히 응답성을 높이는 데 유용합니다[^gil-deep]
 
 ### GIL의 영향
 
@@ -496,11 +496,7 @@ print(f"멀티 스레드: {time.time() - start:.2f}초, counter={counter}")
 
 프로세스, 스레드, 동기/비동기, 블로킹/논블로킹 같은 관련 개념들을 함께 이해하면 더욱 효과적으로 프로그래밍할 수 있습니다.
 
----
-
-## 참고 자료
-
-- [Concurrency is not Parallelism - Rob Pike](https://go.dev/blog/waza-talk)
-- [Python GIL (Global Interpreter Lock)](https://docs.python.org/3/glossary.html#term-global-interpreter-lock)
-- [Real Python - Async IO in Python](https://realpython.com/async-io-python/)
-- [Understanding the Python GIL](https://realpython.com/python-gil/)
+[^robpike]: Rob Pike, *Concurrency is not Parallelism*. <https://go.dev/blog/waza-talk>
+[^asyncio]: Real Python, *Async IO in Python: A Complete Walkthrough*. <https://realpython.com/async-io-python/>
+[^gil-glossary]: Python 공식 용어집, *global interpreter lock*. <https://docs.python.org/3/glossary.html#term-global-interpreter-lock>
+[^gil-deep]: Real Python, *What Is the Python Global Interpreter Lock (GIL)?* <https://realpython.com/python-gil/>
