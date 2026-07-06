@@ -121,6 +121,10 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 .prose h3 { font-size: var(--text-xl); }
 .prose h4 { font-size: var(--text-lg); }
 .prose p { margin: 0; }
+/* Consecutive paragraphs (the author writes one sentence per paragraph) need a
+   clear gap: the `.prose p` reset above out-specifies `> * + *`, so restore a
+   paragraph rhythm that reads as distinct from the (loose) intra-line leading. */
+.prose p + p { margin-top: var(--space-6); }
 .prose strong { color: var(--text-strong); font-weight: var(--weight-semibold); }
 
 .prose a {
