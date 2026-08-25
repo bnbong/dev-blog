@@ -1,5 +1,5 @@
 ---
-title: [알고리즘 리뷰] 구현
+title: '[알고리즘 리뷰] 구현'
 description: 구현 알고리즘 팁 및 예시 문제
 authors:
 - bnbong
@@ -17,7 +17,9 @@ comments: true
 
 ??? note "Series: 알고리즘 리뷰"
 
-    [0. 구현](./index.md)
+    [0. Introduction](20250128.md)
+
+    [1. 구현](20260825.md)
 
 나동빈님의 '이것이 취업을 위한 코딩 테스트다 with 파이썬' 책을 바탕으로 정리한 내용이 포함되어 있습니다.
 
