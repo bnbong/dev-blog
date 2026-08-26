@@ -19,9 +19,9 @@ export const profile = {
   avatar: "/assets/bongo.jpg",
   resume: "/assets/resume.pdf",
   portfolio: "/assets/portfolio.pdf",
-  headline: "문제를 흐름으로 보고, 병목은 계측하고 반복은 자동화합니다.",
-  bio: "문제를 기능 단위가 아니라 사용자·개발자·운영자의 흐름 단위로 보는 서버 개발자입니다. FastAPI·Spring Boot API, 오픈소스 CLI, AI 추론 서버까지 서버 개발과 운영 자동화를 함께 경험했고, 성과는 latency·비용·WAF/IOPS·다운로드 수처럼 검증 가능한 수치로 확인합니다.",
-  intro: "백엔드를 만들고, 배운 것을 기록합니다.",
+  headline: "삶을 윤택하게 만드는 개발자",
+  bio: "문제를 전체 흐름 단위로 해결하는 서버 개발자. 한가지에 꽂히면 파고드는 성격이 Backend - FastAPI / DevOps - Docker & k8s / Cloud - AWS & OCI / Game 등 다양한 세계로 넓어졌습니다.",
+  intro: "해결하고, 배운 것을 기록합니다.",
   location: "경기도 성남시 분당구",
   github: "https://github.com/bnbong",
   email: "bbbong9@gmail.com",
@@ -121,7 +121,7 @@ export const featuredProjectSlugs = ["wegis", "fastapi-fastkit", "femu-monitorin
  */
 export const openSource = {
   intro:
-    "오픈소스는 저에게 \"코드로 쓰는 자기소개\"이자 \"빠른 피드백 루프\"입니다. 매일 쓰는 도구의 부족한 부분을 직접 고치거나, 한국어 사용자의 언어 장벽을 낮추는 작은 번역 커밋이라도 꾸준히 쌓아 두려 합니다.",
+    "오픈소스가 바로 제가 추구하는 가치인 \"삶을 윤택하게 만드는\" 실현체입니다. 상용 도구의 부족한 부분을 개선하거나, 언어 장벽을 낮추고 사용자에게 목적을 부여합니다.",
   maintained: [
     {
       name: "FastAPI-fastkit",
@@ -143,6 +143,17 @@ export const openSource = {
         "5개 축 스코어링 + 신뢰도 가중치 설계",
         "FastAPI 카드 생성 서버 · 웹 제너레이터",
         "GitHub Action 연동 자동 갱신",
+      ],
+    },
+    {
+      name: "Overlock",
+      slug: "overlock",
+      upstream: "https://github.com/bnbong/Overlock",
+      desc: "재봉틀 노루발을 레이싱 머신처럼 몰아 원단 위 재봉선을 따라 완주하는 무료 웹 타임어택 게임. Godot 클라이언트와 FastAPI 리더보드 서버 구현.",
+      contributions: [
+        "Godot 4 결정론적 시뮬레이션 + Mode 7 원근 셰이더 표현 계층",
+        "트랙 에디터 · 트랙 파일 공유 · FastAPI 온라인 리더보드",
+        "웹 export 배포 파이프라인 (GitHub Actions · Docker · itch.io)",
       ],
     },
   ],

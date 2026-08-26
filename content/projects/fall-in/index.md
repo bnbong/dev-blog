@@ -11,9 +11,9 @@ tags:
   - game
   - personal
 featured: true
-period: 2026.01.30 - 진행중
+period: 2026.01.30 - 2026.04
 role: 1인 개발, 기획 / 룰 설계 / 구현 / 테스트 / 배포 / 아트 통합
-status: wip
+status: archived
 ---
 
 # 헤쳐 모여! (Fall In!)
@@ -29,6 +29,9 @@ status: wip
     ![Fall In logo text](fall_in_logo_text.png)
     <figcaption>프로젝트 타이틀</figcaption>
 </figure>
+
+!!! warning "개발 중단"
+    2026년 8월 기준으로 개발을 중단한 프로젝트입니다(이유: 개발자인 내가 해도 재미 없음). 아래 내용은 개발 당시 시점에 작성한 그대로 두었습니다.
 
 !!! tip "아이템 한줄 설명"
     보드게임 6 Nimmt!를 대한민국 공군 세계관으로 재해석한 전략 카드 게임

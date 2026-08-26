@@ -265,6 +265,13 @@
     "image": "https://opengraph.githubassets.com/4158e0f53d848273da1323d5e0a25cfb7ea2dc8c943512120f47e7225038b3f5/bnbong/KakaoTalk-channel-WeatherToday",
     "siteName": "GitHub"
   },
+  "https://github.com/bnbong/Overlock": {
+    "url": "https://github.com/bnbong/Overlock",
+    "title": "GitHub - bnbong/Overlock: <game> 원단 위 손떨리는 레이싱",
+    "description": "<game> 원단 위 손떨리는 레이싱. Contribute to bnbong/Overlock development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/79b6130f633966e3912188b7d302bd743d2748a63ec43a3a3c4252e26665397b/bnbong/Overlock",
+    "siteName": "GitHub"
+  },
   "https://github.com/bnbong/Project-Pinned": {
     "url": "https://github.com/bnbong/Project-Pinned",
     "title": "GitHub - bnbong/Project-Pinned: <공모전 출품용> 지역 랜드마크와 관련된 내 추억을 공유하는 지도 기반 웹 SNS 서비스",
@@ -462,6 +469,13 @@
     "siteName": "LeetCode"
   },
   "https://leetcode.com/problems/two-sum/": null,
+  "https://overlock.bnbong.com": {
+    "url": "https://overlock.bnbong.com",
+    "title": "Overlock — 재봉틀 레이싱 게임",
+    "description": "원단 위 손떨리는 레이싱",
+    "image": "https://overlock.bnbong.com/preview.png",
+    "siteName": "overlock.bnbong.com"
+  },
   "https://platform.openai.com/account/api-keys": null,
   "https://platform.openai.com/docs/guides/gpt": {
     "url": "https://platform.openai.com/docs/guides/gpt",
