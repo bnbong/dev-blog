@@ -101,8 +101,6 @@ ARP reply
 
 ---
 
-<!-- more -->
-
 ### 3. ARP 패킷 포맷
 
 ![arp_packet](arp_packet.png)

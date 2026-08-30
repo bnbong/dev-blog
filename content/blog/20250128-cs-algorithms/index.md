@@ -102,8 +102,6 @@ ll.append(2)
 
 스택은 LIFO(Last In, First Out) 원칙을 따릅니다.
 
-<!-- more -->
-
 ```python
 stack = []
 stack.append(1)  # Push

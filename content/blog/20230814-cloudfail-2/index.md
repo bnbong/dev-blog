@@ -53,8 +53,6 @@ Somethin' on your mind?
 
 정말정말 직관적인 UI가 우릴 반겨줍니다.
 
-<!-- more -->
-
 좌측 shortcut과 상단 탭에서 바로바로 관련 페이지로 이동할 수 있습니다.
 
 ![ui2](ui2.png)

@@ -40,8 +40,6 @@ comments: true
 
 ## 풀이
 
-<!-- more -->
-
 ### 초기 접근
 
 저는 이 문제를 brute force로 직접 경우의 수를 permutation, product로 구현하려고 시도했습니다.

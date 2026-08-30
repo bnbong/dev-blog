@@ -46,8 +46,6 @@ def duplicate(string: str, number: int = 2) -> list:
     return [string] * number
 ```
 
-<!-- more -->
-
 이렇게 Python에 type annotation을 적용할 수 있게 되면서 이 type annotation을 좀 더 강력하게 활용할 수 있게 나온 라이브러리가 바로 Pydantic입니다.
 
 웹 개발을 하면 다양한 표준으로 넘어오는 데이터를 직렬화(Serializing)하고 유효성을 검증하는 로직을 필수로 구현해야 하는데, 이 Pydantic이 제공하는 표준을 적용하면 JSON 스키마 생성이나 유효성 검증 로직을 직접 짜지 않아도 안전하고 강력한 Data Serializing을 웹 서버에 적용할 수 있습니다.

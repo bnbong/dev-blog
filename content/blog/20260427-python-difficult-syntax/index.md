@@ -53,8 +53,6 @@ print(append_to(3))
 <details>
 <summary>정답 보기</summary>
 
-<!-- more -->
-
 ```
 [1]
 [1, 2]

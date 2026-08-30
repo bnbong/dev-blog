@@ -86,8 +86,6 @@ comments: true
     CI/CD: Github Action<br>
     Infrastructure: AWS
 
-<!-- more -->
-
 ---
 
 ## 문서화
