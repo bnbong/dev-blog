@@ -24,7 +24,7 @@ from .errors import BlogflowError
 @click.group(context_settings={"help_option_names": ["-h", "--help"]})
 @click.version_option(__version__, "-V", "--version")
 def cli() -> None:
-    """Local-first editorial workflow for bnbong.github.io."""
+    """Local-first editorial workflow for bnbong.com"""
 
 
 for _cmd in (

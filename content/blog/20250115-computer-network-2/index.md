@@ -17,9 +17,13 @@ comments: true
 
 ??? note "Series : Computer Network"
 
-    [0. 컴퓨터 네트워크 개요](https://bnbong.github.io/blog/2024/12/30/computer-network-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B0%9C%EC%9A%94/)
+    [0. 컴퓨터 네트워크 개요](https://bnbong.com/blog/20241230-computer-network-1/)
 
-    [1. ARP protocol](https://bnbong.github.io/blog/2025/01/15/computer-network-arp-protocol/)
+    [1. ARP protocol](https://bnbong.com/blog/20250115-computer-network-2/)
+
+    [2. IPv4](https://bnbong.com/blog/20250117-computer-network-3/)
+
+    [3. IPv6](https://bnbong.com/blog/20260526-computer-network-4/)
 
 ## ARP (Address Resolution Protocol)
 

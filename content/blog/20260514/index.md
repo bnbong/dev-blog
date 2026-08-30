@@ -22,7 +22,7 @@ comments: true
 
 이 글에서는 코딩테스트에서 자주 출제되는 핵심 알고리즘 유형을 정리하고, 각 유형별로 프로그래머스와 LeetCode의 대표 문제를 풀어봅니다. 풀이는 모두 Python으로 작성하며, 코드 아래에 별도 설명을 붙입니다.
 
-> 이전 글 '[[Computer Science] 코딩 테스트 준비 - 알고리즘 및 자료구조 기초](https://bnbong.github.io/blog/2025/01/28/computer-science-%EC%BD%94%EB%94%A9-%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%A4%80%EB%B9%84---%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%B0%8F-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-%EA%B8%B0%EC%B4%88/)'에서 배열, 스택, 큐, 트리 등 기초 자료구조를 다루었습니다.
+> 이전 글 '[[Computer Science] 코딩 테스트 준비 - 알고리즘 및 자료구조 기초](https://bnbong.com/blog/20250128-cs-algorithms/)'에서 배열, 스택, 큐, 트리 등 기초 자료구조를 다루었습니다.
 > 이번 글은 그 후속편으로, 실전 문제 풀이에 필요한 알고리즘 유형에 집중하며 이 글만으로도 독립적으로 이해할 수 있도록 각 유형의 핵심 개념부터 설명합니다.
 
 ---

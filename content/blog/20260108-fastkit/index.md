@@ -87,7 +87,7 @@ SpringBoot의 경우 dto, service, controller 등의 패턴이 best practice로 
 
 이제 문제 상황을 파악했으니 남은 건 개발 속행이었습니다.
 
-최신 1.2.0 버전이 배포된 지금은 fastkit의 핵심적인 UX는 다음 링크에서 확인 가능합니다 :
+1.2.0 버전이 배포된 시점에서 fastkit의 핵심적인 UX는 다음 링크에서 확인 가능합니다 :
 
 <https://bnbong.github.io/FastAPI-fastkit/#usage>
 

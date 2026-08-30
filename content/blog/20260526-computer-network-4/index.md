@@ -18,13 +18,13 @@ comments: true
 
 ??? note "Series: Computer Network"
 
-    [0. 컴퓨터 네트워크 개요](https://bnbong.github.io/blog/2024/12/30/computer-network-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B0%9C%EC%9A%94/)
+    [0. 컴퓨터 네트워크 개요](https://bnbong.com/blog/20241230-computer-network-1/)
 
-    [1. ARP protocol](https://bnbong.github.io/blog/2025/01/15/computer-network-arp-protocol/)
+    [1. ARP protocol](https://bnbong.com/blog/20250115-computer-network-2/)
 
-    [2. IPv4](https://bnbong.github.io/blog/2025/01/17/computer-network-ipv4/)
+    [2. IPv4](https://bnbong.com/blog/20250117-computer-network-3/)
 
-    [3. IPv6](20260526.md)
+    [3. IPv6](https://bnbong.com/blog/20260526-computer-network-4/)
 
 ## 1. IPv6의 등장 배경과 필요성
 
@@ -32,7 +32,7 @@ IPv4는 32비트 주소 체계로 약 43억 개의 주소를 제공합니다. �
 
 이 문제를 해결하기 위해 설계된 것이 **IPv6(Internet Protocol version 6)**입니다. IPv6는 128비트 주소 체계로 약 3.4×10³⁸개의 주소를 제공하며, 주소 공간 확장 외에도 헤더 단순화, 확장 헤더 체계, 자동 주소 설정 등 여러 부분을 개선했습니다.
 
-> 이 포스트는 기존 Computer Network 시리즈의 [IPv4 포스트](https://bnbong.github.io/blog/2025/01/17/computer-network-ipv4/)와 연결되는 내용입니다. IPv4 헤더 구조를 먼저 살펴보고 오면 비교가 더 수월합니다.
+> 이 포스트는 기존 Computer Network 시리즈의 [IPv4 포스트](https://bnbong.com/blog/20250117-computer-network-3/)와 연결되는 내용입니다. IPv4 헤더 구조를 먼저 살펴보고 오면 비교가 더 수월합니다.
 
 ---
 

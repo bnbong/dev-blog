@@ -18,11 +18,13 @@ comments: true
 
 ??? note "Series: Computer Network"
 
-    [0. 컴퓨터 네트워크 개요](https://bnbong.github.io/blog/2024/12/30/computer-network-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B0%9C%EC%9A%94/)
+    [0. 컴퓨터 네트워크 개요](https://bnbong.com/blog/20241230-computer-network-1/)
 
-    [1. ARP protocol](https://bnbong.github.io/blog/2025/01/15/computer-network-arp-protocol/)
+    [1. ARP protocol](https://bnbong.com/blog/20250115-computer-network-2/)
 
-    [2. IPv4](https://bnbong.github.io/blog/2025/01/17/computer-network-ipv4/)
+    [2. IPv4](https://bnbong.com/blog/20250117-computer-network-3/)
+
+    [3. IPv6](https://bnbong.com/blog/20260526-computer-network-4/)
 
 ## IPv4: 인터넷의 주소 체계
 
@@ -49,7 +51,7 @@ IPv4의 핵심 특성은 다음과 같습니다:
 
 ## 2. IPv4의 역사와 위치 (OSI 모델 / TCP/IP 모델에서의 역할)
 
-[이전 포스트](https://bnbong.github.io/blog/2024/12/30/computer-network-%EC%BB%B4%ED%93%A8%ED%84%B0-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC-%EA%B0%9C%EC%9A%94/)에서 정리한 것처럼, 네트워크 프로토콜은 계층 구조로 나뉩니다. IPv4는 이 중 **네트워크 계층**에 위치합니다.
+[이전 포스트](https://bnbong.com/blog/20241230-computer-network-1/)에서 정리한 것처럼, 네트워크 프로토콜은 계층 구조로 나뉩니다. IPv4는 이 중 **네트워크 계층**에 위치합니다.
 
 | 모델 | 계층 | IPv4의 역할 |
 |------|------|------------|
@@ -59,7 +61,7 @@ IPv4의 핵심 특성은 다음과 같습니다:
 !!! note "계층 번호에 대하여"
     OSI 모델은 7개 계층, TCP/IP 모델은 4개 계층으로 나뉘므로 같은 역할의 계층이라도 번호가 다릅니다. 혼동을 피하기 위해 이 글에서는 번호보다 **계층명**을 기준으로 표기합니다.
 
-IPv4는 상위 계층으로부터 받은 데이터(TCP 세그먼트 또는 UDP 데이터그램)를 **패킷(Packet)**으로 캡슐화하여 하위 계층(데이터 링크 계층)으로 전달하는 역할을 합니다. [ARP 포스트](https://bnbong.github.io/blog/2025/01/15/computer-network-arp-protocol/)에서 다뤘던 것처럼, 이렇게 만들어진 IP 패킷은 데이터 링크 계층에서 이더넷 프레임으로 한 번 더 캡슐화되어 실제 물리 네트워크를 통해 전송됩니다.
+IPv4는 상위 계층으로부터 받은 데이터(TCP 세그먼트 또는 UDP 데이터그램)를 **패킷(Packet)**으로 캡슐화하여 하위 계층(데이터 링크 계층)으로 전달하는 역할을 합니다. [ARP 포스트](https://bnbong.com/blog/20250115-computer-network-2/)에서 다뤘던 것처럼, 이렇게 만들어진 IP 패킷은 데이터 링크 계층에서 이더넷 프레임으로 한 번 더 캡슐화되어 실제 물리 네트워크를 통해 전송됩니다.
 
 ---
 
