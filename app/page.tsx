@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { getAllPosts, getAllProjects } from "@/lib/content";
-import { profile, skillGroups, education, work, certifications, awards, activities, featuredProjectSlugs } from "@/lib/site";
+import { profile, skillGroups, education, work, certifications, languages, awards, activities, featuredProjectSlugs } from "@/lib/site";
 import { Avatar } from "@/components/Avatar";
 import { Button } from "@/components/Button";
 import { Tag } from "@/components/Tag";
@@ -155,6 +155,12 @@ export default async function AboutPage() {
             <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.7 }}>
               {certifications.map((c) => (
                 <li key={c}>{c}</li>
+              ))}
+            </ul>
+            <p style={{ ...eyebrowStyle, marginTop: "1.5rem" }}>Language</p>
+            <ul style={{ margin: 0, paddingLeft: "1.1rem", color: "var(--text-muted)", fontSize: "0.9375rem", lineHeight: 1.7 }}>
+              {languages.map((l) => (
+                <li key={l}>{l}</li>
               ))}
             </ul>
           </div>

@@ -26,7 +26,7 @@ status: archived
 ## 기여 내용
 
 - [:fontawesome-solid-code-pull-request: [New Source]: NAVER Blog RSS Feed](https://github.com/gautamkrishnar/blog-post-workflow/issues/241)
-- [:fontawesome-solid-bug: [Bug]: Regression in 1.9.5 — `item_exec` can no longer access `customTags` / local scope variables](https://github.com/gautamkrishnar/blog-post-workflow/issues/292)
+- [:fontawesome-solid-bug: [Bug]: Regression in 1.9.5 - `item_exec` can no longer access `customTags` / local scope variables](https://github.com/gautamkrishnar/blog-post-workflow/issues/292)
 
 ## NAVER Blog RSS 가이드
 
@@ -37,9 +37,9 @@ status: archived
 
 ## v1.9.5 `item_exec` 회귀 버그 리포트
 
-`@v1` 태그가 `1.9.5`를 가리키기 시작한 뒤부터, 기존에 잘 돌던 제 워크플로우가 갑자기 실패했습니다.
+`@v1` 태그가 `1.9.5`를 가리키기 시작한 뒤부터, 기존에 정상 동작하던 제 워크플로우가 갑자기 실패했습니다.
 RSS feed 자체는 정상적으로 수신되는데, `item_exec` 안에서 `customTags`를 참조하는 순간
-다음 에러가 떨어졌습니다.
+다음 에러가 발생했습니다.
 
 ```txt
 Error: Failure in executing `item_exec` parameter

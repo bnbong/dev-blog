@@ -15,10 +15,10 @@
 
 ## 기술 스택
 
-- **Next.js 15** (App Router, `output: "export"` 정적 export) · **React 19** · TypeScript
-- **Markdown** 콘텐츠 — `gray-matter`(frontmatter) + `marked` + 커스텀 전처리기([lib/markdown.ts](lib/markdown.ts))
-- **giscus** 댓글 (GitHub Discussions) · **Google Analytics 4**
-- 폰트: Pretendard(self-hosted) · Space Grotesk · JetBrains Mono · 브랜드 컬러 `#E1B978`
+- **Next.js 15** (App Router, `output: "export"` 정적 export), **React 19**, TypeScript
+- **Markdown** 콘텐츠: `gray-matter`(frontmatter) + `marked` + 커스텀 전처리기([lib/markdown.ts](lib/markdown.ts))
+- **giscus** 댓글 (GitHub Discussions), **Google Analytics 4**
+- 폰트: Pretendard(self-hosted), Space Grotesk, JetBrains Mono / 브랜드 컬러: `#E1B978`
 - 디자인: Claude Design
 
 ## 개발

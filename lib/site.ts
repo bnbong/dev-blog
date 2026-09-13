@@ -1,5 +1,5 @@
 /**
- * Site-wide configuration — profile, navigation, analytics, and comments.
+ * Site-wide configuration - profile, navigation, analytics, and comments.
  * Migrated from the legacy MkDocs site (bnbong.github.io).
  */
 
@@ -20,7 +20,7 @@ export const profile = {
   resume: "/assets/resume.pdf",
   portfolio: "/assets/portfolio.pdf",
   headline: "삶을 윤택하게 만드는 개발자",
-  bio: "문제를 전체 흐름 단위로 해결하는 서버 개발자. 한가지에 꽂히면 파고드는 성격이 Backend - FastAPI / DevOps - Docker & k8s / Cloud - AWS & OCI / Game 등 다양한 세계로 넓어졌습니다.",
+  bio: "문제를 전체 흐름 단위로 해결하는 개발자. 한가지에 꽂히면 파고드는 성격이 Backend, DevOps, Cloud, Game 등 다양한 세계로 넓어졌습니다.",
   intro: "해결하고, 배운 것을 기록합니다.",
   location: "경기도 성남시 분당구",
   github: "https://github.com/bnbong",
@@ -46,58 +46,61 @@ export const education = [
     org: "SSAFY (삼성 청년 SW아카데미)",
     period: "2026.07.07 시작",
     notes: [
-      "16기 대전캠퍼스"
+      "16기 대전캠퍼스, Data 트랙"
     ],
   },
   {
     org: "한양대학교 ERICA 컴퓨터학부",
-    period: "2019.03 – 2026.08 졸업",
+    period: "2019.03 - 2026.08 졸업",
     notes: [
-      "학점 3.76 / 4.5 · 클라우드SW 중급 마이크로전공 이수",
+      "학점 3.76 / 4.5, 클라우드SW 중급 마이크로전공 이수",
       "졸업 프로젝트: \"CNN + BERT Multimodal Qshing Detection\"",
     ],
   },
-  { org: "이매고등학교 졸업", period: "2016.03 – 2019.02", notes: [] },
+  { org: "이매고등학교 졸업", period: "2016.03 - 2019.02", notes: [] },
 ];
 
 export const work = [
   {
     org: "카카오엔터프라이즈",
     role: "IaaS 기술기획 인턴",
-    period: "2024.07 – 2024.08",
+    period: "2024.07 - 2024.08",
     notes: [
       "카카오클라우드 IaaS 제품 기술기획 및 사내 문서화",
-      "서비스 개선 6건 · 신규 서비스 기획 5건 수행",
+      "서비스 개선 6건과 신규 서비스 기획 5건 수행",
     ],
   },
   {
     org: "K-Buddy 창업팀",
     role: "Backend & DevOps",
-    period: "2023.09 – 2024.06",
+    period: "2023.09 - 2024.06",
     notes: [
       "Spring Boot 메인 서버 + FastAPI Mock API 분리로 프론트 연동 테스트와 서버 개발을 병렬화",
-      "OCI · Docker · Jenkins · GitHub Actions · EFK · Uptime Kuma 기반 배포/로그/헬스체크 환경 구축",
+      "OCI, Docker, Jenkins, GitHub Actions, EFK, Uptime Kuma 기반 배포/로그/헬스체크 환경 구축",
     ],
   },
   {
     org: "대한민국 공군",
     role: "정보체계관리 / 병장 만기전역",
-    period: "2021.04 – 2023.01",
-    notes: ["중앙방공통제소 서버 장비 정비, 이중화 인프라·장애 대응 체계 점검"],
+    period: "2021.04 - 2023.01",
+    notes: ["중앙방공통제소 서버 장비 정비, 이중화 인프라와 장애 대응 체계 점검"],
   },
   {
     org: "GiftMusic 창업팀",
     role: "Backend",
-    period: "2020.09 – 2021.04",
+    period: "2020.09 - 2021.04",
     notes: ["지도 기반 음악 공유 SNS 백엔드(Django) 개발 및 유지보수 (Mugip)"],
   },
 ];
 
 export const certifications = [
-  "정보처리기사 (필기 합격)",
+  "정보처리기사 (2026.09 취득, 26202240449G)",
   "정보처리산업기사 (2023.06)",
   "정보처리기능사 (2020.12)",
 ];
+
+/** 어학 성적 */
+export const languages = ["OPIc IH (2026.09)"];
 
 export const awards = [
   { title: "창업우수상", date: "2024.11" },
@@ -106,16 +109,16 @@ export const awards = [
 ];
 
 export const activities = [
-  "통기타동아리 JOY — 강사(2020–2025) · 회장(2023) · 부회장(2020)",
+  "통기타동아리 JOY: 강사(2020-2025), 회장(2023), 부회장(2020)",
   "SW 학회 JARAM 학회원 (2023)",
   "알고리즘 연구 학회 0&1 학회원 (2019)",
 ];
 
 /** Slugs of the projects to surface as "Featured" on the About page. */
-export const featuredProjectSlugs = ["wegis", "fastapi-fastkit", "femu-monitoring"];
+export const featuredProjectSlugs = ["cnn-qr-phishing-detector", "wegis", "fastapi-fastkit"];
 
 /**
- * Open Source — maintained projects and external contributions.
+ * Open Source - maintained projects and external contributions.
  * Migrated from the legacy docs/open-source/index.md. `slug` links to the
  * project write-up; `upstream` links to the GitHub repo.
  */
@@ -138,10 +141,10 @@ export const openSource = {
       name: "codemaru",
       slug: "codemaru",
       upstream: "https://github.com/bnbong/codemaru",
-      desc: "GitHub 프로필 README에 개발 역량을 5개 축으로 요약하는 SVG 카드 생성기. GitHub·solved.ac·LeetCode 데이터를 모아 점수화하고 8단계 티어로 표현합니다.",
+      desc: "GitHub 프로필 README에 개발 역량을 5개 축으로 요약하는 SVG 카드 생성기. GitHub, solved.ac, LeetCode 데이터를 모아 점수화하고 8단계 티어로 표현합니다.",
       contributions: [
         "5개 축 스코어링 + 신뢰도 가중치 설계",
-        "FastAPI 카드 생성 서버 · 웹 제너레이터",
+        "FastAPI 카드 생성 서버와 웹 제너레이터",
         "GitHub Action 연동 자동 갱신",
       ],
     },
@@ -152,8 +155,8 @@ export const openSource = {
       desc: "재봉틀 노루발을 레이싱 머신처럼 몰아 원단 위 재봉선을 따라 완주하는 무료 웹 타임어택 게임. Godot 클라이언트와 FastAPI 리더보드 서버 구현.",
       contributions: [
         "Godot 4 결정론적 시뮬레이션 + Mode 7 원근 셰이더 표현 계층",
-        "트랙 에디터 · 트랙 파일 공유 · FastAPI 온라인 리더보드",
-        "웹 export 배포 파이프라인 (GitHub Actions · Docker · itch.io)",
+        "트랙 에디터, 트랙 파일 공유, FastAPI 온라인 리더보드",
+        "웹 export 배포 파이프라인 (GitHub Actions, Docker, itch.io)",
       ],
     },
   ],
@@ -162,10 +165,10 @@ export const openSource = {
       name: "BaekjoonHub",
       slug: "baekjoonhub",
       upstream: "https://github.com/BaekjoonHub/BaekjoonHub",
-      desc: "백준·프로그래머스·SWEA 풀이를 GitHub에 자동 커밋해 주는 브라우저 확장. SWEA 자동 업로드가 끊기던 버그를 수정했습니다.",
+      desc: "백준, 프로그래머스, SWEA 풀이를 GitHub에 자동 커밋해 주는 브라우저 확장. SWEA 자동 업로드가 끊기던 버그를 수정했습니다.",
       contributions: [
-        "SWEA DOM 변경 대응: selector fallback · null-safe 파싱 (#334)",
-        "머지 후 .textContent/.innerText 오해로 인한 회귀를 직접 겪고 회고 — 텍스트 추출 의미 차이와 테스트 격리의 중요성",
+        "SWEA DOM 변경 대응: selector fallback과 null-safe 파싱 (#334)",
+        "머지 후 .textContent/.innerText 오해로 인한 회귀를 직접 겪고 회고: 텍스트 추출의 의미 차이와 테스트 격리의 중요성",
       ],
     },
     {
@@ -176,7 +179,7 @@ export const openSource = {
       contributions: ["샘플 및 문서 개선 PR", "재현 가능한 이슈 리포트"],
     },
     {
-      name: "Azure SDK for Python — Korean Docs",
+      name: "Azure SDK for Python - Korean Docs",
       slug: "azure-sdk-python-kor",
       upstream: "https://github.com/Azure/azure-docs-sdk-python",
       desc: "Azure Python SDK 공식 문서의 한국어 번역/현지화 기여.",
@@ -199,13 +202,13 @@ export const openSource = {
   ],
 };
 
-/** Google Analytics 4 — migrated from the legacy mkdocs.yml. */
+/** Google Analytics 4 - migrated from the legacy mkdocs.yml. */
 export const analytics = {
   gaId: "G-G1E1JBX2WR",
 };
 
 /**
- * giscus (GitHub Discussions comments) — attached to the bnbong/dev-blog repo.
+ * giscus (GitHub Discussions comments) - attached to the bnbong/dev-blog repo.
  *
  * `repoId` and `categoryId` are GitHub node IDs unique to this repo + category,
  * so they must be generated from https://giscus.app and pasted below. Until
@@ -222,14 +225,14 @@ export const giscus = {
   strict: "0" as const,
   reactionsEnabled: "1" as const,
   inputPosition: "bottom" as const,
-  // The blog has no dark-mode toggle — it's always light (warm paper #FDFBF6).
+  // The blog has no dark-mode toggle - it's always light (warm paper #FDFBF6).
   // `preferred_color_scheme` would follow the visitor's OS and flip to dark,
   // mismatching the page. Use a fixed light theme instead.
   theme: "light" as const,
   // Optional exact match: host the bundled custom theme on the deployed site
   // and put its ABSOLUTE url here (e.g. "https://bnbong.github.io/giscus-theme.css").
   // When set, it overrides `theme`. Leave "" to use the built-in `light` theme.
-  // (Must be an absolute https URL — a relative path won't load inside the giscus iframe.)
+  // (Must be an absolute https URL - a relative path won't load inside the giscus iframe.)
   themeUrl: "",
   lang: "ko" as const,
 };

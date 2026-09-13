@@ -10,7 +10,6 @@ tags:
   - OCI
   - Docker
   - Redis
-  - MongoDB
   - PostgreSQL
   - ai
   - personal
@@ -18,7 +17,7 @@ tags:
   - cloud
   - devops
 featured: true
-period: 2025.09 - 2025.10
+period: 2025.09 - 진행중
 role: 개인 프로젝트, 모델 서빙 / 확장 프로그램 / 인프라 재설계 / 운영 구조 개선
 status: active
 ---
@@ -43,7 +42,9 @@ Wegis는 `qr-phishing-detector` 캡스톤 프로젝트를 개인 프로젝트로
 
 - Extension : <https://github.com/bnbong/Wegis>
 - Server : <https://github.com/bnbong/Wegis_server>
+- Model : <https://github.com/bnbong/Wegis_model>
 - 캡스톤 원형 프로젝트 : [Phishing QR detector](qr-phishing-detector.md)
+- QR 시각 패턴 가설을 이어간 통제 실험 : [CNN-QR-phishing-detector](cnn-qr-phishing-detector.md)
 
 ## 문제 정의
 
@@ -118,17 +119,38 @@ Wegis의 분류 모델은 캡스톤 단계에서 확립한 멀티모달 구조�
     <figcaption>멀티모달 모델 실험 결과 예시 Confusion Matrix</figcaption>
 </figure>
 
+### 학습 파이프라인 분리
+
+2026년 8월 말에는 모델 코드를 `Wegis_model` 저장소로 떼어냈습니다. 서버 저장소 안에 학습 스크립트와 서빙 코드가 섞여 있으면 "이 가중치를 어떤 설정으로 뽑았는지"를 나중에 되짚을 수가 없었기 때문입니다. 분리한 패키지는 `train` / `evaluate` / `prepare-data` CLI를 제공하고, 학습 결과를 safetensors 체크포인트와 함께 `train_config.json`, `history.json`, `best_metrics.json`으로 남깁니다. 시드와 검증 분할 비율도 옵션으로 고정되므로 같은 데이터에서 같은 실험을 다시 돌릴 수 있고, 공개한 가중치가 이 저장소의 모델 정의에 `strict=True`로 로드되는지를 테스트로 확인합니다.
+
+여기서 한 가지 결정을 더 했습니다. URL 인코더의 패딩 처리에 정확하지 않은 부분이 있는데(합성곱 bias 때문에 패딩 구간의 상수 활성값이 전역 max-pooling에 섞여 들어갑니다), 이미 공개한 가중치와의 호환을 유지하기 위해 고치지 않고 README에 알려진 특이 사항으로 적어 두었습니다.
+
 ## 서버 설계
 
 서버는 FastAPI 기반으로 작성했고, 애플리케이션 시작 시점에 필요한 외부 자원과 모델을 명시적으로 초기화하는 구조를 사용했습니다.
 
-- FastAPI lifespan에서 Redis, MongoDB, PostgreSQL, 모델 객체를 순차적으로 초기화합니다.
+- FastAPI lifespan에서 Redis, PostgreSQL, 모델 객체를 순차적으로 초기화합니다(초기 설계에서는 MongoDB도 함께 띄웠습니다).
 - 분석 API는 단건 체크와 배치 체크를 분리해 확장 프로그램 호출 패턴에 맞췄습니다.
 - Redis에는 결과 캐시와 화이트리스트/블랙리스트 도메인 집합을 저장합니다.
-- MongoDB에는 사용자 피드백처럼 스키마 변동 가능성이 높은 문서를 저장합니다.
+- 사용자 피드백처럼 스키마 변동 가능성이 높은 데이터는 초기에 MongoDB에 두었다가, v2에서 PostgreSQL로 통합했습니다.
 - PostgreSQL은 구조화된 서비스 데이터와 분석 이력 관리 용도로 사용합니다.
 
 저장소를 이렇게 나눈 건 데이터 성격이 서로 달랐기 때문입니다. 결과 캐시는 빠른 조회가 중요했고, 피드백은 유연한 메타데이터 저장이 필요했으며, 운영 데이터는 관계형 관리가 더 적합했습니다.
+
+## 2026년 8월 리뉴얼(v2)
+
+확장 프로그램을 실제로 붙여 놓고 보니, 이 서버의 성격이 "사용자가 보낸 임의의 URL을 서버가 직접 가져오는 서비스"라는 점이 가장 큰 위험 요소였습니다. 8월 21일 작업에서는 그 지점을 집중적으로 막았습니다.
+
+- SSRF 가드(`src/services/net_guard.py`)를 두어 http/https 이외의 스킴과 80과 443 이외의 포트를 거부하고, 호스트를 직접 resolve해서 루프백, RFC1918 사설망, 링크 로컬(클라우드 메타데이터 `169.254.169.254` 포함), ULA, 예약 주소, 멀티캐스트 주소가 섞여 있으면 연결 자체를 포기하도록 했습니다. 공인 주소와 내부 주소를 함께 응답하는 split-horizon 레코드도 첫 내부 주소에서 fail-closed 처리합니다.
+- DNS 리바인딩은 가드가 검사한 주소 목록을 호출자에게 그대로 넘겨(`ResolvedTarget`) 그 주소로 커넥션을 고정하는 방식으로 닫았습니다. HTTP 클라이언트가 연결 시점에 호스트를 다시 resolve하면 검사와 접속 사이에 다른 답을 받을 수 있기 때문입니다. 자체 DNS를 쓰는 브라우저 폴백 경로는 고정이 불가능해서, 사전 검사만 적용하고 egress 방화벽을 전제로 둔다는 사실을 코드에 남겨 두었습니다.
+- 미들웨어(`src/api/middleware.py`)에는 전역 동시 요청 상한과 Redis 기반 분당 rate limit을 `/analyze`와 `/feedback` 표면에만 걸었습니다. 인증이 rate limiter보다 먼저 실행되는 순서 때문에 거부된 요청은 limiter에 도달하지 않으므로, 인증 실패 시도용 카운터를 따로 두어 토큰 검증 전에 먼저 과금하고 유효한 토큰이면 환불하는 구조로 만들었습니다. Redis가 느려지거나 죽으면 두 limiter 모두 60초간 스스로 꺼지는 fail-open입니다.
+- 분석 캐시 키를 만드는 URL 정규화(`src/services/url_utils.py`)에서는 서명된 URL의 휘발성 파라미터만 골라 제거합니다. AWS SigV4, GCS, Azure SAS처럼 서명 파라미터로 식별되는 경우에만 걷어내고, `token` 같은 일반적인 이름은 건드리지 않습니다. `/d?token=benign`과 `/d?token=malware`는 서로 다른 자원이라 한 키로 묶으면 캐시가 오염되기 때문입니다.
+
+저장소 구성도 이때 한 번 줄였습니다. 피드백을 담아 두던 MongoDB를 제거하고, 피드백 신고 테이블을 PostgreSQL 마이그레이션(`alembic/versions/003_feedback_reports.py`)으로 옮겨 관계형 저장소 하나로 통합했습니다.
+
+이어진 preflight 회귀 수정은 사소해 보이지만 실사용을 막는 문제였습니다. CORS `allow_headers`에 클라이언트가 보내는 커스텀 헤더를 빠뜨리면 그 헤더를 쓰는 요청의 preflight가 400으로 거부되는데, 단말 등록(`POST /auth/register`)용 `X-Wegis-Bootstrap`이 목록에 없어 확장 프로그램의 첫 등록이 실패했습니다. URL 정규화도 스킴 비교를 대소문자 구분 없이 하도록 고쳐, `HTTP://x.com`이 스킴 없는 문자열로 오인돼 `https://HTTP://x.com`이라는 엉뚱한 캐시 키가 되는 일을 막았습니다. 이 변경들은 모두 `tests/test_middleware.py`, `tests/test_net_guard.py`, `tests/test_url_utils.py`에 회귀 테스트로 함께 넣었습니다.
+
+8월 25일에는 데모 페이지와 CI를 정리했습니다. 저장소 구조가 확장과 서버, 모델 셋으로 나뉜 만큼, 문서와 워크플로우도 그 경계에 맞춰 다시 손봐야 했습니다.
 
 ## 인프라 재설계
 
@@ -187,6 +209,7 @@ Wegis의 분류 모델은 캡스톤 단계에서 확립한 멀티모달 구조�
 - 단건 분석 중심 구조에서 배치 분석과 캐시 기반 실시간 보호 흐름으로 확장했습니다.
 - 페이지 링크, 다운로드 링크, QR 코드 링크까지 다루는 확장 프로그램 동작을 확인했습니다.
 - 학술용 PoC를 브라우저 보호 도구 형태의 서비스로 전환했습니다.
+- 2026 오픈소스개발자대회에 v2로 출품했습니다.
 
 ## 배운 점
 

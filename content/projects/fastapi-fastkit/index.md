@@ -59,12 +59,17 @@ FastAPI-fastkit은 "프로젝트 생성기"이면서 동시에 "입문자용 가
 
 - `fastkit init` : 새 FastAPI 프로젝트 초기 생성
 - `fastkit init --interactive` : DB, 인증, 캐시, 모니터링, 테스트, 배포 옵션을 대화형으로 선택
+- `fastkit init --config <파일>` : JSON/TOML/YAML 설정 파일로 프롬프트 없이 동일한 프로젝트를 재생성
 - `fastkit startdemo` : 사전 정의된 템플릿으로 프로젝트 생성
 - `fastkit addroute` : 라우트 추가
 - `fastkit runserver` : 개발 서버 실행
 - `fastkit list-templates` : 사용 가능한 템플릿 조회
 
 단순히 디렉터리를 복사하는 게 아니라 선택한 조합에 맞는 코드와 설정을 생성한다는 점이 핵심입니다.
+
+v1.4.0(2026-09-04)에서는 이 생성 흐름을 "재현 가능한 절차"로 다시 정리했습니다. 대화형 세션을 `--save-config`로 파일에 남겨두면 다음에는 `--config`로 같은 결과를 그대로 다시 만들 수 있고, `init`과 `startdemo`에는 `--dry-run`, `--no-venv`, `--no-install`, `--yes` 옵션을 붙여 CI나 스크립트 안에서도 쓸 수 있게 했습니다. 생성된 프로젝트는 `pyproject.toml`에 `[tool.fastapi-fastkit]` 메타데이터 블록(`template`, `preset`, `package_manager`, `app_module`, `features`)을 기록하고, `runserver`와 `addroute`가 레이아웃을 추측하는 대신 이 값을 읽어 동작합니다.
+
+템플릿은 현재 12종을 배포하고 있습니다. v1.4.0에서 `fastapi-auth-jwt`(리프레시 토큰 회전, argon2, 스코프), `fastapi-sqlmodel`(비동기 SQLModel + Alembic + 제네릭 CRUD), `fastapi-llm-agent`(도구 호출 루프를 포함한 Claude SSE 스트리밍) 세 종을 추가했고, `fastapi-dockerized`와 `fastapi-async-crud`는 deprecated로 표시했지만 기존 사용자를 위해 계속 함께 배포합니다.
 
 ## 기술 선택 이유
 
@@ -102,9 +107,19 @@ Github에서 확인 가능한 최대한 다양한 FastAPI 프로젝트들을 참
 
 이 함께 생성되도록 만들었습니다. 기능 선택이 곧바로 코드 생성으로 이어지는 구조입니다.
 
+v1.4.0에서는 선택 축을 `migrations`(Alembic), `tooling`(ruff, pre-commit, GitHub Actions, devcontainer, Makefile), `logging`(구조화 JSON 로깅) 세 가지로 더 넓혔고, 카탈로그에 있는 모든 선택지(Celery/Dramatiq, Redis 캐시, WebSocket, 페이지네이션, OpenTelemetry, OAuth2, 세션 인증)가 실제로 동작하는 코드를 만들어 내도록 채웠습니다. `/health`와 `/ready`는 선택과 무관하게 항상 생성됩니다. 내부적으로는 문자열을 이어 붙여 코드를 찍어내던 방식을 Jinja2 프래그먼트로 옮겼는데, 선택 조합이 늘어날수록 문자열 조립 방식은 유지보수가 불가능하다는 판단이었습니다.
+
 ### 템플릿 품질 보증
 
 템플릿 프로젝트의 가장 큰 문제는 시간이 지나면 금방 깨진다는 점입니다. 이를 막기 위해 주기적인 자동 테스트 흐름을 GitHub Actions 워크플로우로 두어 템플릿이 계속 동작하도록 관리하고 있습니다.
+
+템플릿 인스펙터도 별도 모듈로 분리해, 단순한 파일 존재 확인에서 벗어나 실제로 uvicorn을 띄워 `/docs`와 `/health`를 찔러 보는 스모크 테스트, 설정 일관성 검사, 의존성 드리프트 검사, 치환되지 않고 남은 플레이스홀더 검사를 함께 수행하도록 했습니다. v1.4.1(2026-09-10)에서는 주간 QA에서 실제로 걸렸던 문제들을 정리했습니다. 컴파일 검사가 바이트코드를 남겨 권한 오류를 일으키던 문제, `docker compose ps --format json`의 출력 형태가 Compose 버전마다 달라 파싱이 깨지던 문제, Docker 기반 템플릿을 호스트 가상환경 없이 컨테이너의 공개 포트로 검증하도록 바꾼 것 등입니다. Windows나 `core.autocrlf=true` 환경에서 생성한 셸 스크립트가 `bash\r` 오류로 실패하던 문제도 복사 시 개행을 LF로 정규화하고 `.gitattributes`를 추가해 막았습니다.
+
+### 생성 코드의 의존성 교체
+
+v1.4.1에서는 생성되는 프로젝트가 상속받는 보안 부채를 걷어냈습니다. JWT 관련 카탈로그 항목과 `fastapi-mcp` 템플릿의 `python-jose`를 `PyJWT[crypto]`로 바꿔 패치되지 않은 `ecdsa` 취약점(CVE-2024-23342)을 떼어냈고, 유지보수가 멈춘 `passlib[bcrypt]`를 `pwdlib[argon2]`로 교체해 생성된 프로젝트가 `fastapi-auth-jwt`와 같은 argon2id로 비밀번호를 해싱하게 했습니다.
+
+스타터 키트가 만들어 주는 코드는 사용자가 그대로 서비스에 올릴 가능성이 높습니다. 그래서 템플릿의 의존성 선택은 이 도구 자신의 의존성보다 오히려 더 보수적으로 관리해야 한다고 봤습니다.
 
 ### 문서와 튜토리얼
 
@@ -126,7 +141,9 @@ Github에서 확인 가능한 최대한 다양한 FastAPI 프로젝트들을 참
 
 ## 현재 상태와 방향
 
-- PyPI 배포형 패키지로 운영 중
+- PyPI 배포형 패키지로 운영 중이며, 누적 다운로드는 24,000회를 넘었습니다(2026-09 기준)
+- 최신 릴리즈는 v1.4.1이고, Python 3.12~3.14 매트릭스로 테스트하고 있습니다
+- 템플릿 12종, 7개 국어 문서(User Guide / Tutorial / CLI Reference)를 함께 운영 중
 - 다양한 스택 조합을 지원하는 대화형 빌더 확장 중
 - 템플릿 품질 검증과 문서 보강을 지속 진행 중
 

@@ -20,6 +20,27 @@
     "image": "",
     "siteName": "azure.microsoft.com"
   },
+  "https://bnbong.com/blog/20230612-cloudfail-1/": {
+    "url": "https://bnbong.com/blog/20230612-cloudfail-1/",
+    "title": "[Cloud] 무료로 클라우드 개발환경을 구성하기 위한 몸부림 (1편) — bnbong",
+    "description": "클라우드 뉴비의 다사다난했던 클라우드 환경 구축기",
+    "image": "",
+    "siteName": "bnbong.com"
+  },
+  "https://bnbong.com/blog/20240112-readme-profile/": {
+    "url": "https://bnbong.com/blog/20240112-readme-profile/",
+    "title": "[Github] README.md로 내 프로필 맛있게 꾸미기 — bnbong",
+    "description": "README.md를 꾸며 내 프로필을 작성하는 방법.",
+    "image": "",
+    "siteName": "bnbong.com"
+  },
+  "https://bnbong.com/projects/overlock/": {
+    "url": "https://bnbong.com/projects/overlock/",
+    "title": "Overlock (오버로크) — bnbong",
+    "description": "재봉틀 노루발로 원단 위 재봉선을 박는 웹 타임어택 게임을 Godot 클라이언트와 FastAPI 리더보드 서버로 1인 개발해 릴리즈한 프로젝트",
+    "image": "",
+    "siteName": "bnbong.com"
+  },
   "https://bnbong.github.io/FastAPI-fastkit/#create-a-project-with-interactive-mode-new": {
     "url": "https://bnbong.github.io/FastAPI-fastkit/#create-a-project-with-interactive-mode-new",
     "title": "FastAPI-fastkit",
@@ -32,13 +53,6 @@
     "title": "FastAPI-fastkit",
     "description": "Fast, easy-to-use starter kit for new users of Python and FastAPI",
     "image": "",
-    "siteName": "bnbong.github.io"
-  },
-  "https://bnbong.github.io/blog/2024/01/12/github-readmemd%EB%A1%9C-%EB%82%B4-%ED%94%84%EB%A1%9C%ED%95%84-%EB%A7%9B%EC%9E%88%EA%B2%8C-%EA%BE%B8%EB%AF%B8%EA%B8%B0/": {
-    "url": "https://bnbong.github.io/blog/2024/01/12/github-readmemd%EB%A1%9C-%EB%82%B4-%ED%94%84%EB%A1%9C%ED%95%84-%EB%A7%9B%EC%9E%88%EA%B2%8C-%EA%BE%B8%EB%AF%B8%EA%B8%B0/",
-    "title": "[Github] README.md로 내 프로필 맛있게 꾸미기 - bnbong's tech blog",
-    "description": "README.md를 꾸며 내 프로필을 작성하는 방법에 대해 서술합니다.",
-    "image": "https://bnbong.github.io/assets/images/social/blog/posts/20240112-readme-profile/20240112.png",
     "siteName": "bnbong.github.io"
   },
   "https://bnbong.github.io/projects/": {
@@ -721,5 +735,12 @@
     "description": "",
     "image": "",
     "siteName": "youtube.com"
+  },
+  "https://youtu.be/9JvsSaqiles?si=X4CvXgqzupHKrdG3": {
+    "url": "https://youtu.be/9JvsSaqiles?si=X4CvXgqzupHKrdG3",
+    "title": "youtu.be",
+    "description": "",
+    "image": "",
+    "siteName": "youtu.be"
   }
 }

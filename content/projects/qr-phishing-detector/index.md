@@ -34,6 +34,7 @@ status: archived
 
 !!! info "후속 프로젝트와의 관계"
     `qr-phishing-detector`는 학기 중 수행한 캡스톤 원형이고, `Wegis`는 이 프로젝트를 개인적으로 이어서 확장한 버전입니다.
+    당시 품었던 QR 시각 패턴 가설은 이후 [CNN-QR-phishing-detector](cnn-qr-phishing-detector.md)에서 통제 실험으로 이어갔습니다.
 
 ## 문제 정의
 
