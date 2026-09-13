@@ -1,11 +1,11 @@
 ---
-title: '[알고리즘 리뷰] 이분 탐색 & 이분 탐색 트리'
-description: 이분 탐색 알고리즘 팁 및 예시 문제
+title: '[알고리즘 리뷰] 다익스트라'
+description: 다익스트라 알고리즘 팁 및 예시 문제
 authors:
 - bnbong
 date:
-  created: 2026-09-02
-  updated: 2026-09-02
+  created: 2026-09-13
+  updated: 2026-09-13
 categories:
 - Algorithms
 tags:
