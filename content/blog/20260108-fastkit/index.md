@@ -1,5 +1,6 @@
 ---
 title: '[Project] FastAPI-fastkit 개발기'
+thumbnail: fastkit_general_logo.png
 description: FastAPI의 boilerplate 배치 기능이 포함된 오픈소스 프로젝트 개발기
 authors:
   - bnbong

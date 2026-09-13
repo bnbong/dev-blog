@@ -1,5 +1,6 @@
 ---
 title: '[Github] README.md로 내 프로필 맛있게 꾸미기'
+thumbnail: practicedone.png
 description: README.md를 꾸며 내 프로필을 작성하는 방법.
 authors:
   - bnbong

@@ -60,6 +60,24 @@ content/projects/<slug>/
 
 GitHub 소셜 카드에 별/포크/언어를 표시하려면 frontmatter에 `stars`, `forks`, `language`, `languageColor`를 추가하면 됩니다. 이미지는 블로그와 동일하게 폴더 안에 두고 `![](demo.png)` 상대경로로 참조합니다.
 
+## 카드 썸네일
+
+블로그 목록과 프로젝트 목록의 카드에는 썸네일 이미지가 표시됩니다. 어떤 이미지를 사용할지는 다음 순서로 결정됩니다.
+
+1. frontmatter의 `thumbnail:` 값을 사용합니다. 호환을 위해 `cover:`와 `image:`도 같은 용도로 인식합니다.
+2. `thumbnail:`이 없으면 본문에 처음 등장하는 이미지를 사용합니다.
+3. 본문에도 이미지가 없으면 기본값인 프로필 사진(`/assets/new_profile.png`)을 사용합니다.
+
+```markdown
+---
+title: 글 제목
+thumbnail: cover.png        # 글 폴더 안의 상대경로
+# thumbnail: /assets/new_profile.png   ← 절대경로나 외부 URL도 가능합니다
+---
+```
+
+상대경로로 적으면 본문 이미지와 동일하게 글 폴더를 기준으로 해석되므로, 이미지를 `index.md` 옆에 두고 파일 이름만 적으면 됩니다.
+
 ## blogflow 활용
 
 ```bash

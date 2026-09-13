@@ -15,6 +15,7 @@ export default async function ProjectsPage() {
     stars: p.stars,
     status: p.status,
     year: p.year,
+    thumbnail: p.thumbnail,
   }));
 
   return (

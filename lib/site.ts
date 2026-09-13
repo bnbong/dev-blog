@@ -25,9 +25,9 @@ export const profile = {
   location: "경기도 성남시 분당구",
   github: "https://github.com/bnbong",
   email: "bbbong9@gmail.com",
-  linkedin: "https://www.linkedin.com/in/%EC%A4%80%ED%98%81-%EC%9D%B4-669733231/",
+  linkedin: "https://www.linkedin.com/in/bnbong/",
   naverBlog: "https://blog.naver.com/bnbong",
-  instagram: "https://www.instagram.com/j_hyeok__lee/",
+  instagram: "https://www.instagram.com/junnie_.bong/",
   rss: "/feed.xml",
 };
 

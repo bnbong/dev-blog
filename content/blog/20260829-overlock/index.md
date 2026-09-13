@@ -1,18 +1,19 @@
 ---
-title: '[Project] Overlock 개발 기록'
+title: "[Project] Overlock 개발 기록"
+thumbnail: new_release.png
 description: 첫 게임 Overlock 개발기
 authors:
-- bnbong
+  - bnbong
 date:
   created: 2026-08-29
   updated: 2026-08-29
 categories:
-- Project
+  - Project
 tags:
-- game
-- godot
-- fastapi
-- itch.io
+  - game
+  - godot
+  - fastapi
+  - itch.io
 comments: true
 ---
 

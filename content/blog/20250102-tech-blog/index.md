@@ -1,5 +1,6 @@
 ---
 title: '[Project] MKDocs-materials로 개발 블로그 & 포트폴리오 사이트 배포하기'
+thumbnail: dev.png
 description: 오픈소스를 활용하여 효율적으로 제 사이트를 배포하는 방법
 authors:
   - bnbong

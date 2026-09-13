@@ -14,6 +14,7 @@ export default async function BlogPage() {
     readingTime: p.readingTime,
     tags: p.tags,
     isNew: p.isNew,
+    thumbnail: p.thumbnail,
   }));
 
   return (

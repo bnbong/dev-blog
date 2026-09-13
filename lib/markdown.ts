@@ -104,7 +104,7 @@ function escapeHtml(s: string): string {
  * drop anything with a non-image-safe scheme (javascript:, vbscript:, …).
  * `cover.png` under content/blog/<slug>/ → `/blog/<slug>/cover.png`.
  */
-function resolveSrc(src: string, base: string): string {
+export function resolveSrc(src: string, base: string): string {
   const trimmed = src.trim();
   if (/^(?!https?:|\/|\.|#|data:image\/)[a-z][a-z0-9+.-]*:/i.test(trimmed)) return ""; // unsafe scheme
   if (!base || /^([a-z]+:|\/\/|\/|#)/i.test(trimmed)) return trimmed;

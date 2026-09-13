@@ -1,5 +1,6 @@
 ---
 title: 생소하거나 헷갈리는 Python 문법들
+thumbnail: python_gosu.png
 description: 생소하거나 헷갈리는 Python 문법들
 authors:
 - bnbong

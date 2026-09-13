@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { renderMarkdown, plainTextLength, tableOfContents, injectHeadingIds, type TocEntry } from "./markdown";
+import { renderMarkdown, plainTextLength, tableOfContents, injectHeadingIds, resolveSrc, type TocEntry } from "./markdown";
 import { getLinkPreviews } from "./link-preview";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
@@ -20,6 +20,8 @@ export interface Post {
   tags: string[];
   intro?: string;
   isNew?: boolean;
+  /** Card thumbnail URL — always set (falls back to DEFAULT_THUMBNAIL). */
+  thumbnail: string;
   html: string;
   toc: TocEntry[];
 }
@@ -40,7 +42,43 @@ export interface Project {
   featured: boolean;
   period?: string;
   role?: string;
+  /** Card thumbnail URL — always set (falls back to DEFAULT_THUMBNAIL). */
+  thumbnail: string;
   html: string;
+}
+
+/** Card image used when a post/project has neither an explicit nor an inline image. */
+export const DEFAULT_THUMBNAIL = "/assets/new_profile.png";
+
+/** All Markdown/HTML image sources in body order: `![alt](src)` and `<img src="…">`. */
+function* imageSources(markdown: string): Generator<string> {
+  // Fenced code blocks are samples, not illustrations — skip them.
+  const body = markdown.replace(/^```[\s\S]*?^```/gm, "");
+  const re = /!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)|<img\b[^>]*?\bsrc="([^"]+)"/gi;
+  for (let m = re.exec(body); m; m = re.exec(body)) yield m[1] ?? m[2];
+}
+
+/**
+ * Pick a card thumbnail: explicit frontmatter (`thumbnail`, or legacy `cover`/`image`)
+ * → first image in the body → the default profile picture. Relative paths resolve
+ * against `assetBase` the same way body images do.
+ */
+export function resolveThumbnail(
+  data: Record<string, unknown>,
+  content: string,
+  assetBase: string,
+): string {
+  const explicit = data.thumbnail ?? data.cover ?? data.image;
+  if (explicit) {
+    const v = String(explicit).trim();
+    if (v) return /^(https?:\/\/|\/)/i.test(v) ? v : `${assetBase}/${v.replace(/^\.\//, "")}`;
+  }
+  for (const src of imageSources(content)) {
+    if (/^data:/i.test(src.trim())) continue; // inline blobs make poor card art
+    const resolved = resolveSrc(src, assetBase);
+    if (resolved) return resolved;
+  }
+  return DEFAULT_THUMBNAIL;
 }
 
 /** "2026.05.12" → comparable "2026-05-12". */
@@ -160,6 +198,7 @@ export type PostSummary = Omit<Post, "html" | "toc">;
 
 /** Frontmatter → post metadata (no Markdown rendering, no link-preview fetch). */
 function parsePostMeta(slug: string, data: Record<string, unknown>, content: string) {
+  const thumbnail = resolveThumbnail(data, content, `/blog/${slug}`);
   const { created, updated } = extractDates(data);
   const category =
     (data.category as string) ?? (Array.isArray(data.categories) ? String(data.categories[0]) : "Writing");
@@ -173,6 +212,7 @@ function parsePostMeta(slug: string, data: Record<string, unknown>, content: str
     readingTime: data.readingTime ? String(data.readingTime) : estimateReadingTime(content),
     tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
     intro: data.intro ? String(data.intro) : undefined,
+    thumbnail,
     isNewExplicit: typeof data.isNew === "boolean" ? (data.isNew as boolean) : undefined,
   };
 }
@@ -273,6 +313,7 @@ export async function getAllProjects(): Promise<Project[]> {
       featured: Boolean(data.featured),
       period: period || undefined,
       role: data.role ? String(data.role) : undefined,
+      thumbnail: resolveThumbnail(data, content, `/projects/${slug}`),
       html: renderMarkdown(content, { assetBase: `/projects/${slug}`, resolveLink, linkPreviews: previews }),
     } satisfies Project;
   });

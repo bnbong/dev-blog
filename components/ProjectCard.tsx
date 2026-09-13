@@ -14,6 +14,7 @@ export interface ProjectCardData {
   stars?: number;
   status?: ProjectStatus;
   year?: number;
+  thumbnail?: string;
 }
 
 export interface ProjectCardProps {
@@ -29,7 +30,7 @@ export interface ProjectCardProps {
  * status: "active" | "archived" | "wip"
  */
 export function ProjectCard({ project = { name: "" }, href, onClick, style, ...rest }: ProjectCardProps) {
-  const { name, description, stack = [], stars, status, year } = project;
+  const { name, description, stack = [], stars, status, year, thumbnail } = project;
   const statusTone = ({ active: "success", wip: "warning", archived: "neutral" } as const)[status ?? "active"] || "neutral";
   const statusLabel = status ? ({ active: "Active", wip: "WIP", archived: "Archived" } as const)[status] : undefined;
   const interactive = !!href || !!onClick;
@@ -41,10 +42,11 @@ export function ProjectCard({ project = { name: "" }, href, onClick, style, ...r
         display: "flex",
         flexDirection: "column",
         gap: "var(--space-3)",
-        padding: "var(--space-5)",
+        padding: thumbnail ? "0 var(--space-5) var(--space-5)" : "var(--space-5)",
         background: "var(--surface-card)",
         border: "var(--border-width) solid var(--border-subtle)",
         borderRadius: "var(--radius-lg)",
+        overflow: "hidden",
         boxShadow: "var(--shadow-sm)",
         height: "100%",
         cursor: interactive ? "pointer" : "default",
@@ -66,6 +68,24 @@ export function ProjectCard({ project = { name: "" }, href, onClick, style, ...r
       }}
       {...rest}
     >
+      {thumbnail && (
+        <img
+          src={thumbnail}
+          alt=""
+          loading="lazy"
+          draggable={false}
+          style={{
+            display: "block",
+            width: "calc(100% + 2 * var(--space-5))",
+            marginLeft: "calc(-1 * var(--space-5))",
+            marginBottom: "var(--space-2)",
+            aspectRatio: "16 / 9",
+            objectFit: "cover",
+            background: "var(--surface-sunken)",
+            borderRadius: "var(--radius-lg) var(--radius-lg) 0 0",
+          }}
+        />
+      )}
       <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)" }}>
         <span style={{ display: "inline-flex", flexShrink: 0, color: "var(--color-brand-strong)" }} aria-hidden>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
