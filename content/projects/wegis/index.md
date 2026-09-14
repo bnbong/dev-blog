@@ -1,5 +1,6 @@
 ---
 title: Wegis
+thumbnail: new_wegis_logo.png
 description: 캡스톤 QR/URL 피싱 탐지 연구를 개인 서비스로 확장한 브라우저 보호형 멀티모달 피싱 탐지 시스템
 authors:
   - bnbong
@@ -32,6 +33,11 @@ status: active
 Wegis는 `qr-phishing-detector` 캡스톤 프로젝트를 개인 프로젝트로 이어서 확장한 버전입니다.
 학기 중에는 멀티모달 피싱 탐지 모델과 서버 PoC를 만드는 데 집중했다면, Wegis에서는
 그 결과물을 실제 사용 흐름에 맞게 다시 설계했습니다. 브라우저 확장 프로그램이 페이지의 링크를 수집하고, FastAPI 서버가 URL과 HTML을 함께 분석한 뒤, 위험 링크를 차단하거나 경고 UI를 보여주는 식으로 제품 형태까지 끌어올렸습니다.
+
+<figure markdown="span">
+    ![Wegis logo](new_wegis_logo.png)
+    <figcaption>Wegis 로고</figcaption>
+</figure>
 
 <figure markdown="span">
     ![Wegis demo](wegis_demo.png)

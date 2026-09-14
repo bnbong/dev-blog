@@ -1,5 +1,6 @@
 ---
 title: BNGdrasil
+thumbnail: BNGdrasil.png
 description: Bifrost 게이트웨이에서 출발해 개인 클라우드 플랫폼으로 확장한 멀티 저장소 인프라 프로젝트
 authors:
   - bnbong

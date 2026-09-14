@@ -1,5 +1,6 @@
 ---
 title: Azure SDK Python Korean
+thumbnail: azuresdkpythonlogo.png
 description: Azure SDK Python 구현 가이드를 한국어로 번역하며 문서 기여와 로컬 빌드 이슈를 함께 다룬 경험
 authors:
   - bnbong

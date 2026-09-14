@@ -174,6 +174,27 @@
     "image": "https://opengraph.githubassets.com/2a55018957b6e35a9053adcc81babb927934c964b60cc6101d654b9cc3367d18/Azure/azure-sdk-for-python/pull/31635",
     "siteName": "GitHub"
   },
+  "https://github.com/Azure/azure-sdk-korean/blob/main/CONTRIBUTING.md#full-local-setup": {
+    "url": "https://github.com/Azure/azure-sdk-korean/blob/main/CONTRIBUTING.md#full-local-setup",
+    "title": "azure-sdk-korean/CONTRIBUTING.md at main · Azure/azure-sdk-korean",
+    "description": "Korean explanation and related materials to navigate Azure SDK parent and child repositories - Azure/azure-sdk-korean",
+    "image": "https://opengraph.githubassets.com/b28f020e859644ce52e4ef6978b46826a2a6b2258b8faf4f1686ce19811d00d8/Azure/azure-sdk-korean",
+    "siteName": "GitHub"
+  },
+  "https://github.com/Azure/azure-sdk-korean/issues/130": {
+    "url": "https://github.com/Azure/azure-sdk-korean/issues/130",
+    "title": "[Suggesetion] jekyll Building Failure at Local · Issue #130 · Azure/azure-sdk-korean",
+    "description": "Azure SDK Korean repository에서 제공해주는 CONTRIBUTING.md 문서의 Full Local Setup 탭에서 제시해주는 방식 대로 Jekyll을 설치한 후 의존성 라이브러리들을 설치하고 난 후 bundle exec jekyll serve 명령어를 바로 수행한다면 다음과 같은 오류가 발생합니다. Local 환경 Local M...",
+    "image": "https://opengraph.githubassets.com/84a23d12e54e2482ede489cf69f3d7f3c39ecbc81c23a62aef68e4175ea0d564/Azure/azure-sdk-korean/issues/130",
+    "siteName": "GitHub"
+  },
+  "https://github.com/Azure/azure-sdk-korean/pull/191": {
+    "url": "https://github.com/Azure/azure-sdk-korean/pull/191",
+    "title": "Translate 'docs/python/implementation.md' into korean by bnbong · Pull Request #191 · Azure/azure-sdk-korean",
+    "description": "related issue: #178\nCompleted translating the 'docs/python/implementation.md' page into Korean.\nIn accordance with Python coding style, some of the translations were translated into appropr...",
+    "image": "https://opengraph.githubassets.com/16294cf63d409454c5cfd29e554163783797287bc7a51ce28d66b44fb0106251/Azure/azure-sdk-korean/pull/191",
+    "siteName": "GitHub"
+  },
   "https://github.com/BaekjoonHub/BaekjoonHub/issues/333": {
     "url": "https://github.com/BaekjoonHub/BaekjoonHub/issues/333",
     "title": "SWEA push 끊김 · Issue #333 · BaekjoonHub/BaekjoonHub",
@@ -403,6 +424,13 @@
     "title": "GitHub - kyechan99/capsule-render: 🌈 Dynamic Coloful Image Render",
     "description": "🌈 Dynamic Coloful Image Render. Contribute to kyechan99/capsule-render development by creating an account on GitHub.",
     "image": "https://repository-images.githubusercontent.com/280360410/988dd580-c8fb-11ea-9071-cf915afe6709",
+    "siteName": "GitHub"
+  },
+  "https://github.com/lablup/backend.ai": {
+    "url": "https://github.com/lablup/backend.ai",
+    "title": "GitHub - lablup/backend.ai: Backend.AI is a streamlined, container-based computing cluster platform that hosts popular computing/ML frameworks and diverse programming languages, with pluggable heterogeneous accelerator support including CUDA GPU, ROCm GPU, Gaudi NPU, Google TPU, GraphCore IPU and other NPUs.",
+    "description": "Backend.AI is a streamlined, container-based computing cluster platform that hosts popular computing/ML frameworks and diverse programming languages, with pluggable heterogeneous accelerator suppor...",
+    "image": "https://opengraph.githubassets.com/07af854edca9d6b6d18a6169e1784f059074dacb3ceb617888785367f699ca48/lablup/backend.ai",
     "siteName": "GitHub"
   },
   "https://github.com/msng-devs/JGW-Attendance-Python": {
@@ -687,12 +715,26 @@
     "image": "",
     "siteName": "acmicpc.net"
   },
+  "https://www.backend.ai/": {
+    "url": "https://www.backend.ai/",
+    "title": "Backend.AI | AI Infrastructure OS: GPU Orchestration & Virtualization",
+    "description": "Backend.AI is an enterprise AI infrastructure platform with patented GPU virtualization (fGPU), multi-tenant GPU orchestration, and 12+ heterogeneous accelerator support.",
+    "image": "https://cdn.lablup.com/main_3e20fe0f7b.jpg",
+    "siteName": "Backend.AI"
+  },
   "https://www.campuspick.com/contest/view?id=22177": {
     "url": "https://www.campuspick.com/contest/view?id=22177",
     "title": "제11회 문화데이터 활용 경진대회 | 에브리커리어",
     "description": "제11회 문화데이터 활용 경진대회  문화데이터를 활용한 우수 아이디어, 새로운 비즈니스 모델을 발굴하기 위해 경진대회를 실시하오니 많은 관심과",
     "image": "https://cf-tabs-image.campuspick.com/activity/168497819729926_thumb.jpg",
     "siteName": "에브리커리어(캠퍼스픽)"
+  },
+  "https://www.contribution.ac/2023-ossca": {
+    "url": "https://www.contribution.ac/2023-ossca",
+    "title": "2026 오픈소스 컨트리뷰션 아카데미 [참여형] 멘티 모집 <마감>",
+    "description": "🌱 [참여형] 멘티를 찾습니다!",
+    "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=attachment%3A51afbc23-21d4-4547-b8b5-07033c3b6689%3A2026_OSSCA-notion-head-3d-%EC%B5%9C%EC%A2%85.png&amp;blockId=2e336dcb-0b5f-8072-b6fe-c5863c77b3e4&amp;width=2400",
+    "siteName": "2026 오픈소스 컨트리뷰션 아카데미 [참여형] 멘티 모집 <마감>"
   },
   "https://www.django-rest-framework.org/api-guide/generic-views/": {
     "url": "https://www.django-rest-framework.org/api-guide/generic-views/",
@@ -714,6 +756,13 @@
     "description": "The world's most advanced open source database.",
     "image": "https://www.postgresql.org/media/img/about/press/elephant.png",
     "siteName": "PostgreSQL"
+  },
+  "https://www.ruby-lang.org/en/news/2020/12/25/ruby-3-0-0-released/": {
+    "url": "https://www.ruby-lang.org/en/news/2020/12/25/ruby-3-0-0-released/",
+    "title": "Ruby 3.0.0 Released | Ruby",
+    "description": "We are pleased to announce the release of Ruby 3.0.0. From 2015 we developed hard toward Ruby 3, whose goal is performance, concurrency, and Typing. Especial...",
+    "image": "https://www.ruby-lang.org/images/og-image.png",
+    "siteName": "Ruby Programming Language"
   },
   "https://www.terminalgif.com/": {
     "url": "https://www.terminalgif.com/",

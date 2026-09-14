@@ -1,5 +1,6 @@
 ---
 name: codemaru
+thumbnail: codemaru_social_preview.png
 description: GitHub 프로필 README용 개발 역량 요약 SVG 카드 생성기. GitHub, solved.ac, LeetCode, 정올 데이터를 모아 점수화하고 8단계 티어로 표현합니다.
 authors:
   - bnbong

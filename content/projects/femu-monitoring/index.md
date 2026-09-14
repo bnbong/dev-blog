@@ -1,5 +1,6 @@
 ---
 title: FEMU Monitoring
+thumbnail: HYU_symbol_basic_th.png
 description: FEMU 내부에 WAF/Latency/Throughput 계측을 추가하고 Hot/Cold Data Separation까지 실험한 시스템 프로젝트
 authors:
   - bnbong

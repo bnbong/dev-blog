@@ -1,5 +1,6 @@
 ---
 title: Azure SDK Python
+thumbnail: azuresdkpythonlogo.png
 description: Azure SDK for Python 저장소에 코드 기여를 진행하며 OSS 기여 프로세스를 익힌 경험
 authors:
   - bnbong
