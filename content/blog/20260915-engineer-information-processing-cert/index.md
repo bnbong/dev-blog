@@ -1,12 +1,12 @@
 ---
 title: '[자격증] 정보처리기사 합격 후기'
-thumbnail: img01.png
+thumbnail: passed.png
 description: 정보처리기사 자격증 신청부터 필기, 실기 시험까지의 준비 과정과 후기를 정리했습니다.
 authors:
   - bnbong
 date:
-  created: 2026-09-??
-  updated: 2026-09-??
+  created: 2026-09-15
+  updated: 2026-09-15
 categories:
   - Certificate
 tags:
