@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { decode } from "html-entities";
-import { findLinkCardUrls } from "../lib/link-cards.mjs";
+import { findLinkCardUrls, isInternalUrl } from "../lib/link-cards.mjs";
 
 const ROOT = process.cwd();
 const OUT = path.join(ROOT, "data", "link-previews.json");
@@ -31,7 +31,8 @@ function findUrls() {
   };
   walk(path.join(ROOT, "content", "blog"));
   walk(path.join(ROOT, "content", "projects"));
-  return [...urls];
+  // Links to this site itself are rendered from local frontmatter — never fetched.
+  return [...urls].filter((u) => !isInternalUrl(u));
 }
 
 /** Full HTML-entity decode (named + decimal + hex) via html-entities. Runs up to

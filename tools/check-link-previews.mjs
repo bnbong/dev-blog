@@ -6,7 +6,7 @@
 //   npm run check:links
 import fs from "node:fs";
 import path from "node:path";
-import { findLinkCardUrls } from "../lib/link-cards.mjs";
+import { findLinkCardUrls, isInternalUrl } from "../lib/link-cards.mjs";
 
 const ROOT = process.cwd();
 const DATA = path.join(ROOT, "data", "link-previews.json");
@@ -23,7 +23,8 @@ function collect() {
   };
   walk(path.join(ROOT, "content", "blog"));
   walk(path.join(ROOT, "content", "projects"));
-  return [...urls];
+  // Internal (same-origin) links are synthesized from local frontmatter — not cached.
+  return [...urls].filter((u) => !isInternalUrl(u));
 }
 
 const urls = collect();

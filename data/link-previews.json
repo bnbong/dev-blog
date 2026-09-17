@@ -20,27 +20,6 @@
     "image": "",
     "siteName": "azure.microsoft.com"
   },
-  "https://bnbong.com/blog/20230612-cloudfail-1/": {
-    "url": "https://bnbong.com/blog/20230612-cloudfail-1/",
-    "title": "[Cloud] 무료로 클라우드 개발환경을 구성하기 위한 몸부림 (1편) — bnbong",
-    "description": "클라우드 뉴비의 다사다난했던 클라우드 환경 구축기",
-    "image": "",
-    "siteName": "bnbong.com"
-  },
-  "https://bnbong.com/blog/20240112-readme-profile/": {
-    "url": "https://bnbong.com/blog/20240112-readme-profile/",
-    "title": "[Github] README.md로 내 프로필 맛있게 꾸미기 — bnbong",
-    "description": "README.md를 꾸며 내 프로필을 작성하는 방법.",
-    "image": "",
-    "siteName": "bnbong.com"
-  },
-  "https://bnbong.com/projects/overlock/": {
-    "url": "https://bnbong.com/projects/overlock/",
-    "title": "Overlock (오버로크) — bnbong",
-    "description": "재봉틀 노루발로 원단 위 재봉선을 박는 웹 타임어택 게임을 Godot 클라이언트와 FastAPI 리더보드 서버로 1인 개발해 릴리즈한 프로젝트",
-    "image": "",
-    "siteName": "bnbong.com"
-  },
   "https://bnbong.github.io/FastAPI-fastkit/#create-a-project-with-interactive-mode-new": {
     "url": "https://bnbong.github.io/FastAPI-fastkit/#create-a-project-with-interactive-mode-new",
     "title": "FastAPI-fastkit",
@@ -468,6 +447,13 @@
     "image": "https://opengraph.githubassets.com/6ff09c68430a96a3671a2369580ef2e91f6e7b3791b8a2ba162788cb939b6da8/squidfunk/mkdocs-material",
     "siteName": "GitHub"
   },
+  "https://jeongcheogi.edugamja.com/": {
+    "url": "https://jeongcheogi.edugamja.com/",
+    "title": "정처기 감자 | 정보처리기사 필기·실기 합격 준비",
+    "description": "정보처리기사 자격증 시험 준비를 위한 이론 학습, 기출문제 풀이, 실전 모의고사까지. 정처기 감자와 함께 효율적으로 합격을 준비하세요.",
+    "image": "",
+    "siteName": "jeongcheogi.edugamja.com"
+  },
   "https://justinchronicles.net/ko/2023/07/07/github-profile-as-resume/": {
     "url": "https://justinchronicles.net/ko/2023/07/07/github-profile-as-resume/",
     "title": "GitHub 프로필로 이력서 만들기",
@@ -763,6 +749,13 @@
     "description": "We are pleased to announce the release of Ruby 3.0.0. From 2015 we developed hard toward Ruby 3, whose goal is performance, concurrency, and Typing. Especial...",
     "image": "https://www.ruby-lang.org/images/og-image.png",
     "siteName": "Ruby Programming Language"
+  },
+  "https://www.sinagong.co.kr/pds/001001001/past-exams": {
+    "url": "https://www.sinagong.co.kr/pds/001001001/past-exams",
+    "title": "정보처리 기사 필기 - 기출문제 | 시나공",
+    "description": "시나공에서 제공하는 정보처리 기사 필기의 기출문제 게시판 입니다.",
+    "image": "https://www.sinagong.co.kr/frontend/images/icon/sinagong_logo.png",
+    "siteName": "시나공"
   },
   "https://www.terminalgif.com/": {
     "url": "https://www.terminalgif.com/",

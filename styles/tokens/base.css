@@ -172,6 +172,14 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   border: var(--border-width) solid var(--border-subtle);
 }
 
+/* ==highlight== (pymdownx.mark) */
+.prose mark {
+  background: var(--color-brand-soft);
+  color: var(--color-brand-ink);
+  padding: 0.05em 0.25em;
+  border-radius: var(--radius-xs);
+}
+
 /* fenced code block */
 .prose pre {
   background: var(--surface-code);

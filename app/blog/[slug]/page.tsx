@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllPosts, getPost } from "@/lib/content";
-import { profile } from "@/lib/site";
+import { profile, siteUrl } from "@/lib/site";
 import { Tag } from "@/components/Tag";
 import { PostSidebar } from "@/components/PostSidebar";
 import { Giscus } from "@/components/Giscus";
@@ -16,7 +16,33 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const post = await getPost(slug);
-  return { title: post ? `${post.title} — bnbong` : "Post — bnbong", description: post?.excerpt };
+  const title = post ? `${post.title} — bnbong` : "Post — bnbong";
+  if (!post) return { title };
+  // Absolute OG image so social cards (and this site's own internal link cards) resolve it.
+  const images = [{ url: /^https?:\/\//i.test(post.thumbnail) ? post.thumbnail : `${siteUrl}${post.thumbnail}` }];
+  return {
+    title,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `${siteUrl}/blog/${slug}/`,
+      siteName: SITE_NAME,
+      type: "article",
+      publishedTime: isoDate(post.date),
+      modifiedTime: isoDate(post.updated ?? post.date),
+      images,
+    },
+    twitter: { card: "summary_large_image", title: post.title, description: post.excerpt, images },
+  };
+}
+
+const SITE_NAME = new URL(siteUrl).hostname.replace(/^www\./i, "");
+
+/** "2026.09.15" → "2026-09-15" (ISO date for OG timestamps). */
+function isoDate(d: string): string | undefined {
+  const m = d?.match(/(\d{4})[.\-/](\d{1,2})[.\-/](\d{1,2})/);
+  return m ? `${m[1]}-${m[2].padStart(2, "0")}-${m[3].padStart(2, "0")}` : undefined;
 }
 
 export default async function PostDetailPage({ params }: { params: Promise<{ slug: string }> }) {

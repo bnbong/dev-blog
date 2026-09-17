@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllProjects, getProject } from "@/lib/content";
+import { siteUrl } from "@/lib/site";
 import { Badge } from "@/components/Badge";
 import { Tag } from "@/components/Tag";
 import { RepoCard } from "@/components/RepoCard";
@@ -15,8 +16,25 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = await getProject(slug);
-  return { title: project ? `${project.name} — bnbong` : "Project — bnbong", description: project?.description };
+  const title = project ? `${project.name} — bnbong` : "Project — bnbong";
+  if (!project) return { title };
+  const images = [{ url: /^https?:\/\//i.test(project.thumbnail) ? project.thumbnail : `${siteUrl}${project.thumbnail}` }];
+  return {
+    title,
+    description: project.description,
+    openGraph: {
+      title: project.name,
+      description: project.description,
+      url: `${siteUrl}/projects/${slug}/`,
+      siteName: SITE_NAME,
+      type: "website",
+      images,
+    },
+    twitter: { card: "summary_large_image", title: project.name, description: project.description, images },
+  };
 }
+
+const SITE_NAME = new URL(siteUrl).hostname.replace(/^www\./i, "");
 
 const STATUS_TONE = { active: "success", wip: "warning", archived: "neutral" } as const;
 const STATUS_LABEL = { active: "Active", wip: "WIP", archived: "Archived" } as const;

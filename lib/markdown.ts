@@ -32,6 +32,40 @@ marked.use(
   }),
 );
 
+/**
+ * pymdownx.mark: `==text==` → `<mark>text</mark>`. Content may not start or end
+ * with whitespace (so `a == b` operators and `== spaced ==` are left alone) and
+ * inner markdown still renders. Inline code spans and fenced blocks are safe:
+ * the regex is anchored, so a leading backtick lets marked's codespan tokenizer
+ * claim the span first, and fences never reach the inline lexer.
+ */
+const MARK_INLINE = /^==(?=[^\s=])((?:[^=\n]|=(?!=))+?)(?<=[^\s=])==/;
+
+marked.use({
+  extensions: [
+    {
+      name: "markHighlight",
+      level: "inline",
+      start(src: string) {
+        return src.match(/==[^\s=]/)?.index;
+      },
+      tokenizer(src: string) {
+        const match = MARK_INLINE.exec(src);
+        if (!match) return undefined;
+        return {
+          type: "markHighlight",
+          raw: match[0],
+          text: match[1],
+          tokens: this.lexer.inlineTokens(match[1]),
+        };
+      },
+      renderer(token) {
+        return `<mark>${this.parser.parseInline(token.tokens ?? [])}</mark>`;
+      },
+    },
+  ],
+});
+
 const ADMONITION_TITLES: Record<string, string> = {
   note: "Note",
   abstract: "Abstract",

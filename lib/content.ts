@@ -2,7 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 import { renderMarkdown, plainTextLength, tableOfContents, injectHeadingIds, resolveSrc, type TocEntry } from "./markdown";
-import { getLinkPreviews } from "./link-preview";
+import { getLinkPreviews, type LinkPreview } from "./link-preview";
+import { findLinkCardUrls, internalPath } from "./link-cards.mjs";
+import { siteUrl } from "./site";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 const PROJECTS_DIR = path.join(process.cwd(), "content", "projects");
@@ -230,9 +232,68 @@ function sortAndFlagNew<T extends { date: string; isNewExplicit?: boolean }>(
   })) as Array<Omit<T, "isNewExplicit"> & { isNew: boolean }>;
 }
 
+let _internalPreviews: Map<string, LinkPreview> | null = null;
+
+/**
+ * Social cards for links that point back at this site. They are NOT prefetched
+ * (tools/prefetch-link-previews.mjs skips same-origin URLs) — the card is built
+ * from the target's own frontmatter, so it always carries the real title,
+ * excerpt and thumbnail without a network round-trip or a recursive render.
+ * Keyed by the exact URL as it appears in the Markdown; built once per build.
+ */
+function getInternalPreviews(): Map<string, LinkPreview> {
+  if (_internalPreviews) return _internalPreviews;
+  const map = new Map<string, LinkPreview>();
+  const siteName = new URL(siteUrl).hostname.replace(/^www\./i, "");
+
+  // Frontmatter only — no Markdown rendering (cost + recursion).
+  const blog = new Map<string, { title: string; description: string; image: string }>();
+  for (const { slug, raw } of readDir(BLOG_DIR)) {
+    const { data, content } = matter(raw);
+    const meta = parsePostMeta(slug, data, content);
+    blog.set(slug, { title: meta.title, description: meta.excerpt, image: meta.thumbnail });
+  }
+  const projects = new Map<string, { title: string; description: string; image: string }>();
+  for (const { slug, raw } of readDir(PROJECTS_DIR)) {
+    const { data, content } = matter(raw);
+    projects.set(slug, {
+      title: String(data.name ?? data.title ?? slug),
+      description: String(data.description ?? ""),
+      image: resolveThumbnail(data, content, `/projects/${slug}`),
+    });
+  }
+
+  for (const { raw } of [...readDir(BLOG_DIR), ...readDir(PROJECTS_DIR)]) {
+    for (const url of findLinkCardUrls(raw)) {
+      const pathname = internalPath(url, siteUrl);
+      if (!pathname) continue;
+      const m = pathname.match(/^\/(blog|projects)\/([^/]+)\/?$/);
+      if (!m) continue;
+      const item = (m[1] === "blog" ? blog : projects).get(m[2]);
+      if (!item) continue; // unknown slug → fall back to the cached JSON / minimal card
+      map.set(url, {
+        url,
+        title: item.title,
+        description: item.description,
+        image: /^https?:\/\//i.test(item.image) ? item.image : `${siteUrl}${item.image}`,
+        siteName,
+      });
+    }
+  }
+  _internalPreviews = map;
+  return map;
+}
+
+/** Cached JSON previews with internal (same-origin) cards layered on top. */
+function getPreviewMap(): Map<string, LinkPreview | null> {
+  const merged = getLinkPreviews();
+  for (const [url, preview] of getInternalPreviews()) merged.set(url, preview);
+  return merged;
+}
+
 export async function getAllPosts(): Promise<Post[]> {
   const entries = readDir(BLOG_DIR);
-  const previews = getLinkPreviews();
+  const previews = getPreviewMap();
   const resolveLink = getLinkResolver();
 
   const posts = entries.map(({ slug, raw }) => {
@@ -284,7 +345,7 @@ function firstGithubUrl(body: string): string {
 
 export async function getAllProjects(): Promise<Project[]> {
   const entries = readDir(PROJECTS_DIR);
-  const previews = getLinkPreviews();
+  const previews = getPreviewMap();
   const resolveLink = getLinkResolver();
 
   const projects = entries.map(({ slug, raw }) => {
