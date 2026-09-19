@@ -240,6 +240,7 @@ CircleImageView라는 라이브러리를 사용하면 간단하고 깔끔하게 
 <https://platform.openai.com/docs/guides/gpt>
 
 ## Output
+
 우다다다 구현을 성공적으로 끝냈습니다.
 
 프로젝트 버전 관리는 당연히 Git & Github을 사용했습니다.
