@@ -492,7 +492,7 @@ Java 리액티브 스택(Vert.x, Quarkus)은 Python 최상위보다 단일 쿼�
 
 드라이버 안의 동기 싸이클이 격차의 원인이라는 설명은 이 수치로는 뒷받침되지 않으며, 원인을 확정하려면 프로파일링이 필요합니다.
 
-Cal Paterson의 글에도 지금까지 유효한 교훈이 있습니다. Paterson의 벤치마크(4 vCPU, pgbouncer, aiopg)에서 P99 지연은 sync가 31~42ms, async가 75~364ms였습니다.
+Cal Paterson의 글에도 지금까지 유효한 교훈이 있습니다. Paterson의 벤치마크(4 vCPU, pgbouncer, aiopg)에서 P99 지연은 sync가 31 ~ 42ms, async가 75 ~ 364ms였습니다.
 
 P99는 요청 100개를 빠른 순으로 줄 세웠을 때 99번째 요청이 걸린 시간으로, 꼬리 지연을 나타내는 대표 지표입니다.
 
