@@ -337,7 +337,7 @@ asyncio.run(main())
 
 공식 문서도 스레드 executor를 쓰지 않는다고 밝힙니다. 동기 코드가 돌기는 하지만 같은 루프 스레드에서 돌다가 I/O 지점에서 양보하며, 이때 드는 비용은 greenlet 전환과 ORM의 파이썬 연산입니다.
 
-이 브리지 바깥에서 I/O가 일어나면 `MissingGreenlet` 에러가 납니다. FastAPI에서 이 에러가 반복되는 이유와 상황별 해결은 [SQLAlchemy AsyncSession에서 MissingGreenlet 에러가 반복되는 이유](https://bnbong.com/blog/20261016-sqlalchemy-missing-greenlet/)에서 따로 다뤘습니다.
+이 브리지 바깥에서 I/O가 일어나면 `MissingGreenlet` 에러가 납니다. FastAPI에서 이 에러가 반복되는 이유와 상황별 해결은 [SQLAlchemy AsyncSession에서 MissingGreenlet 에러가 반복되는 이유](https://bnbong.com/blog/20261015-sqlalchemy-missing-greenlet/)에서 따로 다뤘습니다.
 
 다음 코드는 asyncpg를 드라이버로 쓰는 SQLAlchemy 비동기 엔진에서 쿼리 하나를 실행합니다.
 
