@@ -41,6 +41,13 @@
     "image": "https://bnbong.github.io/assets/images/social/projects/index.png",
     "siteName": "bnbong.github.io"
   },
+  "https://bnbong.itch.io/overlock": {
+    "url": "https://bnbong.itch.io/overlock",
+    "title": "Overlock by bnbong",
+    "description": "Sewing machine racing",
+    "image": "https://img.itch.zone/aW1nLzMwNDg1NTkwLnBuZw==/original/mLFLP7.png",
+    "siteName": "itch.io"
+  },
   "https://codemaru.bnbong.com": {
     "url": "https://codemaru.bnbong.com",
     "title": "codemaru — developer summary cards",
@@ -305,6 +312,13 @@
     "title": "GitHub - bnbong/TooKindFriendChat: <자람 워크샵 프로젝트> 나에게 모든걸 맞춰주는 환상적인 친구와 채팅하는 앱",
     "description": "<자람 워크샵 프로젝트> 나에게 모든걸 맞춰주는 환상적인 친구와 채팅하는 앱. Contribute to bnbong/TooKindFriendChat development by creating an account on GitHub.",
     "image": "https://opengraph.githubassets.com/b8f03162dfe3dc25c8dfc74ecbcd6376318e92b033caf3963738308ef959e0e8/bnbong/TooKindFriendChat",
+    "siteName": "GitHub"
+  },
+  "https://github.com/bnbong/VastHorizon": {
+    "url": "https://github.com/bnbong/VastHorizon",
+    "title": "GitHub - bnbong/VastHorizon: SSAFY 16기 AI 코어 프로젝트 - RAG 기반 도메인 지식 서비스",
+    "description": "SSAFY 16기 AI 코어 프로젝트 - RAG 기반 도메인 지식 서비스. Contribute to bnbong/VastHorizon development by creating an account on GitHub.",
+    "image": "https://opengraph.githubassets.com/e22eb03879414fc5043951d31db60e8d558cc25bebcd5c12400dd81cf399da98/bnbong/VastHorizon",
     "siteName": "GitHub"
   },
   "https://github.com/bnbong/azure-sdk-for-python": {
@@ -693,6 +707,13 @@
     "description": "Simplify API development for users, teams, and enterprises with our open source and professional toolset. Find out how Swagger can help you and get started today.",
     "image": "",
     "siteName": "swagger.io"
+  },
+  "https://vasthorizon.bnbong.com": {
+    "url": "https://vasthorizon.bnbong.com",
+    "title": "VastHorizon — 당신의 세상은 생각보다 넓다",
+    "description": "3D 하늘에서 천체를 고르면 수집한 문서에 근거해서만 답하는 우주 지식 서비스입니다. 당신의 세상은 생각보다 넓습니다.",
+    "image": "https://vasthorizon.bnbong.com/data/brand/og-2026-10b.jpg",
+    "siteName": "VastHorizon"
   },
   "https://www.acmicpc.net/problem/1436": {
     "url": "https://www.acmicpc.net/problem/1436",
