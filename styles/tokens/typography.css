@@ -1,20 +1,21 @@
 /* ============================================================
    bnbong — Typography tokens
-   Display/UI = Space Grotesk · Body/Korean = Pretendard
-   Code = JetBrains Mono
+   Display/UI = Geist · Body/Korean = Pretendard
+   Code/meta = Geist Mono
    ============================================================ */
 
 :root {
   /* --- Font families --- */
-  --font-display: "Space Grotesk", "Pretendard", system-ui, sans-serif;
-  --font-body:    "Pretendard", "Space Grotesk", system-ui, -apple-system, sans-serif;
-  --font-mono:    "JetBrains Mono", "SFMono-Regular", "Menlo", monospace;
+  --font-display: "Geist", "Pretendard", system-ui, sans-serif;
+  --font-body:    "Pretendard", "Geist", system-ui, -apple-system, sans-serif;
+  --font-mono:    "Geist Mono", "SFMono-Regular", "Menlo", monospace;
 
   /* --- Weights --- */
   --weight-regular:  400;
   --weight-medium:   500;
   --weight-semibold: 600;
   --weight-bold:     700;
+  --weight-black:    800;
 
   /* --- Type scale (1.250 major-third, rem) --- */
   --text-2xs:  0.6875rem;  /* 11px — micro labels */
@@ -26,16 +27,20 @@
   --text-xl:   1.75rem;    /* 28px — h3 */
   --text-2xl:  2.25rem;    /* 36px — h2 */
   --text-3xl:  3rem;       /* 48px — h1 */
-  --text-4xl:  4rem;       /* 64px — hero display */
+  --text-4xl:  4rem;       /* 64px — section display */
+  --text-5xl:  6rem;       /* 96px — page display */
+  --text-6xl:  9.25rem;    /* 148px — hero name */
 
   /* --- Line heights --- */
-  --leading-tight:   1.12;
+  --leading-display: 0.88;
+  --leading-tight:   1.1;
   --leading-snug:    1.28;
   --leading-normal:  1.5;
   --leading-relaxed: 1.72;   /* long-form reading */
 
   /* --- Letter spacing --- */
-  --tracking-tight:  -0.02em;
+  --tracking-display: -0.055em;
+  --tracking-tight:  -0.025em;
   --tracking-snug:   -0.01em;
   --tracking-normal: 0em;
   --tracking-wide:   0.04em;

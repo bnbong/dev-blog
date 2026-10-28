@@ -17,19 +17,66 @@ html {
 html, body { overflow-x: clip; max-width: 100%; }
 
 /* ------------------------------------------------------------
-   Responsive containers (inline styles can't hold media queries,
-   so the padding that needs to shrink on mobile lives here)
+   Page shell. The root <main> carries the 1280px column and the
+   clamp(20px,4vw,48px) side padding; .page-container (Container)
+   only caps width, so it adds no padding of its own.
    ------------------------------------------------------------ */
-.page-container { padding: 4rem 2rem; }
-.site-header__inner { padding: 0 2rem; gap: 2rem; }
-.site-header__nav { margin-left: 1rem; }
+.page-container { padding: 0; }
+
+/* ------------------------------------------------------------
+   Site header (components/SiteHeader.tsx)
+   ------------------------------------------------------------ */
+.site-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 64px;
+  box-sizing: border-box;
+  border-bottom: 2px solid transparent;
+  padding-top: 2px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-strong);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 160ms;
+}
+.site-tab:hover { color: var(--color-brand-ink); }
+.site-tab--active {
+  color: var(--color-brand-ink);
+  border-bottom-color: var(--color-brand);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: none;
+  border: 1px solid var(--border-strong);
+  border-radius: 0;
+  color: var(--text-strong);
+  height: 32px;
+  padding: 0 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 160ms, color 160ms;
+}
+.theme-toggle:hover {
+  background: var(--text-strong);
+  color: var(--surface-page);
+}
 
 @media (max-width: 720px) {
-  .page-container { padding: 2.5rem 1.25rem; }
-  .site-header__inner { padding: 0 1rem; gap: 1rem; }
+  .site-header__inner { gap: 16px !important; }
+  /* The logo/actions lose their equal-flex centring so the tabs get the
+     remaining width and scroll sideways instead of overflowing. */
+  .site-header__logo { flex: 0 0 auto !important; }
+  .site-header__actions { flex: 0 0 auto !important; }
   .site-header__nav {
-    margin-left: 0;
-    flex: 1;
+    flex: 1 1 auto;
     min-width: 0;
     overflow-x: auto;
     scrollbar-width: none;
@@ -37,23 +84,100 @@ html, body { overflow-x: clip; max-width: 100%; }
   .site-header__nav::-webkit-scrollbar { display: none; }
 }
 
-/* Post detail: collapse the two-column (sidebar + body) layout before it gets
-   cramped. Drop the flex layout entirely and fall back to normal block flow —
-   the same thing the projects page does — so the body is a plain full-width
-   block whose content wraps (and code blocks scroll) instead of overflowing.
-   `!important` is required because the layout is set via inline styles.
-   The sticky profile rail becomes a static header; the long TOC is hidden. */
+@media (max-width: 600px) {
+  /* 390px: logo + 3 tabs + toggle must fit on one row without clipping. */
+  .site-header__inner { gap: 16px !important; }
+  .site-header__wordmark { font-size: 18px !important; }
+  .site-header__nav { gap: 14px !important; }
+  .site-tab__count { display: none; }
+  .theme-toggle { padding: 0 10px; width: 32px; box-sizing: border-box; justify-content: center; }
+  .theme-toggle__label { display: none; }
+}
+
+/* ------------------------------------------------------------
+   Site footer (components/SiteFooter.tsx)
+   ------------------------------------------------------------ */
+.footer-link {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 160ms;
+}
+.footer-link:hover { color: var(--color-brand-ink); }
+
+/* ------------------------------------------------------------
+   Project card cover (components/ProjectCard.tsx)
+   ------------------------------------------------------------ */
+.project-cover {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--border-strong);
+  background: var(--surface-card);
+  color: var(--text-strong);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: background 160ms, color 160ms, border-color 160ms;
+}
+.project-cover:hover {
+  background: var(--color-brand);
+  color: #FFFFFF;
+  border-color: var(--color-brand);
+}
+.project-card:focus-visible { outline: none; }
+.project-card:focus-visible .project-cover {
+  outline: 1px solid var(--color-brand);
+  outline-offset: 2px;
+}
+.project-cover__row,
+.project-cover__name { position: relative; z-index: 2; }
+
+/* With a real thumbnail: the image fills the cover, the No./status row and
+   the short name sit on top in white over a top/bottom shade; on hover a
+   cobalt layer fades in, matching the text cover's hover fill. */
+.project-cover--image { color: #FFFFFF; background: var(--surface-sunken); }
+.project-cover__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 0;
+}
+.project-cover__shade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, rgba(11, 11, 31, 0.55) 0%, rgba(11, 11, 31, 0) 28%, rgba(11, 11, 31, 0) 50%, rgba(11, 11, 31, 0.72) 100%);
+}
+.project-cover__shade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-brand);
+  opacity: 0;
+  transition: opacity 160ms;
+}
+.project-cover--image:hover .project-cover__shade::after { opacity: 1; }
+
+/* Post detail: below 860px the 220px rail + article stop sitting side by side.
+   Fall back to block flow so the article is a plain full-width block (code
+   blocks scroll instead of overflowing). The sticky rail becomes a static
+   block above the article and the long TOC is hidden. `!important` is
+   required because the layout is set via inline styles. */
 @media (max-width: 860px) {
   .post-layout { display: block !important; }
   .post-sidebar {
     position: static !important;
     top: auto !important;
-    max-width: none !important;
     max-height: none !important;
-    margin-bottom: 1.75rem;
+    margin-bottom: 40px;
   }
   .post-toc { display: none !important; }
 }
+
 
 body {
   margin: 0;
@@ -80,204 +204,259 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+/* Links change colour only — never an underline (hover included). */
 a {
   color: var(--text-link);
   text-decoration: none;
 }
-a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
 
 code, pre, kbd, samp { font-family: var(--font-mono); }
 
 :focus-visible {
-  outline: none;
-  box-shadow: var(--ring-brand);
-  border-radius: var(--radius-sm);
+  outline: 1px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
 /* ------------------------------------------------------------
-   .prose — long-form markdown article styling
+   .prose — long-form markdown article styling (Swiss)
    Wrap rendered markdown in <div class="prose"> … </div>
    ------------------------------------------------------------ */
 .prose {
   font-family: var(--font-prose);
-  font-size: var(--text-md);
-  line-height: var(--leading-relaxed);
+  font-size: 17px;
+  line-height: 1.85;
   color: var(--text-body);
-  max-width: var(--container-prose);
+  max-width: 720px;
+  overflow-wrap: break-word;
 }
-.prose > * + * { margin-top: var(--space-5); }
-.prose h1, .prose h2, .prose h3, .prose h4 {
-  margin-top: var(--space-8);
-  margin-bottom: var(--space-3);
-  /* Clear the 4.5rem sticky site header when jumping to a TOC anchor. */
-  scroll-margin-top: 5.5rem;
+.prose > * + * { margin-top: 24px; }
+.prose > :first-child { margin-top: 0; }
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  margin-bottom: 0;
+  /* Clear the 64px sticky site header when jumping to a TOC anchor. */
+  scroll-margin-top: 88px;
 }
-.prose h1 { font-size: var(--text-3xl); }
+.prose h1 {
+  font-size: 36px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  margin-top: 64px;
+}
 .prose h2 {
-  font-size: var(--text-2xl);
-  padding-bottom: var(--space-2);
-  border-bottom: var(--border-width) solid var(--border-subtle);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-strong);
 }
-.prose h3 { font-size: var(--text-xl); }
-.prose h4 { font-size: var(--text-lg); }
+.prose h3 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.3;
+  margin-top: 40px;
+}
+.prose h4, .prose h5, .prose h6 {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.4;
+  margin-top: 32px;
+}
+.prose > h1:first-child,
+.prose > h2:first-child,
+.prose > h3:first-child { margin-top: 0; }
+/* Project detail: the hero already shows the title, so drop a leading markdown h1. */
+.prose--project > h1:first-child { display: none; }
+.prose--project > h1:first-child + * { margin-top: 0; }
 .prose p { margin: 0; }
-/* Consecutive paragraphs (the author writes one sentence per paragraph) need a
-   clear gap: the `.prose p` reset above out-specifies `> * + *`, so restore a
-   paragraph rhythm that reads as distinct from the (loose) intra-line leading. */
+/* The `.prose p` reset out-specifies `> * + *`; give top-level paragraphs the
+   same 24px rhythm back. Consecutive paragraphs (the author writes one sentence
+   per paragraph) get a wider gap so they read as distinct from the loose
+   intra-line leading. A heading's first follower sits 16px under it. */
+.prose > * + p { margin-top: 24px; }
 .prose p + p { margin-top: var(--space-6); }
+.prose > :is(h1, h2, h3, h4, h5, h6) + * { margin-top: 16px; }
 .prose strong { color: var(--text-strong); font-weight: var(--weight-semibold); }
 
 .prose a {
-  color: var(--text-link);
-  text-decoration: underline;
-  text-decoration-color: var(--gold-300);
-  text-underline-offset: 0.18em;
-  text-decoration-thickness: 1.5px;
+  color: var(--color-brand-ink);
+  text-decoration: none;
+  transition: color 160ms;
 }
-.prose a:hover { text-decoration-color: var(--gold-600); }
+.prose a:hover { color: var(--color-brand); }
 
 .prose ul, .prose ol { padding-left: var(--space-5); margin: 0; }
 .prose li + li { margin-top: var(--space-2); }
-.prose li::marker { color: var(--color-brand-strong); }
+.prose li::marker { color: var(--text-subtle); }
+.prose ul > li::marker { color: var(--color-brand); }
 
 .prose blockquote {
   margin: 0;
-  padding: var(--space-2) var(--space-5);
+  padding: 4px 0 4px 20px;
   border-left: 3px solid var(--color-brand);
-  background: var(--color-brand-tint);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  color: var(--text-muted);
-  font-style: italic;
+  background: none;
+  border-radius: 0;
+  color: var(--text-strong);
+  font-style: normal;
 }
+.prose blockquote > * + * { margin-top: 12px; }
 
 .prose hr {
   border: none;
-  border-top: var(--border-width) solid var(--border-subtle);
-  margin: var(--space-8) 0;
+  border-top: 1px solid var(--border-subtle);
+  margin: 48px 0;
 }
 
 .prose img {
   max-width: 100%;
-  border-radius: var(--radius-lg);
-  border: var(--border-width) solid var(--border-subtle);
+  height: auto;
+  border-radius: 0;
+  border: 1px solid var(--border-subtle);
 }
 
 /* inline code */
 .prose :not(pre) > code {
-  font-size: 0.875em;
-  background: var(--color-brand-tint);
-  color: var(--color-brand-ink);
-  padding: 0.12em 0.4em;
-  border-radius: var(--radius-xs);
-  border: var(--border-width) solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  background: var(--surface-sunken);
+  color: var(--text-strong);
+  padding: 2px 6px;
+  border-radius: 0;
+  border: none;
 }
 
 /* ==highlight== (pymdownx.mark) */
 .prose mark {
   background: var(--color-brand-soft);
-  color: var(--color-brand-ink);
+  color: var(--text-strong);
   padding: 0.05em 0.25em;
-  border-radius: var(--radius-xs);
+  border-radius: 0;
 }
 
 /* fenced code block */
 .prose pre {
   background: var(--surface-code);
-  color: var(--warm-100);
-  font-size: var(--text-sm);
-  line-height: var(--leading-normal);
-  padding: var(--space-5);
-  border-radius: var(--radius-lg);
+  color: var(--code-fg);
+  font-size: 14px;
+  line-height: 1.65;
+  padding: 20px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  box-shadow: none;
   overflow-x: auto;
-  box-shadow: var(--shadow-md);
 }
-.prose pre code { background: none; border: none; padding: 0; color: inherit; }
+.prose pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
 
-/* highlight.js token theme — dark, warm-toned to match the code surface.
+/* highlight.js token theme — ink/cobalt on the dark code surface.
    Tokens are emitted at build time; no client JS. */
-.prose pre code.hljs { display: block; color: var(--warm-100); }
+.prose pre code.hljs { display: block; color: var(--code-fg); }
 .prose .hljs-comment,
-.prose .hljs-quote { color: var(--warm-500); font-style: italic; }
+.prose .hljs-quote { color: var(--code-muted); font-style: italic; }
 .prose .hljs-keyword,
 .prose .hljs-selector-tag,
 .prose .hljs-literal,
 .prose .hljs-built_in,
 .prose .hljs-type,
-.prose .hljs-doctag { color: var(--gold-300); }
+.prose .hljs-doctag { color: var(--code-accent); }
 .prose .hljs-string,
 .prose .hljs-regexp,
 .prose .hljs-addition,
 .prose .hljs-attribute,
-.prose .hljs-meta .hljs-string { color: #a9c99a; }
+.prose .hljs-meta .hljs-string { color: var(--cobalt-200); }
 .prose .hljs-number,
 .prose .hljs-symbol,
 .prose .hljs-bullet,
 .prose .hljs-link,
 .prose .hljs-meta,
 .prose .hljs-selector-id,
-.prose .hljs-selector-class { color: var(--gold-400); }
+.prose .hljs-selector-class { color: var(--cobalt-400); }
 .prose .hljs-title,
 .prose .hljs-title.class_,
 .prose .hljs-title.function_,
 .prose .hljs-section,
-.prose .hljs-name { color: var(--gold-100); }
+.prose .hljs-name { color: var(--ink-0); }
 .prose .hljs-attr,
 .prose .hljs-variable,
 .prose .hljs-template-variable,
 .prose .hljs-property,
-.prose .hljs-params { color: var(--warm-200); }
-.prose .hljs-deletion { color: var(--red-500); }
+.prose .hljs-params { color: var(--ink-200); }
+.prose .hljs-deletion { color: #F2847A; }
 .prose .hljs-emphasis { font-style: italic; }
 .prose .hljs-strong { font-weight: var(--weight-bold); }
 
 .prose table {
   width: 100%;
   border-collapse: collapse;
-  font-size: var(--text-sm);
+  font-size: 15px;
+  line-height: 1.6;
 }
 .prose th, .prose td {
   text-align: left;
-  padding: var(--space-3) var(--space-4);
-  border-bottom: var(--border-width) solid var(--border-subtle);
+  padding: 12px 12px 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: top;
 }
 .prose th {
-  font-family: var(--font-heading);
-  color: var(--text-strong);
-  font-weight: var(--weight-semibold);
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom-color: var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-subtle);
 }
+.prose th:last-child, .prose td:last-child { padding-right: 0; }
 
 /* ------------------------------------------------------------
-   .admonition — MkDocs-Material call-out boxes, recreated.
+   .admonition — MkDocs-Material call-out boxes, Swiss-flattened:
+   1px rule + 3px coloured left edge on a sunken panel.
    (note / tip / warning / danger / info / example / quote …)
    ------------------------------------------------------------ */
 .prose .admonition {
-  margin: var(--space-5) 0;
-  padding: var(--space-3) var(--space-5) var(--space-4);
-  border: var(--border-width) solid var(--border-subtle);
-  border-left: 4px solid var(--color-brand);
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-  background: var(--color-brand-tint);
-  font-size: var(--text-base);
+  margin: 0;
+  padding: 16px 20px 18px;
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--color-brand);
+  border-radius: 0;
+  background: var(--surface-sunken);
+  font-size: 15.5px;
+  line-height: 1.75;
 }
-.prose .admonition > * + * { margin-top: var(--space-3); }
+/* `.prose .admonition { margin:0 }` out-specifies `.prose > * + *`; restore the gap above. */
+.prose > * + .admonition { margin-top: 24px; }
+.prose .admonition > * + * { margin-top: 10px; }
 .prose .admonition-title {
   margin: 0;
-  font-family: var(--font-heading);
-  font-weight: var(--weight-bold);
-  font-size: var(--text-sm);
-  letter-spacing: var(--tracking-snug);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--text-strong);
 }
 .prose .admonition.tip,
 .prose .admonition.success,
-.prose .admonition.note { border-left-color: var(--color-success); background: var(--color-success-soft); }
+.prose .admonition.note { border-left-color: var(--color-success); }
 .prose .admonition.warning,
-.prose .admonition.question { border-left-color: var(--color-warning); background: var(--color-warning-soft); }
+.prose .admonition.question { border-left-color: var(--color-warning); }
 .prose .admonition.danger,
 .prose .admonition.failure,
-.prose .admonition.bug { border-left-color: var(--color-danger); background: var(--color-danger-soft); }
+.prose .admonition.bug { border-left-color: var(--color-danger); }
 .prose .admonition.info,
-.prose .admonition.abstract { border-left-color: var(--color-info); background: var(--color-info-soft); }
+.prose .admonition.abstract { border-left-color: var(--color-info); }
 
 .prose .admonition pre { box-shadow: none; }
 
@@ -294,83 +473,105 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
    /// caption ///  →  figure caption (left-aligned, tucks under image)
    ------------------------------------------------------------ */
 .prose .md-caption {
-  margin-top: calc(-1 * var(--space-3));
+  margin-top: 10px;
   text-align: left;
-  font-size: var(--text-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
   color: var(--text-subtle);
 }
 .prose .md-caption > * { margin: 0; }
 
 /* /// details ///  →  native collapsible */
 .prose .md-details {
-  border: var(--border-width) solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: var(--space-3) var(--space-4);
-  background: var(--surface-sunken);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  padding: 14px 20px;
+  background: var(--surface-card);
 }
 .prose .md-details > summary {
   cursor: pointer;
-  font-family: var(--font-heading);
-  font-weight: var(--weight-semibold);
+  font-family: var(--font-display);
+  font-weight: 600;
   color: var(--text-strong);
 }
-.prose .md-details[open] > summary { margin-bottom: var(--space-3); }
+.prose .md-details > summary::marker { color: var(--color-brand); }
+.prose .md-details[open] > summary { margin-bottom: 12px; }
 
 /* ------------------------------------------------------------
-   ```mermaid  →  diagram (rendered to SVG on the client)
+   ```mermaid  →  diagram (rendered to SVG on the client),
+   framed like a figure.
    ------------------------------------------------------------ */
 .prose pre.mermaid {
-  margin: var(--space-5) 0;
-  padding: 0;
-  background: none;
-  border: 0;
+  padding: 28px;
+  background: var(--surface-card);
+  color: var(--text-strong);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
+  box-shadow: none;
   text-align: center;
   line-height: normal;
+  font-family: var(--font-mono);
 }
 /* Hide the raw diagram source until mermaid swaps in the SVG. */
 .prose pre.mermaid:not([data-processed]) { visibility: hidden; }
 .prose pre.mermaid svg { max-width: 100%; height: auto; }
 
 /* ------------------------------------------------------------
+   KaTeX (rendered at build time)
+   ------------------------------------------------------------ */
+.prose .katex { color: var(--text-strong); }
+.prose .katex-display {
+  margin: 0;
+  padding: 20px;
+  background: var(--surface-sunken);
+  text-align: center;
+  color: var(--text-strong);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.prose p > .katex-display:not(:only-child) { margin: 16px 0; }
+
+/* ------------------------------------------------------------
    [^id] footnotes
    ------------------------------------------------------------ */
 .prose sup[id^="footnote-ref"] { line-height: 0; }
 .prose .footnotes {
-  margin-top: var(--space-7);
-  padding-top: var(--space-4);
-  border-top: var(--border-width) solid var(--border-subtle);
-  font-size: var(--text-sm);
+  margin-top: 56px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-strong);
+  font-size: 14px;
+  line-height: 1.7;
   color: var(--text-muted);
 }
 .prose .footnotes ol { padding-left: var(--space-5); }
 .prose .footnotes li { margin: var(--space-2) 0; }
-.prose .footnotes li:target { background: var(--surface-sunken); border-radius: var(--radius-sm); }
+.prose .footnotes li:target { background: var(--surface-sunken); }
 .prose a[data-footnote-backref] { text-decoration: none; }
 
 /* ------------------------------------------------------------
-   <https://…>  →  social / link-preview card
+   <https://…>  →  social / link-preview card (flat, 1px rule)
    ------------------------------------------------------------ */
-.prose .link-card-wrap { margin: var(--space-5) 0; }
+.prose .link-card-wrap { margin: 0; }
+.prose * + .link-card-wrap { margin-top: 24px; }
 .prose .link-card {
   display: flex;
   align-items: stretch;
   overflow: hidden;
   text-decoration: none;
-  border: var(--border-width) solid var(--border-default);
-  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0;
   background: var(--surface-card);
-  box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--duration-normal) var(--ease-out), border-color var(--duration-fast) var(--ease-standard), transform var(--duration-normal) var(--ease-out);
+  box-shadow: none;
+  transition: border-color 160ms;
 }
-.prose .link-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--border-brand);
-  transform: translateY(-2px);
-}
+.prose .link-card:hover { border-color: var(--color-brand); }
+.prose .link-card:hover .link-card__title { color: var(--color-brand-ink); }
 .prose .link-card__media {
   flex: 0 0 30%;
   max-width: 12rem;
   background: var(--surface-sunken);
+  border-right: 1px solid var(--border-subtle);
 }
 .prose .link-card__media img {
   width: 100%;
@@ -386,22 +587,24 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   display: flex;
   flex-direction: column;
   gap: var(--space-1);
-  padding: var(--space-4) var(--space-5);
+  padding: 16px 20px;
   min-width: 0;
   flex: 1;
 }
 .prose .link-card__title {
-  font-family: var(--font-heading);
-  font-weight: var(--weight-semibold);
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.015em;
   color: var(--text-strong);
   line-height: var(--leading-snug);
+  transition: color 160ms;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 .prose .link-card__desc {
-  font-size: var(--text-sm);
+  font-size: 14px;
   color: var(--text-muted);
   line-height: var(--leading-normal);
   display: -webkit-box;
@@ -415,16 +618,164 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
   gap: var(--space-2);
   margin-top: var(--space-1);
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
+  font-size: 12px;
   color: var(--text-subtle);
 }
 .prose .link-card__favicon {
   width: 16px;
   height: 16px;
   border: none;
-  border-radius: var(--radius-xs);
+  border-radius: 0;
   margin: 0;
 }
 @media (max-width: 560px) {
   .prose .link-card__media { display: none; }
 }
+
+/* about */
+/* ------------------------------------------------------------
+   About page (app/page.tsx) — hover states for inline-styled links
+   ------------------------------------------------------------ */
+.about-link {
+  color: var(--color-brand-ink);
+  text-decoration: none;
+  transition: color 160ms;
+}
+.about-link:hover { color: var(--color-brand); }
+.about-post-row {
+  color: var(--text-strong);
+  transition: color 160ms;
+}
+.about-post-row:hover { color: var(--color-brand-ink); }
+.about-more { transition: color 160ms; }
+.about-more:hover { color: var(--color-brand-ink) !important; }
+
+/* blog list
+   ------------------------------------------------------------ */
+.blog-filter {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 6px 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 160ms;
+}
+.blog-filter:hover { color: var(--text-strong); }
+.blog-filter .blog-filter__count { color: var(--text-subtle); }
+.blog-filter--active,
+.blog-filter--active:hover { color: var(--color-brand-ink); font-weight: 500; }
+.blog-filter--active .blog-filter__count { color: inherit; }
+
+@media (max-width: 720px) {
+  /* Category rail becomes one horizontally scrolling row above the list.
+     !important beats the desktop inline column styles in BlogIndex.tsx. */
+  .blog-rail {
+    flex: 1 1 100% !important;
+    min-width: 0;
+    flex-direction: row !important;
+    gap: 16px !important;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .blog-rail::-webkit-scrollbar { display: none; }
+  .blog-rail .blog-filter {
+    flex: 0 0 auto;
+    width: auto;
+    gap: 6px;
+    white-space: nowrap;
+  }
+}
+
+.blog-row {
+  display: flex;
+  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px 24px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  text-decoration: none;
+  color: var(--text-strong);
+  transition: color 160ms;
+}
+.blog-row:hover { color: var(--color-brand-ink); }
+
+.blog-thumb {
+  display: flex;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-sunken);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.blog-thumb--image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.blog-thumb--fallback {
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 12px;
+  color: var(--text-strong);
+  transition: background 160ms, color 160ms, border-color 160ms;
+}
+.blog-row:hover .blog-thumb--fallback {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #FFFFFF;
+}
+
+/* post detail */
+.post-back,
+.post-author,
+.post-toc__link { transition: color 160ms; }
+.post-back:hover { color: var(--text-strong) !important; }
+.post-author:hover { color: var(--color-brand-ink) !important; }
+.post-toc__link { color: var(--text-muted); }
+.post-toc__link:hover { color: var(--text-strong); }
+.post-toc__link.is-active { color: var(--color-brand-ink); }
+
+/* projects */
+.projects-filter {
+  border: 0;
+  background: transparent;
+  color: var(--text-strong);
+  font: inherit;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 160ms, color 160ms;
+}
+.projects-filter:hover { background: var(--surface-sunken); }
+.projects-filter--active,
+.projects-filter--active:hover {
+  background: var(--text-strong);
+  color: var(--surface-page);
+}
+.projects-filter:focus-visible {
+  outline: 1px solid var(--color-brand);
+  outline-offset: -3px;
+}
+.projects-back {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 160ms;
+}
+.projects-back:hover { color: var(--text-strong); }
+.projects-repo-link {
+  color: var(--color-brand-ink);
+  text-decoration: none;
+  transition: color 160ms;
+}
+.projects-repo-link:hover { color: var(--text-strong); }

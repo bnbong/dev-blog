@@ -10,6 +10,7 @@ export default async function BlogPage() {
     slug: p.slug,
     title: p.title,
     excerpt: p.excerpt,
+    category: p.category,
     date: p.date,
     readingTime: p.readingTime,
     tags: p.tags,

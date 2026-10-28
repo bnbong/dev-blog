@@ -1,130 +1,112 @@
 /* ============================================================
-   bnbong — Color tokens
-   A warm, golden, editorial palette built around the brand
-   signal color #E1B978 (wheat gold), paired with warm paper
-   neutrals and ink. Includes a dark theme scope.
+   bnbong — Color tokens (v2 · Swiss minimal)
+   Ink + paper, one signal color: cobalt #3D5AFE.
+   Cobalt is an accent — use it once or twice per view.
+   Dark theme: <html data-theme="dark"> or any [data-theme="dark"] scope.
    ============================================================ */
 
 :root {
-  /* --- Brand / gold ramp (warm wheat → toasted) --- */
-  --gold-50:  #FBF4E6;
-  --gold-100: #F6E8CC;
-  --gold-200: #EFD7A6;
-  --gold-300: #E8C88A;
-  --gold-400: #E1B978;  /* ← brand signal color */
-  --gold-500: #D2A256;
-  --gold-600: #BC8A3C;
-  --gold-700: #9A6E2C;
-  --gold-800: #74521F;
-  --gold-900: #4F3814;
+  /* --- Cobalt ramp (signal) --- */
+  --cobalt-50:  #EEF1FF;
+  --cobalt-100: #DDE3FF;
+  --cobalt-200: #C9CEF5;
+  --cobalt-300: #94A3FF;
+  --cobalt-400: #6378FF;
+  --cobalt-500: #3D5AFE;  /* ← brand signal color */
+  --cobalt-600: #2A3FD1;
+  --cobalt-700: #1F2FA3;
+  --cobalt-800: #172276;
+  --cobalt-900: #10184F;
 
-  /* --- Warm neutral ramp (paper → ink) --- */
-  --warm-0:   #FFFFFF;
-  --warm-50:  #FDFBF6;  /* page paper */
-  --warm-100: #F8F4EC;
-  --warm-150: #F2EBDE;
-  --warm-200: #E9E0CE;
-  --warm-300: #D9CEB7;
-  --warm-400: #B9AC91;
-  --warm-500: #948A74;
-  --warm-600: #6E6657;
-  --warm-700: #4E483D;
-  --warm-800: #332F28;
-  --warm-900: #211E19;
-  --warm-950: #16140F;
+  /* --- Ink neutral ramp (cool, slightly blue) --- */
+  --ink-0:   #FFFFFF;
+  --ink-50:  #F7F7FA;  /* page paper */
+  --ink-100: #EFEFF4;
+  --ink-150: #E6E7EF;
+  --ink-200: #DADCE8;
+  --ink-300: #C2C4D4;
+  --ink-400: #9497AE;
+  --ink-500: #6E7189;
+  --ink-600: #5B5E78;
+  --ink-700: #3B3D57;
+  --ink-800: #25264A;
+  --ink-900: #141433;  /* ink */
+  --ink-950: #0B0B1F;
 
-  /* --- Semantic status (kept in the warm family) --- */
-  --green-500:  #5E8C57;
-  --green-50:   #EDF3EB;
-  --amber-500:  #D49A33;
-  --amber-50:   #FBF1DA;
-  --red-500:    #C2553B;
-  --red-50:     #F8E7E1;
-  --blue-500:   #527699;
-  --blue-50:    #E8EEF3;
+  /* --- Status (muted, so cobalt stays the only loud color) --- */
+  --green-500: #1F8A5B;  --green-50: #E6F4EC;
+  --amber-500: #B7791F;  --amber-50: #FBF1DE;
+  --red-500:   #D2362B;  --red-50:   #FCE9E7;
+  --blue-500:  #2A3FD1;  --blue-50:  #EEF1FF;
 
-  /* ============================================================
-     Semantic aliases — reference these in components
-     ============================================================ */
+  /* ============ Semantic aliases ============ */
+  --color-brand:        var(--cobalt-500);
+  --color-brand-strong: var(--cobalt-600);
+  --color-brand-soft:   var(--cobalt-100);
+  --color-brand-tint:   var(--cobalt-50);
+  --color-brand-ink:    var(--cobalt-600);  /* cobalt text on light bg (AA) */
 
-  /* Brand */
-  --color-brand:          var(--gold-400);
-  --color-brand-strong:   var(--gold-600);
-  --color-brand-soft:     var(--gold-100);
-  --color-brand-tint:     var(--gold-50);
-  --color-brand-ink:      var(--gold-800);  /* gold text on light bg */
+  --surface-page:    var(--ink-50);
+  --surface-raised:  var(--ink-0);
+  --surface-sunken:  var(--ink-100);
+  --surface-card:    var(--ink-0);
+  --surface-inverse: var(--ink-900);
+  --surface-code:    var(--ink-950);
 
-  /* Surfaces */
-  --surface-page:         var(--warm-50);
-  --surface-raised:       var(--warm-0);
-  --surface-sunken:       var(--warm-100);
-  --surface-card:         var(--warm-0);
-  --surface-inverse:      var(--warm-900);
-  --surface-code:         var(--warm-900);   /* code block bg */
+  --text-strong:     var(--ink-900);
+  --text-body:       var(--ink-800);
+  --text-muted:      var(--ink-600);
+  --text-subtle:     var(--ink-500);
+  --text-on-brand:   #FFFFFF;
+  --text-on-inverse: var(--ink-50);
+  --text-link:       var(--cobalt-600);
 
-  /* Text */
-  --text-strong:          var(--warm-900);
-  --text-body:            var(--warm-800);
-  --text-muted:           var(--warm-600);
-  --text-subtle:          var(--warm-500);
-  --text-on-brand:        var(--warm-950);   /* ink on gold */
-  --text-on-inverse:      var(--warm-100);
-  --text-link:            var(--gold-700);
+  --border-subtle:  var(--ink-200);
+  --border-default: var(--ink-300);
+  --border-strong:  var(--ink-900);  /* Swiss rule line */
+  --border-brand:   var(--cobalt-500);
+  --border-focus:   var(--cobalt-500);
 
-  /* Borders / lines */
-  --border-subtle:        var(--warm-200);
-  --border-default:       var(--warm-300);
-  --border-strong:        var(--warm-400);
-  --border-brand:         var(--gold-400);
-  --border-focus:         var(--gold-600);
+  --color-success: var(--green-500); --color-success-soft: var(--green-50);
+  --color-warning: var(--amber-500); --color-warning-soft: var(--amber-50);
+  --color-danger:  var(--red-500);   --color-danger-soft:  var(--red-50);
+  --color-info:    var(--blue-500);  --color-info-soft:    var(--blue-50);
 
-  /* Status semantic */
-  --color-success:        var(--green-500);
-  --color-success-soft:   var(--green-50);
-  --color-warning:        var(--amber-500);
-  --color-warning-soft:   var(--amber-50);
-  --color-danger:         var(--red-500);
-  --color-danger-soft:    var(--red-50);
-  --color-info:           var(--blue-500);
-  --color-info-soft:      var(--blue-50);
+  --code-fg:     #E6E7EF;
+  --code-muted:  #9497AE;
+  --code-accent: #94A3FF;
 
-  /* Selection */
-  --color-selection-bg:   var(--gold-200);
-  --color-selection-fg:   var(--warm-900);
+  --color-selection-bg: var(--cobalt-500);
+  --color-selection-fg: #FFFFFF;
 }
 
-/* ============================================================
-   Dark theme — warm charcoal, gold stays the signal
-   Apply with <html data-theme="dark"> or [data-theme="dark"]
-   ============================================================ */
 [data-theme="dark"] {
-  --surface-page:         var(--warm-950);
-  --surface-raised:       var(--warm-900);
-  --surface-sunken:       #1C1A15;
-  --surface-card:         var(--warm-900);
-  --surface-inverse:      var(--warm-50);
-  --surface-code:         #100E0A;
+  --color-brand:        #5C74FF;
+  --color-brand-strong: var(--cobalt-400);
+  --color-brand-soft:   #1B2260;
+  --color-brand-tint:   #12173F;
+  --color-brand-ink:    var(--cobalt-300);
 
-  --text-strong:          var(--warm-50);
-  --text-body:            var(--warm-150);
-  --text-muted:           var(--warm-400);
-  --text-subtle:          var(--warm-500);
-  --text-on-inverse:      var(--warm-900);
-  --text-link:            var(--gold-300);
+  --surface-page:    #0B0B1F;
+  --surface-raised:  #141433;
+  --surface-sunken:  #10102A;
+  --surface-card:    #141433;
+  --surface-inverse: var(--ink-50);
+  --surface-code:    #07071A;
 
-  --color-brand-soft:     #3A2E18;
-  --color-brand-tint:     #2A2113;
-  --color-brand-ink:      var(--gold-300);
+  --text-strong:     #F7F7FA;
+  --text-body:       #DADCE8;
+  --text-muted:      #A9ACC8;
+  --text-subtle:     #8386A3;
+  --text-on-inverse: var(--ink-900);
+  --text-link:       var(--cobalt-300);
 
-  --border-subtle:        #2C281F;
-  --border-default:       #3A352B;
-  --border-strong:        #4E483D;
+  --border-subtle:  #25264A;
+  --border-default: #3B3D57;
+  --border-strong:  #F7F7FA;
 
-  --color-success-soft:   #1E2A1C;
-  --color-warning-soft:   #2E2510;
-  --color-danger-soft:    #2E1812;
-  --color-info-soft:      #16212C;
-
-  --color-selection-bg:   var(--gold-800);
-  --color-selection-fg:   var(--gold-50);
+  --color-success-soft: #0F2A1F;
+  --color-warning-soft: #2B210E;
+  --color-danger-soft:  #2E1210;
+  --color-info-soft:    #12173F;
 }

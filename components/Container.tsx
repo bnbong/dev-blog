@@ -1,13 +1,14 @@
 import React from "react";
 
 /**
- * Centered page container. List/landing pages use the default 72rem; detail
- * pages pass a wider `max` so long-form content isn't crowded by huge side
- * margins on large screens.
+ * Centered page column. The side padding (clamp(20px,4vw,48px)) lives on the
+ * root <main>, so this only caps the width (1280px by default) and adds no
+ * vertical padding — pages set their own section rhythm. `max` is kept for
+ * callers that want a narrower column.
  */
 export function Container({
   children,
-  max = "72rem",
+  max = "1280px",
   style,
 }: {
   children: React.ReactNode;

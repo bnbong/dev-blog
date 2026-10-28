@@ -19,8 +19,8 @@
 
   /* Layout */
   --container-prose: 44rem;   /* 704px — reading column */
-  --container-page:  72rem;   /* 1152px — site shell */
+  --container-page:  80rem;   /* 1280px — site shell */
   --container-wide:  82rem;   /* 1312px */
   --gutter:          var(--space-5);
-  --header-height:   4.5rem;
+  --header-height:   4rem;    /* 64px */
 }

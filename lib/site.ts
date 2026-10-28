@@ -23,6 +23,8 @@ export const profile = {
   bio: "문제를 전체 흐름 단위로 해결하는 개발자. 한가지에 꽂히면 파고드는 성격이 Backend, DevOps, Cloud, Game 등 다양한 세계로 넓어졌습니다.",
   intro: "해결하고, 배운 것을 기록합니다.",
   location: "경기도 성남시 분당구",
+  /** About 00 Index → "Now" row. */
+  now: "SSAFY 16기 · 대전",
   github: "https://github.com/bnbong",
   email: "bbbong9@gmail.com",
   linkedin: "https://www.linkedin.com/in/bnbong/",
@@ -114,9 +116,6 @@ export const activities = [
   "알고리즘 연구 학회 0&1 학회원 (2019)",
 ];
 
-/** Slugs of the projects to surface as "Featured" on the About page. */
-export const featuredProjectSlugs = ["cnn-qr-phishing-detector", "wegis", "fastapi-fastkit"];
-
 /**
  * Open Source - maintained projects and external contributions.
  * Migrated from the legacy docs/open-source/index.md. `slug` links to the
@@ -202,6 +201,21 @@ export const openSource = {
   ],
 };
 
+/**
+ * Project slugs shown under the "Open Source" filter on /projects
+ * (per the design handoff README). Kept separate from `openSource` above,
+ * which also lists non-OSS-filter entries such as Overlock.
+ */
+export const ossProjectSlugs = [
+  "fastapi-fastkit",
+  "codemaru",
+  "baekjoonhub",
+  "blog-post-workflow",
+  "femu-monitoring",
+  "azure-sdk-python",
+  "azure-sdk-python-kor",
+];
+
 /** Google Analytics 4 - migrated from the legacy mkdocs.yml. */
 export const analytics = {
   gaId: "G-G1E1JBX2WR",
@@ -225,13 +239,14 @@ export const giscus = {
   strict: "0" as const,
   reactionsEnabled: "1" as const,
   inputPosition: "bottom" as const,
-  // The blog has no dark-mode toggle - it's always light (warm paper #FDFBF6).
-  // `preferred_color_scheme` would follow the visitor's OS and flip to dark,
-  // mismatching the page. Use a fixed light theme instead.
+  // Theme used while the site is in LIGHT mode. In dark mode components/Giscus.tsx
+  // switches to giscus' built-in `dark`, and site theme toggles are pushed into
+  // the iframe via postMessage. (Not `preferred_color_scheme`: the site theme
+  // can differ from the OS preference once the visitor toggles it.)
   theme: "light" as const,
   // Optional exact match: host the bundled custom theme on the deployed site
   // and put its ABSOLUTE url here (e.g. "https://bnbong.github.io/giscus-theme.css").
-  // When set, it overrides `theme`. Leave "" to use the built-in `light` theme.
+  // When set, it overrides `theme` in both site themes. Leave "" to use the built-in light/dark themes.
   // (Must be an absolute https URL - a relative path won't load inside the giscus iframe.)
   themeUrl: "",
   lang: "ko" as const,

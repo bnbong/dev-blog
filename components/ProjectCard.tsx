@@ -1,169 +1,142 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
-import { Tag } from "./Tag";
-import { Badge } from "./Badge";
 
 export type ProjectStatus = "active" | "archived" | "wip";
 
 export interface ProjectCardData {
+  slug?: string;
   name: string;
   description?: string;
   stack?: string[];
-  stars?: number;
   status?: ProjectStatus;
+  period?: string;
   year?: number;
   thumbnail?: string;
+  /** Unused by the Swiss card; kept so existing callers still type-check. */
+  stars?: number;
 }
 
 export interface ProjectCardProps {
-  project?: ProjectCardData;
-  /** When set, the whole card is a link to this route (keyboard + open-in-new-tab). */
-  href?: string;
-  onClick?: React.MouseEventHandler<HTMLElement>;
-  style?: React.CSSProperties;
+  project: ProjectCardData;
+  /** 0-based position; rendered as "No.01". */
+  index?: number;
+  href: string;
+  /**
+   * Projects-page variant: larger cover type + a title line above the
+   * description. The About grid leaves it off (cover name + description only).
+   */
+  showText?: boolean;
+}
+
+/** Mirrors DEFAULT_THUMBNAIL in lib/content.ts (not imported: that module reads the filesystem). */
+const DEFAULT_THUMBNAIL = "/assets/new_profile.png";
+
+const STATUS_LABEL: Record<ProjectStatus, string> = {
+  active: "● Active",
+  wip: "● WIP",
+  archived: "Archived",
+};
+
+/** "Overlock (오버로크)" → "Overlock" */
+export function shortProjectName(name: string): string {
+  const short = name.replace(/\s*[(（][^)）]*[)）]\s*/g, " ").trim();
+  return short || name;
 }
 
 /**
- * bnbong ProjectCard — project tile that opens a project write-up.
- * status: "active" | "archived" | "wip"
+ * Swiss project tile: 4:3 cover (No. + status on top, short name at the bottom)
+ * with a cobalt fill on hover (.project-cover in base.css), then a mono meta
+ * row (period ↔ first two stack items) and the description.
+ * A real thumbnail is laid under the cover; the default site image is ignored.
  */
-export function ProjectCard({ project = { name: "" }, href, onClick, style, ...rest }: ProjectCardProps) {
-  const { name, description, stack = [], stars, status, year, thumbnail } = project;
-  const statusTone = ({ active: "success", wip: "warning", archived: "neutral" } as const)[status ?? "active"] || "neutral";
-  const statusLabel = status ? ({ active: "Active", wip: "WIP", archived: "Archived" } as const)[status] : undefined;
-  const interactive = !!href || !!onClick;
+export function ProjectCard({ project, index, href, showText = false }: ProjectCardProps) {
+  const { name, description, stack = [], status, period, year, thumbnail } = project;
+  const short = shortProjectName(name);
+  const no = index != null ? `No.${String(index + 1).padStart(2, "0")}` : "";
+  const statusLabel = status ? STATUS_LABEL[status] : "";
+  const when = period || (year ? String(year) : "");
+  const stackShort = stack.slice(0, 2).join(" · ");
+  const image = thumbnail && thumbnail !== DEFAULT_THUMBNAIL ? thumbnail : undefined;
 
-  const article = (
-    <article
-      onClick={onClick}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "var(--space-3)",
-        padding: thumbnail ? "0 var(--space-5) var(--space-5)" : "var(--space-5)",
-        background: "var(--surface-card)",
-        border: "var(--border-width) solid var(--border-subtle)",
-        borderRadius: "var(--radius-lg)",
-        overflow: "hidden",
-        boxShadow: "var(--shadow-sm)",
-        height: "100%",
-        cursor: interactive ? "pointer" : "default",
-        transition:
-          "transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal) var(--ease-out), border-color var(--duration-fast) var(--ease-standard)",
-        ...style,
-      }}
-      onMouseEnter={(e) => {
-        if (!interactive) return;
-        e.currentTarget.style.transform = "translateY(-3px)";
-        e.currentTarget.style.boxShadow = "var(--shadow-lg)";
-        e.currentTarget.style.borderColor = "var(--border-brand)";
-      }}
-      onMouseLeave={(e) => {
-        if (!interactive) return;
-        e.currentTarget.style.transform = "none";
-        e.currentTarget.style.boxShadow = "var(--shadow-sm)";
-        e.currentTarget.style.borderColor = "var(--border-subtle)";
-      }}
-      {...rest}
+  return (
+    <Link
+      href={href}
+      className="project-card"
+      aria-label={name}
+      style={{ display: "flex", flexDirection: "column", textDecoration: "none", color: "var(--text-strong)" }}
     >
-      {thumbnail && (
-        <img
-          src={thumbnail}
-          alt=""
-          loading="lazy"
-          draggable={false}
-          style={{
-            display: "block",
-            width: "calc(100% + 2 * var(--space-5))",
-            marginLeft: "calc(-1 * var(--space-5))",
-            marginBottom: "var(--space-2)",
-            aspectRatio: "16 / 9",
-            objectFit: "cover",
-            background: "var(--surface-sunken)",
-            borderRadius: "var(--radius-lg) var(--radius-lg) 0 0",
-          }}
-        />
-      )}
-      <div style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-3)" }}>
-        <span style={{ display: "inline-flex", flexShrink: 0, color: "var(--color-brand-strong)" }} aria-hidden>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-          </svg>
+      <div
+        className={image ? "project-cover project-cover--image" : "project-cover"}
+        style={{ padding: showText ? 20 : 18 }}
+      >
+        {image && (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="project-cover__img" src={image} alt="" loading="lazy" draggable={false} />
+            <span className="project-cover__shade" aria-hidden />
+          </>
+        )}
+        <span
+          className="project-cover__row"
+          style={{ fontFamily: "var(--font-mono)", fontSize: 12, display: "flex", justifyContent: "space-between", gap: 12 }}
+        >
+          <span>{no}</span>
+          <span>{statusLabel}</span>
         </span>
+        <span
+          className="project-cover__name"
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 800,
+            fontSize: showText ? "clamp(32px, 3.4vw, 46px)" : "clamp(30px, 3.2vw, 42px)",
+            lineHeight: 0.92,
+            letterSpacing: "-0.045em",
+            textWrap: showText ? "balance" : undefined,
+            overflowWrap: "anywhere",
+          }}
+        >
+          {short}
+        </span>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          gap: 12,
+          fontFamily: "var(--font-mono)",
+          fontSize: 12,
+          color: "var(--text-muted)",
+          padding: "14px 0 10px",
+          borderBottom: "1px solid var(--border-subtle)",
+          marginBottom: showText ? 12 : 10,
+        }}
+      >
+        <span>{when}</span>
+        <span style={{ textAlign: "right" }}>{stackShort}</span>
+      </div>
+
+      {showText && (
         <h3
           style={{
-            minWidth: 0,
-            // Break long unbreakable names (underscore/camelCase) so they wrap
-            // instead of sliding under the status badge.
-            overflowWrap: "anywhere",
-            fontSize: "var(--text-lg)",
+            margin: "0 0 6px",
+            fontFamily: "var(--font-display)",
+            fontSize: 19,
             fontWeight: 700,
+            letterSpacing: "-0.02em",
+            lineHeight: 1.3,
             color: "var(--text-strong)",
-            fontFamily: "var(--font-mono)",
-            letterSpacing: "var(--tracking-snug)",
+            overflowWrap: "anywhere",
           }}
         >
           {name}
         </h3>
-        {statusLabel && (
-          <Badge tone={statusTone} dot style={{ flexShrink: 0, marginLeft: "auto" }}>
-            {statusLabel}
-          </Badge>
-        )}
-      </div>
+      )}
       {description && (
-        <p
-          style={{
-            margin: 0,
-            color: "var(--text-muted)",
-            fontSize: "var(--text-base)",
-            lineHeight: "var(--leading-normal)",
-            textWrap: "pretty",
-            flex: 1,
-          }}
-        >
+        <p style={{ margin: 0, fontSize: 14.5, lineHeight: 1.6, color: "var(--text-muted)", textWrap: "pretty" }}>
           {description}
         </p>
       )}
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
-        {stack.map((s) => (
-          <Tag key={s} tone="brand" size="sm">
-            {s}
-          </Tag>
-        ))}
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "var(--space-4)",
-          marginTop: "var(--space-1)",
-          fontFamily: "var(--font-mono)",
-          fontSize: "var(--text-xs)",
-          color: "var(--text-subtle)",
-        }}
-      >
-        {stars != null && (
-          <span style={{ display: "inline-flex", alignItems: "center", gap: 4 }}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-              <path d="m12 2 2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7z" />
-            </svg>
-            {stars}
-          </span>
-        )}
-        {year && <span>{year}</span>}
-      </div>
-    </article>
+    </Link>
   );
-
-  if (href) {
-    return (
-      <Link href={href} aria-label={name} style={{ display: "block", height: "100%", color: "inherit", textDecoration: "none" }}>
-        {article}
-      </Link>
-    );
-  }
-  return article;
 }

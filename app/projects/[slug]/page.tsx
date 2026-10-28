@@ -3,9 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllProjects, getProject } from "@/lib/content";
 import { siteUrl } from "@/lib/site";
-import { Badge } from "@/components/Badge";
-import { Tag } from "@/components/Tag";
-import { RepoCard } from "@/components/RepoCard";
+import { shortProjectName } from "@/components/ProjectCard";
 import { Container } from "@/components/Container";
 import { Mermaid } from "@/components/Mermaid";
 
@@ -36,79 +34,167 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const SITE_NAME = new URL(siteUrl).hostname.replace(/^www\./i, "");
 
-const STATUS_TONE = { active: "success", wip: "warning", archived: "neutral" } as const;
-const STATUS_LABEL = { active: "Active", wip: "WIP", archived: "Archived" } as const;
+const STATUS_LABEL = { active: "● Active", wip: "● WIP", archived: "Archived" } as const;
+
+/** Mirrors DEFAULT_THUMBNAIL in lib/content.ts: the site-wide fallback is not a key visual. */
+const DEFAULT_THUMBNAIL = "/assets/new_profile.png";
+
+const metaLabel: React.CSSProperties = {
+  fontFamily: "var(--font-mono)",
+  fontSize: 12,
+  color: "var(--text-subtle)",
+  marginBottom: 6,
+};
+const metaValue: React.CSSProperties = {
+  margin: 0,
+  fontFamily: "var(--font-mono)",
+  fontSize: 14,
+  color: "var(--text-strong)",
+  overflowWrap: "anywhere",
+};
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = await getProject(slug);
+  const projects = await getAllProjects();
+  const index = projects.findIndex((p) => p.slug === slug);
+  const project = projects[index];
   if (!project) notFound();
 
-  return (
-    <Container max="68rem">
-      <Link
-        href="/projects"
-        style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "0.4rem",
-          color: "var(--text-muted)",
-          fontFamily: "var(--font-display)",
-          fontWeight: 600,
-          fontSize: "0.875rem",
-          textDecoration: "none",
-          marginBottom: "1.75rem",
-        }}
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M19 12H5" />
-          <path d="m12 19-7-7 7-7" />
-        </svg>
-        Back to projects
-      </Link>
+  const no = String(index + 1).padStart(2, "0");
+  const short = shortProjectName(project.name);
+  const statusLabel = STATUS_LABEL[project.status] ?? "";
+  const period = project.period || (project.year ? String(project.year) : "—");
+  const image = project.thumbnail && project.thumbnail !== DEFAULT_THUMBNAIL ? project.thumbnail : undefined;
+  const repoLabel = project.url.replace(/^https?:\/\//i, "").replace(/\/$/, "");
 
-      <div style={{ marginBottom: "1.25rem" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.75rem", flexWrap: "wrap" }}>
-          <h1 style={{ fontFamily: "var(--font-mono)", fontWeight: 700, fontSize: "2.5rem", letterSpacing: "-0.03em", color: "var(--text-strong)", margin: 0 }}>
-            {project.name}
+  return (
+    <Container>
+      <div style={{ padding: "40px 0 0" }}>
+        <Link href="/projects" className="projects-back">
+          ← Projects
+        </Link>
+      </div>
+
+      <header style={{ display: "flex", flexWrap: "wrap", gap: 24, padding: "40px 0 48px" }}>
+        <div style={{ flex: "0 0 220px", fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-muted)" }}>
+          <b style={{ display: "block", color: "var(--text-strong)", fontWeight: 500, marginBottom: 6 }}>No.{no}</b>
+          {statusLabel}
+        </div>
+        <div style={{ flex: "1 1 560px", minWidth: 0 }}>
+          <h1
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(48px, 8vw, 112px)",
+              lineHeight: 0.88,
+              letterSpacing: "-0.06em",
+              color: "var(--text-strong)",
+              margin: "0 0 28px",
+              textWrap: "balance",
+              overflowWrap: "anywhere",
+            }}
+          >
+            {short}
+            <span style={{ color: "var(--color-brand)" }}>.</span>
           </h1>
-          {project.status && (
-            <Badge tone={STATUS_TONE[project.status]} dot>
-              {STATUS_LABEL[project.status]}
-            </Badge>
+          {project.description && (
+            <p style={{ margin: 0, maxWidth: 720, fontSize: 20, lineHeight: 1.6, color: "var(--text-muted)", textWrap: "pretty" }}>
+              {project.description}
+            </p>
           )}
         </div>
-        <p style={{ margin: 0, color: "var(--text-muted)", fontSize: "1.125rem", lineHeight: 1.7 }}>{project.description}</p>
-      </div>
+      </header>
 
-      <div style={{ marginBottom: "2.5rem" }}>
-        <RepoCard
-          repo={{
-            owner: project.owner,
-            name: project.name,
-            description: project.description,
-            language: project.language,
-            languageColor: project.languageColor,
-            stars: project.stars,
-            forks: project.forks,
-            stack: project.stack,
-            url: project.url,
+      <dl
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+          margin: 0,
+          borderTop: "1px solid var(--border-strong)",
+          borderBottom: "1px solid var(--border-strong)",
+        }}
+      >
+        <div style={{ padding: "18px 20px 18px 0" }}>
+          <dt style={metaLabel}>Period</dt>
+          <dd style={metaValue}>{period}</dd>
+        </div>
+        <div style={{ padding: "18px 20px 18px 0" }}>
+          <dt style={metaLabel}>Status</dt>
+          <dd style={metaValue}>{statusLabel || "—"}</dd>
+        </div>
+        <div style={{ padding: "18px 20px 18px 0" }}>
+          <dt style={metaLabel}>Stack</dt>
+          <dd style={metaValue}>{project.stack.length ? project.stack.join(", ") : "—"}</dd>
+        </div>
+        <div style={{ padding: "18px 0" }}>
+          <dt style={metaLabel}>Repository</dt>
+          <dd style={metaValue}>
+            {project.url ? (
+              <a href={project.url} target="_blank" rel="noopener noreferrer" className="projects-repo-link">
+                {repoLabel} ↗
+              </a>
+            ) : (
+              "—"
+            )}
+          </dd>
+        </div>
+      </dl>
+
+      {image ? (
+        <div
+          style={{
+            margin: "48px 0",
+            aspectRatio: "21 / 9",
+            border: "1px solid var(--border-strong)",
+            background: "var(--surface-sunken)",
+            boxSizing: "border-box",
+            overflow: "hidden",
           }}
-        />
-      </div>
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={image} alt={`${project.name} key visual`} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        </div>
+      ) : (
+        <div
+          aria-hidden
+          style={{
+            margin: "48px 0",
+            aspectRatio: "21 / 9",
+            background: "var(--color-brand)",
+            color: "#fff",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "clamp(20px, 3vw, 36px)",
+            boxSizing: "border-box",
+            overflow: "hidden",
+          }}
+        >
+          <span style={{ fontFamily: "var(--font-mono)", fontSize: 13, display: "flex", justifyContent: "space-between", gap: 12 }}>
+            <span>bnbong / {project.slug}</span>
+            <span>Key visual</span>
+          </span>
+          <span
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(40px, 7vw, 96px)",
+              lineHeight: 0.88,
+              letterSpacing: "-0.06em",
+              overflowWrap: "anywhere",
+            }}
+          >
+            {short}
+          </span>
+        </div>
+      )}
 
-      <div className="prose" style={{ maxWidth: "none" }} dangerouslySetInnerHTML={{ __html: project.html }} />
-      {project.html.includes('class="mermaid"') && <Mermaid />}
-
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", alignItems: "center", marginTop: "2.5rem", paddingTop: "1.5rem", borderTop: "1px solid var(--border-subtle)" }}>
-        {project.stack.map((s) => (
-          <Tag key={s} tone="neutral" size="sm">
-            {s}
-          </Tag>
-        ))}
-        <span style={{ marginLeft: "auto", fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--text-subtle)" }}>
-          {project.year}
-        </span>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 24, paddingBottom: 96 }}>
+        <div style={{ flex: "0 0 220px", fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-muted)" }}>Overview</div>
+        <article style={{ flex: "1 1 560px", minWidth: 0, maxWidth: 720 }}>
+          <div className="prose prose--project" dangerouslySetInnerHTML={{ __html: project.html }} />
+          {project.html.includes('class="mermaid"') && <Mermaid />}
+        </article>
       </div>
     </Container>
   );

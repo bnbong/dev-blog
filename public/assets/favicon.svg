@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>bnbong</title>
+  <path fill="#3D5AFE" d="M0 0h64v64H0z"/>
+  <path fill="#fff" fill-rule="evenodd" d="M16 11h8v20c2.5-3.4 6.2-5.2 11-5.2 9.5 0 15.5 7.1 15.5 17.1S44.5 60 35 60c-4.8 0-8.5-1.8-11-5.2V59h-8V11Zm18 22c-5.8 0-10 4.1-10 10s4.2 10 10 10 9.5-4.1 9.5-10S39.8 33 34 33Z"/>
+</svg>

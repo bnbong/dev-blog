@@ -1,10 +1,13 @@
 import React from "react";
 import { getAllProjects } from "@/lib/content";
+import { ossProjectSlugs } from "@/lib/site";
 import { ProjectsIndex } from "@/components/ProjectsIndex";
-import { OpenSourceSections } from "@/components/OpenSourceSections";
 import { Container } from "@/components/Container";
 
 export const metadata = { title: "Projects — bnbong" };
+
+/** Projects shown under the "Open Source" filter (lib/site.ts). */
+const OSS_SLUGS = new Set<string>(ossProjectSlugs);
 
 export default async function ProjectsPage() {
   const projects = (await getAllProjects()).map((p) => ({
@@ -12,20 +15,16 @@ export default async function ProjectsPage() {
     name: p.name,
     description: p.description,
     stack: p.stack,
-    stars: p.stars,
     status: p.status,
+    period: p.period,
     year: p.year,
     thumbnail: p.thumbnail,
+    oss: OSS_SLUGS.has(p.slug),
   }));
 
   return (
     <Container>
-      <div style={{ display: "flex", flexDirection: "column", gap: "4rem" }}>
-        <ProjectsIndex projects={projects} />
-        <div style={{ borderTop: "1px solid var(--border-subtle)", paddingTop: "3rem" }}>
-          <OpenSourceSections />
-        </div>
-      </div>
+      <ProjectsIndex projects={projects} />
     </Container>
   );
 }

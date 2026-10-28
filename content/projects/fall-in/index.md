@@ -10,7 +10,6 @@ tags:
   - GitHub Actions
   - game
   - personal
-featured: true
 period: 2026.01.30 - 2026.04
 role: 1인 개발, 기획 / 룰 설계 / 구현 / 테스트 / 배포 / 아트 통합
 status: archived
