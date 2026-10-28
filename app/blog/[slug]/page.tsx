@@ -61,7 +61,7 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
 
       <header style={{ display: "flex", flexWrap: "wrap", gap: 24, padding: "40px 0 48px", borderBottom: "1px solid var(--border-strong)" }}>
         <div style={{ flex: "0 0 220px", fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--color-brand-ink)" }}>{post.category}</div>
-        <div style={{ flex: "1 1 560px", minWidth: 0, maxWidth: 880 }}>
+        <div style={{ flex: "1 1 560px", minWidth: 0 }}>
           <h1
             style={{
               fontFamily: "var(--font-display)",
@@ -85,7 +85,7 @@ export default async function PostDetailPage({ params }: { params: Promise<{ slu
       <div className="post-layout" style={{ display: "flex", flexWrap: "wrap", gap: 24, padding: "48px 0 96px" }}>
         <PostSidebar date={post.date} updated={updated} readingTime={post.readingTime} tags={post.tags} toc={post.toc} />
 
-        <article style={{ flex: "1 1 560px", minWidth: 0, maxWidth: 720 }}>
+        <article style={{ flex: "1 1 560px", minWidth: 0 }}>
           <div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
           {post.html.includes('class="mermaid"') && <Mermaid />}
 

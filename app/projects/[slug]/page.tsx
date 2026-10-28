@@ -98,7 +98,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
             <span style={{ color: "var(--color-brand)" }}>.</span>
           </h1>
           {project.description && (
-            <p style={{ margin: 0, maxWidth: 720, fontSize: 20, lineHeight: 1.6, color: "var(--text-muted)", textWrap: "pretty" }}>
+            <p style={{ margin: 0, fontSize: 20, lineHeight: 1.6, color: "var(--text-muted)", textWrap: "pretty" }}>
               {project.description}
             </p>
           )}
@@ -191,7 +191,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
       <div style={{ display: "flex", flexWrap: "wrap", gap: 24, paddingBottom: 96 }}>
         <div style={{ flex: "0 0 220px", fontFamily: "var(--font-mono)", fontSize: 13, color: "var(--text-muted)" }}>Overview</div>
-        <article style={{ flex: "1 1 560px", minWidth: 0, maxWidth: 720 }}>
+        <article style={{ flex: "1 1 560px", minWidth: 0 }}>
           <div className="prose prose--project" dangerouslySetInnerHTML={{ __html: project.html }} />
           {project.html.includes('class="mermaid"') && <Mermaid />}
         </article>
