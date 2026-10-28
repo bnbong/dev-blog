@@ -517,6 +517,10 @@ code, pre, kbd, samp { font-family: var(--font-mono); }
 .prose pre.mermaid:not([data-processed]) { visibility: hidden; }
 .prose pre.mermaid svg { max-width: 100%; height: auto; }
 
+/* Content-authored `rect rgb(...)` highlight blocks are picked for light paper.
+   In dark mode keep them as a faint tint so the light text stays readable. */
+[data-theme="dark"] .prose pre.mermaid svg rect.rect[fill^="rgb("] { fill-opacity: 0.16; }
+
 /* ------------------------------------------------------------
    KaTeX (rendered at build time)
    ------------------------------------------------------------ */
