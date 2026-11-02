@@ -7,7 +7,7 @@ date:
   created: 2026-01-15
   updated: 2026-01-15
 categories:
-  - Algorithm
+  - Algorithms
 tags:
   - Python
   - Brute Force

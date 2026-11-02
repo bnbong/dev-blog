@@ -7,7 +7,7 @@ date:
   created: 2026-05-14
   updated: 2026-05-14
 categories:
-  - Algorithm
+  - Algorithms
 tags:
   - Algorithm
   - Coding Test
