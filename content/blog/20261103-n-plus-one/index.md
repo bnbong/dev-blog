@@ -90,16 +90,16 @@ for post in posts:
     print(post.title, post.author.name)
 ```
 
-코드만 보면 조회는 첫 줄에서 한 번만 하는 것처럼 보입니다. 하지만 지연 로딩(lazy loading)으로 설정된 ORM에서 `post.author`는 처음 읽는 순간에 비로소 데이터베이스에서 가져오는 속성입니다.
+코드만 보면 조회는 첫 줄에서 한 번만 하는 것처럼 보입니다. 하지만 지연 로딩(lazy loading)으로 설정된 ORM에서 `post.author`는 처음 읽는 순간에 비로소 데이터베이스에서 가져오는 속성입니다. 그래서 반복문이 돌 때마다 작성자를 조회하는 쿼리가 따로 나갑니다.
 
-SQLAlchemy의 관계와 JPA의 `@OneToMany`는 기본값이 지연 로딩입니다. 그래서 반복문이 돌 때마다 작성자를 조회하는 쿼리가 따로 나갑니다.
+SQLAlchemy의 `relationship()`과 JPA의 `@OneToMany`는 별도 설정이 없으면 지연 로딩으로 동작합니다. JPA의 `@ManyToOne`은 기본값이 즉시 로딩이지만, 뒤에서 설명할 이유로 지연 로딩으로 바꿔 쓰는 경우가 많습니다.
+
+먼저 N+1이 일어날 때의 왕복입니다. 목록 쿼리 1번 뒤에 작성자 쿼리가 작성자 수만큼 따로 나갑니다.
 
 ```mermaid
 sequenceDiagram
     participant App as 애플리케이션
     participant DB as 데이터베이스
-
-    Note over App,DB: N+1: 목록 1번 + 항목마다 1번씩
     App->>DB: SELECT * FROM posts
     DB-->>App: 게시글 N개
     App->>DB: SELECT * FROM authors WHERE id = 1
@@ -109,12 +109,32 @@ sequenceDiagram
     Note over App,DB: ... 작성자 수만큼 반복 ...
     App->>DB: SELECT * FROM authors WHERE id = N
     DB-->>App: 작성자 N
+```
 
-    Note over App,DB: JOIN: 한 번에
+/// caption
+N+1: 목록 쿼리 1번 뒤에 작성자 쿼리가 N번 따로 나갑니다.
+///
+
+같은 데이터를 JOIN으로 가져오면 왕복은 한 번입니다.
+
+```mermaid
+sequenceDiagram
+    participant App as 애플리케이션
+    participant DB as 데이터베이스
     App->>DB: SELECT ... FROM posts JOIN authors ON ...
     DB-->>App: 게시글 N개 + 작성자 정보
+```
 
-    Note over App,DB: IN 배치: 두 번에
+/// caption
+JOIN: 게시글과 작성자를 한 번의 쿼리로 함께 받습니다.
+///
+
+IN 조건으로 묶어서 가져오면 왕복은 두 번입니다.
+
+```mermaid
+sequenceDiagram
+    participant App as 애플리케이션
+    participant DB as 데이터베이스
     App->>DB: SELECT * FROM posts
     DB-->>App: 게시글 N개
     App->>DB: SELECT * FROM authors WHERE id IN (1, 2, ..., N)
@@ -122,7 +142,7 @@ sequenceDiagram
 ```
 
 /// caption
-N+1 방식과 JOIN, IN 배치 방식에서 애플리케이션과 데이터베이스가 주고받는 요청
+IN 배치: 목록을 받은 뒤, 작성자 ID를 모아 한 번 더 조회합니다.
 ///
 
 ![N+1 방식과 JOIN 또는 배치 조회 방식의 쿼리 수 비교](n_plus_one_vs_join.png)
@@ -181,7 +201,7 @@ public class Post {
 
 `@OneToMany`는 기본값이 지연 로딩(`LAZY`)입니다. 반면 `@ManyToOne`은 JPA 기본값이 즉시 로딩(`EAGER`)이기 때문에, 위 코드처럼 `fetch = FetchType.LAZY`를 명시하는 것이 일반적인 권장 사항입니다. 이유는 뒤에서 다시 설명하겠습니다.
 
-### 컬렉션을 순회할 때 생기는 N+1
+### 연관 관계를 순회할 때 생기는 N+1
 
 작성자 목록을 조회한 뒤, 작성자마다 게시글 수를 출력하는 코드입니다. 실행할 때는 `TransactionTemplate`으로 감싼 트랜잭션 안에서 돌렸습니다.
 
@@ -230,7 +250,9 @@ JPA는 한 트랜잭션 안에서 이미 불러온 엔티티를 영속성 컨텍
 
 그래서 N+1에서 N은 정확히 말하면 "추가 조회가 필요한 연관 데이터의 건수"이고, 이미 불러온 데이터는 여기서 빠집니다. 앞의 `@OneToMany` 예제에서는 작성자마다 게시글 컬렉션 하나씩 5건이었고, 이 예제에서는 서로 다른 작성자 5명이었습니다.
 
-`@ManyToOne`을 기본값인 `EAGER`로 두면 문제가 사라지는 것이 아니라 시점만 앞당겨집니다.
+### `@ManyToOne`을 `EAGER`로 두면 해결되는가
+
+앞서 엔티티를 정의할 때 `@ManyToOne`에 `fetch = FetchType.LAZY`를 명시하는 이유를 뒤에서 설명하겠다고 했는데, 그 이유가 여기에 있습니다. 기본값인 `EAGER`로 두면 N+1이 사라지는 것이 아니라 쿼리가 나가는 시점만 앞당겨집니다.
 
 `fetch = FetchType.LAZY`를 지우고 같은 코드를 실행해 보면, `findAll()`이 반환되는 시점에 작성자 쿼리 5번이 반복문보다 먼저 한꺼번에 나갔습니다. `findAll()`은 게시글 목록만 조회한 뒤, 즉시 로딩 설정을 지키려고 작성자를 개별 쿼리로 채우기 때문입니다.
 
@@ -461,7 +483,7 @@ authors = session.scalars(
 
 ### 해결 3: `lazy="raise"`로 미리 막기
 
-해결 방법을 알아도 즉시 로딩 옵션을 빠뜨리는 실수는 계속 생깁니다. SQLAlchemy는 지연 로딩이 일어나는 순간 쿼리를 보내는 대신 예외를 던지게 하는 `lazy="raise"` 설정을 제공합니다.
+해결 방법을 알아도 `selectinload()` 같은 로딩 옵션을 빠뜨리는 실수는 계속 생깁니다. SQLAlchemy는 지연 로딩이 일어나는 순간 쿼리를 보내는 대신 예외를 던지게 하는 `lazy="raise"` 설정을 제공합니다.
 
 ```python
 class Post(Base):
@@ -526,7 +548,7 @@ sqlalchemy.exc.MissingGreenlet: greenlet_spawn has not been called; can't call a
 
 N+1 관점에서 보면 이 동작은 장점이기도 합니다.
 
-동기 세션에서는 지연 로딩이 조용히 쿼리를 늘리지만, 비동기 세션에서는 즉시 로딩을 빠뜨린 지점이 바로 에러로 드러납니다. 결과적으로 비동기 세션은 `lazy="raise"`를 기본으로 켠 것과 비슷하게 동작하고, 해결 방법도 같습니다.
+동기 세션에서는 지연 로딩이 조용히 쿼리를 늘리지만, 비동기 세션에서는 로딩 옵션을 빠뜨린 지점이 바로 에러로 드러납니다. 결과적으로 비동기 세션은 `lazy="raise"`를 기본으로 켠 것과 비슷하게 동작하고, 해결 방법도 같습니다.
 
 `selectinload(Post.author)`를 붙인 쿼리는 비동기 세션에서도 정상적으로 실행됐습니다.
 
